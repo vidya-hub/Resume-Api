@@ -532,15 +532,10 @@ module.exports.fnUpdateResumeType = async (req, res, next) => {
                                         console.log("result");
                                         console.log("result");
                                         var demoResumeArray = [
-                                                { resumeType: 1, thumbnil: ipaddress+"/api/get_resume_with_filename/?image=resume6.PNG" },
-                                                { resumeType: 2, thumbnil: ipaddress+"/api/get_resume_with_filename/?image=resume7.PNG"  },
-                                                { resumeType: 3, thumbnil: ipaddress+"/api/get_resume_with_filename/?image=resume8.PNG" },
-                                        ];
-                                        // var demoResumeArray = [
-                                        //         ipaddress+'/resume7.PNG',
-                                        //         ipaddress+'resume8.PNG',
-                                        //         ipaddress+'resume6.PNG',
-                                        // ]
+                                                ipaddress+"/api/get_resume_with_filename/?image=resume6.PNG",
+                                                ipaddress+"/api/get_resume_with_filename/?image=resume6.PNG",
+                                                ipaddress+"/api/get_resume_with_filename/?image=resume6.PNG",
+                                        ]
                                         result["thumbnil"] = demoResumeArray[result.resumeType];
                                         console.log(result["thumbnil"]);
                                         console.log(result.resumeType);
@@ -711,10 +706,10 @@ module.exports.fnGetResumeList = async (req, res, next) => {
                                 console.log(result);
                                 console.log(userId);
                                 var demoResumeArray = [
-                                        { resumeType: 1, thumbnil: ipaddress+"/api/get_resume_with_filename/?image=resume6.PNG" },
-                                        { resumeType: 2, thumbnil: ipaddress+"/api/get_resume_with_filename/?image=resume7.PNG"  },
-                                        { resumeType: 3, thumbnil: ipaddress+"/api/get_resume_with_filename/?image=resume8.PNG" },
-                                ];
+                                        ipaddress+"/api/get_resume_with_filename/?image=resume6.PNG",
+                                        ipaddress+"/api/get_resume_with_filename/?image=resume7.PNG",
+                                        ipaddress+"/api/get_resume_with_filename/?image=resume8.PNG"
+                                ]
                                 if (result.length > 0) {
                                         for (let index = 0; index < result.length; index++) {
                                                 result[index]['thumbnil'] = demoResumeArray[result[index].resumeType  -1];
