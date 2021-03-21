@@ -41,7 +41,7 @@ var server = http.createServer(app, session);
 app.set('view engine', 'ejs')     // Setamos que nossa engine será o ejs
 app.use(expressLayouts)   
 
-server.listen(port,ipaddress);
+server.listen(port);
 server.on('error', function (error) {
 	if (error.syscall != 'listen') {
 		throw error;
