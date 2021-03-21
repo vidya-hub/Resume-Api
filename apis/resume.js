@@ -585,7 +585,7 @@ module.exports.fnDeleteResume = async (req, res, next) => {
                 var resumeId = req.body.resumeId;
                 resumeId = (resumeId && typeof resumeId === 'string') ? resumeId.trim() : null;
                 if (resumeId) {
-                        resumeModel.findOneAndUpdate({ _id: resumeId, userId: req.session.userId }, { isDeleted: true }, { new: true }, function (e1, result) {
+                        resumeModel.findOneAndDelete({ _id: resumeId, userId: req.session.userId }, { isDeleted: true }, { new: true }, function (e1, result) {
                                 if (!e1) {
                                         response.status = 'success';
                                         response.msg = 'Resume is deleted.';
