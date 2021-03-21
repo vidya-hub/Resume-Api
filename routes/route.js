@@ -30,7 +30,9 @@ router.post('/api/login_with_linkedin', main.fnLoginWithLinkedin);
 router.post('/api/login_with_google', main.fnLoginWithGoogle);
 router.post('/api/add_resume', resume.fnAddResume);
 router.post('/api/login_with_google', resume.fnAddResume);
-router.post('/api/get_resumes', resume.fnGetDemoResume);
+router.get('/api/get_resumes', resume.fnGetDemoResumes);
+router.get('/api/get_resume_with_filename', resume.fnGetDemoResumeFromFile);
+
 router.post('/api/get_single_resume_data', resume.fnGetSingleResume);
 router.post('/api/get_download_link', resume.fnDownloadResume);
 router.get('/api/render', resume.renderFile);

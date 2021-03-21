@@ -2,7 +2,10 @@ var resumeModel = require("../models/resume");
 const phantom = require('phantom');
 const fetch = require("node-fetch");
 var  ipval  = require("../helper/ipaddress.js");
-
+var http = require('http'),
+    fs = require('fs'),
+    url = require('url');
+const { ipvalreturn } = require("../helper/ipaddress.js");
 var ipaddress =  ipval.ipvalreturn();
 console.log(ipaddress);
 module.exports.fnAddResume = async (req, res, next) => {
@@ -704,7 +707,7 @@ module.exports.fnGetResumeList = async (req, res, next) => {
                                 console.log(userId);
                                 var demoResumeArray = [
                                         ipaddress+'resume6.PNG',
-                                        ipaddress+'/resume7.PNG',
+                                        ipaddress+'resume7.PNG',
                                         ipaddress+'resume8.PNG',
                                 ]
                                 if (result.length > 0) {
@@ -728,7 +731,9 @@ module.exports.fnGetResumeList = async (req, res, next) => {
         }
 }
 
-module.exports.fnGetDemoResume = async (req, res, next) => {
+module.exports.fnGetDemoResumes =  (req, res, next) => {
+        console.log("resume");
+
         var response = {
                 status: 'error',
                 msg: "Something happened wrong try again after sometime.",
@@ -737,10 +742,11 @@ module.exports.fnGetDemoResume = async (req, res, next) => {
         }
         try {
                 var resume = [
-                        { resumeType: 1, thumbnil: ipaddress+'resume6.PNG' },
-                        { resumeType: 2, thumbnil: ipaddress+'resume7.PNG' },
-                        { resumeType: 3, thumbnil: ipaddress+'resume8.PNG' },
+                        { resumeType: 1, thumbnil: ipaddress+"/api/get_resume_with_filename/?image=resume6.PNG" },
+                        { resumeType: 2, thumbnil: ipaddress+"/api/get_resume_with_filename/?image=resume7.PNG"  },
+                        { resumeType: 3, thumbnil: ipaddress+"/api/get_resume_with_filename/?image=resume8.PNG" },
                 ];
+                console.log(resume)
                 response.msg = '';
                 response.status = 'success';
                 response.data = resume;
@@ -750,6 +756,44 @@ module.exports.fnGetDemoResume = async (req, res, next) => {
                 res.json(response);
         }
 }
+
+module.exports.fnGetDemoResumeFromFile = async (req, res, next) => {
+        console.log(req.url);
+        
+        try {
+                // res.json(response);
+                var query = url.parse(req.url,true).query;
+                pic = query.image;
+
+                fs.readFile('./' + pic, function (err, content) {
+                if (err) {
+                    res.writeHead(400, {'Content-type':'text/html'})
+                    console.log(err);
+                    res.end("No such image");    
+                } else {
+                    //specify the content type in the response will be an image
+                    res.writeHead(200,{'Content-type':'image/jpg'});
+                    res.end(content);
+                }
+        },);
+        } catch (e) {
+                var response = {
+                        status: 'error',
+                        msg: "Something happened wrong try again after sometime.",
+                        data: {},
+                        method: req.url.split('/')[req.url.split('/').length - 1]
+                }
+                console.log('Server error --> fnGetDemoResumeFromFile --> e', e);
+                res.json(response);
+
+        }
+}
+
+// module.exports.fnGetDemoResume = async (req, res, next) => {
+
+// }
+
+
 
 module.exports.renderFile = async (req, res, next) => {
         console.log(req.query.id)

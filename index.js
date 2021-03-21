@@ -4,6 +4,9 @@ var bodyParser = require('body-parser');
 var http = require('http');
 var path = require('path');
 var cors = require('cors');
+var http = require('http'),
+    fs = require('fs'),
+    url = require('url');
 var  ipval  = require("./helper/ipaddress.js");
 
 // var ipval = require("./")
@@ -41,7 +44,7 @@ var server = http.createServer(app, session);
 app.set('view engine', 'ejs')     // Setamos que nossa engine será o ejs
 app.use(expressLayouts)   
 
-server.listen(port);
+server.listen(port,ipaddress);
 server.on('error', function (error) {
 	if (error.syscall != 'listen') {
 		throw error;
