@@ -1,5 +1,7 @@
 var resumeModel = require("../models/resume");
 const phantom = require('phantom');
+var grabzit = require('grabzit');
+
 const fetch = require("node-fetch");
 var crypto = require("crypto");
 var ipval = require("../helper/ipaddress.js");
