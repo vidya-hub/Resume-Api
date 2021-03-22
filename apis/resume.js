@@ -795,6 +795,41 @@ module.exports.fnGetDemoResumeFromFile = async (req, res, next) => {
         }
 }
 
+module.exports.fnSendFiles = async (req, res, next) => {
+        console.log(req.url);
+
+        try {
+                // res.json(response);
+                var query = url.parse(req.url, true).query;
+                doc = query.docfilename;
+
+                fs.readFile('./' + doc, function (err, content) {
+                        if (err) {
+                                res.writeHead(400, { 'Content-type': 'text/html' })
+                                console.log(err);
+                                res.end("No such file");
+                        } else {
+                                //specify the content type in the response will be an image
+                                res.writeHead(200, {
+                                        'Content-Type': "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                                        'Content-disposition': 'attachment;filename=' + filename,
+                                });
+                                res.end(content);
+                        }
+                });
+        } catch (e) {
+                var response = {
+                        status: 'error',
+                        msg: "Something happened wrong try again after sometime.",
+                        data: {},
+                        method: req.url.split('/')[req.url.split('/').length - 1]
+                }
+                console.log('Server error --> fnGetDemoResumeFromFile --> e', e);
+                res.json(response);
+
+        }
+}
+
 // module.exports.fnGetDemoResume = async (req, res, next) => {
 
 // }
@@ -904,7 +939,22 @@ module.exports.sendWordDocument = async (req, res, next) => {
                                         throw error;
                                 }
                         });
-                        res.download(docfullname);
+                        fs.readFile('./' + docfullname, function (err, content) {
+                                if (err) {
+                                        res.writeHead(400, { 'Content-type': 'text/html' })
+                                        console.log(err);
+                                        res.end("No such file");
+                                } else {
+                                        //specify the content type in the response will be an image
+                                        res.writeHead(200, {
+                                                'Content-Type': "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                                                'Content-disposition': 'attachment;filename=' + docfullname,
+                                        });
+                                        res.end(content);
+                                }
+                        });
+                        // response.data = ""
+                        // res.download(docfullname);
 
 
                         // res.writeHead(200, {
