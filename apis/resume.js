@@ -805,7 +805,12 @@ module.exports.renderFile = async (req, res, next) => {
         if (!id) {
                 id = req.body.id;
         }
+        try {
         var data = await resumeModel.findById(id)
+                
+        } catch (error) {
+                console.log(error);
+        }
         console.log(data);
         if (data.resumeType == 1) {
                 ejs.renderFile('resume6.ejs', data, {}, function (err, str) {
