@@ -939,7 +939,7 @@ module.exports.sendWordDocument = async (req, res, next) => {
                                         throw error;
                                 }
                         });
-                        fs.readFile('./' + docfullname, function (err, content) {
+                        fs.readFile(docfullname, function (err, content) {
                                 if (err) {
                                         res.writeHead(400, { 'Content-type': 'text/html' })
                                         console.log(err);
