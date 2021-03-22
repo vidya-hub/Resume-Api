@@ -891,12 +891,16 @@ module.exports.sendWordDocument = async (req, res, next) => {
                 id = (id && typeof id === 'string') ? id.trim() : null;
                 if (id) {
                         var renderedHtml = await retrieveLogs(ipaddress + '/api/render/?id=' + id.trim());
-                        console.log(renderedHtml);
+                        // console.log(renderedHtml);
                         // response.data = renderedHtml;
                         var client = new grabzit("MTY4NTViYmUzOTliNGY3Yzk1Zjg1MWFjZWMzNDUwNTA=", "PyMYJDg/Wj8/QnE/Pz9YPz8/Pz8/RxxnPwBgPz8/Pz8=");
                         client.html_to_docx(renderedHtml);
+                        console.log("saved");
+
                         client.save_to(docfullname, function (error, id) {
                                 if (error != null) {
+                                        console.log("Error");
+
                                         throw error;
                                 }
                         });
@@ -905,18 +909,9 @@ module.exports.sendWordDocument = async (req, res, next) => {
                                 "Content-Type": "application/octet-stream",
                                 "Content-Disposition": "attachment; filename=" + docfullname
                         });
-                        // response.status = "success";
+
 
                         fs.createReadStream(docfullname).pipe(res);
-
-                        fs.unlink(docfullname, (err) => {
-                                if (err) {
-                                        console.error(err)
-                                        return
-                                }
-
-                                //file removed
-                        });
                 } else {
                         response.msg = "Invalid Parameter";
                         res.json(response);
