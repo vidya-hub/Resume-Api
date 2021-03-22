@@ -910,10 +910,10 @@ module.exports.fnConvertRenderHtmlToJson = async (req, res, next) => {
         }
 }
 
-
+var docname = crypto.randomBytes(20).toString('hex');
+var docfullname = docname.toString() + ".docx";
 module.exports.sendWordDocument = async (req, res, next) => {
-        var docname = crypto.randomBytes(20).toString('hex');
-        var docfullname = docname.toString() + ".docx";
+        var docfullname = "resume.docx";
         console.log(docfullname);
         var response = {
                 status: 'error',
