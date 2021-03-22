@@ -879,6 +879,7 @@ module.exports.fnConvertRenderHtmlToJson = async (req, res, next) => {
 module.exports.sendWordDocument = async (req, res, next) => {
         var docname = crypto.randomBytes(20).toString('hex');
         var docfullname = docname + ".docx";
+        console.log(docfullname);
         var response = {
                 status: 'error',
                 msg: "Something happened wrong try again after sometime.",
@@ -899,12 +900,14 @@ module.exports.sendWordDocument = async (req, res, next) => {
                                         throw error;
                                 }
                         });
-                        response.status = "success";
-                        response.writeHead(200, {
+                        // response.status = "success";
+                        res.writeHead(200, {
                                 "Content-Type": "application/octet-stream",
                                 "Content-Disposition": "attachment; filename=" + docfullname
                         });
-                        fs.createReadStream(docfullname).pipe(response);
+                        // response.status = "success";
+
+                        fs.createReadStream(docfullname).pipe(res);
 
                         fs.unlink(docfullname, (err) => {
                                 if (err) {
