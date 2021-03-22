@@ -1,12 +1,13 @@
 var resumeModel = require("../models/resume");
 const phantom = require('phantom');
 const fetch = require("node-fetch");
-var  ipval  = require("../helper/ipaddress.js");
+var crypto = require("crypto");
+var ipval = require("../helper/ipaddress.js");
 var http = require('http'),
-    fs = require('fs'),
-    url = require('url');
+        fs = require('fs'),
+        url = require('url');
 const { ipvalreturn } = require("../helper/ipaddress.js");
-var ipaddress =  ipval.ipvalreturn();
+var ipaddress = ipval.ipvalreturn();
 console.log(ipaddress);
 module.exports.fnAddResume = async (req, res, next) => {
         var response = {
@@ -62,12 +63,12 @@ module.exports.fnAddResume = async (req, res, next) => {
                 // console.log("email",email);
                 // console.log("birthDate",birthDate);
                 // console.log("phoneNo",phoneNo);
-                console.log("jobTitle",jobTitle);
+                console.log("jobTitle", jobTitle);
                 // console.log("firstName",firstName);
-                console.log("jobTitle",jobTitle);
-                console.log("jobTitleId",jobTitleId);
+                console.log("jobTitle", jobTitle);
+                console.log("jobTitleId", jobTitleId);
                 // console.log("additionalDetails",additionalDetails);
-                if (firstName && jobTitle &&phoneNo && birthDate && email && resumeType && expFlag) {
+                if (firstName && jobTitle && phoneNo && birthDate && email && resumeType && expFlag) {
                         var additionalContactsForVerify = additionalContacts && JSON.parse(additionalContacts) ? JSON.parse(additionalContacts) : [];
                         console.log("additionalContacts :-", additionalContactsForVerify)
 
@@ -125,7 +126,7 @@ module.exports.fnAddResume = async (req, res, next) => {
                         console.log(workHistoryForVerify);
                         if (workHistoryForVerify && workHistoryForVerify.length > 0) {
                                 workHistory = JSON.parse(workHistory)
-                                
+
                                 for (let index = 0; index < workHistoryForVerify.length; index++) {
                                         const element = workHistoryForVerify[index];
                                         console.log(element.responsibility);
@@ -223,8 +224,8 @@ module.exports.fnAddResume = async (req, res, next) => {
                                 userId: userId,
                                 firstName: firstName,
                                 lastName: lastName,
-                                jobTitle:jobTitle,
-                                jobTitleId:jobTitleId,
+                                jobTitle: jobTitle,
+                                jobTitleId: jobTitleId,
                                 address: address,
                                 city: city,
                                 state: state,
@@ -245,7 +246,7 @@ module.exports.fnAddResume = async (req, res, next) => {
                                 birthDate: birthDate,
                                 resumeDate: resumeDate,
                                 resumeType: resumeType,
-                                refrences: refrences ? JSON.parse(refrences):[],
+                                refrences: refrences ? JSON.parse(refrences) : [],
                                 environment: environment ? JSON.parse(environment) : [],
                                 objectives: objectives ? JSON.parse(objectives) : [],
                                 additionalDetails: additionalDetails ? JSON.parse(additionalDetails) : [],
@@ -289,7 +290,7 @@ module.exports.fnUpdateResume = async (req, res, next) => {
                 var firstName = req.body.firstName;
                 var jobTitle = req.body.jobTitle;
                 var jobTitleId = req.body.jobTitleId;
-                
+
                 var lastName = req.body.lastName;
                 var address = req.body.address;
                 var city = req.body.city;
@@ -378,7 +379,7 @@ module.exports.fnUpdateResume = async (req, res, next) => {
                                 workHistory = JSON.parse(workHistory)
                                 for (let index = 0; index < workHistoryForVerify.length; index++) {
                                         const element = workHistoryForVerify[index];
-                                        if (!(element.jobTitle && element.employer && element.city &&element.country && element.state && element.startDate && (element.endDate || element.currentlyWorkHere))) {
+                                        if (!(element.jobTitle && element.employer && element.city && element.country && element.state && element.startDate && (element.endDate || element.currentlyWorkHere))) {
                                                 workHistory.splice(index, 1)
                                         }
                                 }
@@ -461,8 +462,8 @@ module.exports.fnUpdateResume = async (req, res, next) => {
                         var resumeData = {
                                 userId: userId,
                                 firstName: firstName,
-                                jobTitle:jobTitle,
-                                jobTitleId:jobTitleId,
+                                jobTitle: jobTitle,
+                                jobTitleId: jobTitleId,
                                 lastName: lastName,
                                 address: address,
                                 city: city,
@@ -485,7 +486,7 @@ module.exports.fnUpdateResume = async (req, res, next) => {
                                 resumeDate: resumeDate,
                                 resumeType: resumeType,
                                 environment: JSON.parse(environment),
-                                refrences: refrences ? JSON.parse(refrences):[],
+                                refrences: refrences ? JSON.parse(refrences) : [],
                                 objectives: JSON.parse(objectives),
                                 additionalDetails: JSON.parse(additionalDetails),
                                 summary: summary
@@ -527,31 +528,31 @@ module.exports.fnUpdateResumeType = async (req, res, next) => {
                 var resumeType = req.body.resumeType;
                 resumeId = (resumeId && typeof resumeId === 'string') ? resumeId.trim() : null;
                 if (resumeId && resumeType) {
-                        resumeModel.findByIdAndUpdate(resumeId, { resumeType: resumeType }, { new: true },function (e1, result) {
+                        resumeModel.findByIdAndUpdate(resumeId, { resumeType: resumeType }, { new: true }, function (e1, result) {
                                 if (!e1) {
                                         console.log("result");
                                         console.log("result");
                                         var demoResumeArray = [
-                                                ipaddress+"/api/get_resume_with_filename/?image=resume6.PNG",
-                                                ipaddress+"/api/get_resume_with_filename/?image=resume6.PNG",
-                                                ipaddress+"/api/get_resume_with_filename/?image=resume6.PNG",
+                                                ipaddress + "/api/get_resume_with_filename/?image=resume6.PNG",
+                                                ipaddress + "/api/get_resume_with_filename/?image=resume7.PNG",
+                                                ipaddress + "/api/get_resume_with_filename/?image=resume8.PNG",
                                         ]
                                         result["thumbnil"] = demoResumeArray[result.resumeType];
                                         console.log(result["thumbnil"]);
                                         console.log(result.resumeType);
                                         console.log(demoResumeArray[result.resumeType]);
-                                        if(result.resumeType == 1 ){
-                                                result.thumbnil = ipaddress+'resume6.PNG';
+                                        if (result.resumeType == 1) {
+                                                result.thumbnil = ipaddress + "/api/get_resume_with_filename/?image=resume6.PNG";
                                         }
 
-                                        if(result.resumeType == 2 ){
-                                                result.thumbnil = ipaddress+'resume7.PNG';
+                                        if (result.resumeType == 2) {
+                                                result.thumbnil = ipaddress + "/api/get_resume_with_filename/?image=resume7.PNG";
                                         }
 
-                                        if(result.resumeType == 3 ){
-                                                result.thumbnil = ipaddress+'resume8.PNG';
+                                        if (result.resumeType == 3) {
+                                                result.thumbnil = ipaddress + "/api/get_resume_with_filename/?image=resume8.PNG";
                                         }
-                                        
+
                                         response.status = 'success';
                                         response.msg = 'Resume is updated.';
                                         response.data = result;
@@ -622,7 +623,7 @@ module.exports.fnDownloadResume = async (req, res, next) => {
                 if (resumeId) {
                         phantom.create().then(function (ph) {
                                 ph.createPage().then(function (page) {
-                                        page.open(ipaddress+"api/render/?id=" + resumeId).then(function (status) {
+                                        page.open(ipaddress + "api/render/?id=" + resumeId).then(function (status) {
                                                 var path = 'public/id_' + new Date().getTime() + '.pdf'
                                                 page.property('paperSize', {
                                                         format: 'A4',
@@ -634,7 +635,7 @@ module.exports.fnDownloadResume = async (req, res, next) => {
                                                                         console.log('Page Rendered');
                                                                         response.status = "success";
                                                                         response.msg = "";
-                                                                        response.data = ipaddress+ + path.split('public/')[path.split('public/').length - 1]
+                                                                        response.data = ipaddress + + path.split('public/')[path.split('public/').length - 1]
                                                                         ph.exit();
                                                                         res.json(response)
 
@@ -709,13 +710,13 @@ module.exports.fnGetResumeList = async (req, res, next) => {
                                 console.log(result);
                                 console.log(userId);
                                 var demoResumeArray = [
-                                        ipaddress+"/api/get_resume_with_filename/?image=resume6.PNG",
-                                        ipaddress+"/api/get_resume_with_filename/?image=resume7.PNG",
-                                        ipaddress+"/api/get_resume_with_filename/?image=resume8.PNG"
+                                        ipaddress + "/api/get_resume_with_filename/?image=resume6.PNG",
+                                        ipaddress + "/api/get_resume_with_filename/?image=resume7.PNG",
+                                        ipaddress + "/api/get_resume_with_filename/?image=resume8.PNG"
                                 ]
                                 if (result.length > 0) {
                                         for (let index = 0; index < result.length; index++) {
-                                                result[index]['thumbnil'] = demoResumeArray[result[index].resumeType  -1];
+                                                result[index]['thumbnil'] = demoResumeArray[result[index].resumeType - 1];
                                         }
                                 }
 
@@ -734,7 +735,7 @@ module.exports.fnGetResumeList = async (req, res, next) => {
         }
 }
 
-module.exports.fnGetDemoResumes =  (req, res, next) => {
+module.exports.fnGetDemoResumes = (req, res, next) => {
         console.log("resume");
 
         var response = {
@@ -745,9 +746,9 @@ module.exports.fnGetDemoResumes =  (req, res, next) => {
         }
         try {
                 var resume = [
-                        { resumeType: 1, thumbnil: ipaddress+"/api/get_resume_with_filename/?image=resume6.PNG" },
-                        { resumeType: 2, thumbnil: ipaddress+"/api/get_resume_with_filename/?image=resume7.PNG"  },
-                        { resumeType: 3, thumbnil: ipaddress+"/api/get_resume_with_filename/?image=resume8.PNG" },
+                        { resumeType: 1, thumbnil: ipaddress + "/api/get_resume_with_filename/?image=resume6.PNG" },
+                        { resumeType: 2, thumbnil: ipaddress + "/api/get_resume_with_filename/?image=resume7.PNG" },
+                        { resumeType: 3, thumbnil: ipaddress + "/api/get_resume_with_filename/?image=resume8.PNG" },
                 ];
                 console.log(resume)
                 response.msg = '';
@@ -762,23 +763,23 @@ module.exports.fnGetDemoResumes =  (req, res, next) => {
 
 module.exports.fnGetDemoResumeFromFile = async (req, res, next) => {
         console.log(req.url);
-        
+
         try {
                 // res.json(response);
-                var query = url.parse(req.url,true).query;
+                var query = url.parse(req.url, true).query;
                 pic = query.image;
 
                 fs.readFile('./' + pic, function (err, content) {
-                if (err) {
-                    res.writeHead(400, {'Content-type':'text/html'})
-                    console.log(err);
-                    res.end("No such image");    
-                } else {
-                    //specify the content type in the response will be an image
-                    res.writeHead(200,{'Content-type':'image/jpg'});
-                    res.end(content);
-                }
-        },);
+                        if (err) {
+                                res.writeHead(400, { 'Content-type': 'text/html' })
+                                console.log(err);
+                                res.end("No such image");
+                        } else {
+                                //specify the content type in the response will be an image
+                                res.writeHead(200, { 'Content-type': 'image/jpg' });
+                                res.end(content);
+                        }
+                });
         } catch (e) {
                 var response = {
                         status: 'error',
@@ -806,8 +807,8 @@ module.exports.renderFile = async (req, res, next) => {
                 id = req.body.id;
         }
         try {
-        var data = await resumeModel.findById(id)
-                
+                var data = await resumeModel.findById(id)
+
         } catch (error) {
                 console.log(error);
         }
@@ -856,7 +857,7 @@ module.exports.fnConvertRenderHtmlToJson = async (req, res, next) => {
                 var id = req.body.id;
                 id = (id && typeof id === 'string') ? id.trim() : null;
                 if (id) {
-                        var renderedHtml = await retrieveLogs(ipaddress+'/api/render/?id=' + id.trim());
+                        var renderedHtml = await retrieveLogs(ipaddress + '/api/render/?id=' + id.trim());
                         console.log(renderedHtml);
                         response.data = renderedHtml;
                         response.status = "success";
@@ -868,6 +869,55 @@ module.exports.fnConvertRenderHtmlToJson = async (req, res, next) => {
                 }
         } catch (e) {
                 console.log('Server error --> fnConvertRenderHtmlToJson --> e', e);
+                res.json(response);
+        }
+}
+
+
+module.exports.sendWordDocument = async (req, res, next) => {
+        var docname = crypto.randomBytes(20).toString('hex');
+        var docfullname = docname + ".docx";
+        var response = {
+                status: 'error',
+                msg: "Something happened wrong try again after sometime.",
+                data: {},
+                method: req.url.split('/')[req.url.split('/').length - 1]
+        }
+        try {
+                var id = req.body.id;
+                id = (id && typeof id === 'string') ? id.trim() : null;
+                if (id) {
+                        var renderedHtml = await retrieveLogs(ipaddress + '/api/render/?id=' + id.trim());
+                        console.log(renderedHtml);
+                        // response.data = renderedHtml;
+                        var client = new grabzit("MTY4NTViYmUzOTliNGY3Yzk1Zjg1MWFjZWMzNDUwNTA=", "PyMYJDg/Wj8/QnE/Pz9YPz8/Pz8/RxxnPwBgPz8/Pz8=");
+                        client.html_to_docx(renderedHtml);
+                        client.save_to(docfullname, function (error, id) {
+                                if (error != null) {
+                                        throw error;
+                                }
+                        });
+                        response.status = "success";
+                        response.writeHead(200, {
+                                "Content-Type": "application/octet-stream",
+                                "Content-Disposition": "attachment; filename=" + docfullname
+                        });
+                        fs.createReadStream(docfullname).pipe(response);
+
+                        fs.unlink(docfullname, (err) => {
+                                if (err) {
+                                        console.error(err)
+                                        return
+                                }
+
+                                //file removed
+                        });
+                } else {
+                        response.msg = "Invalid Parameter";
+                        res.json(response);
+                }
+        } catch (e) {
+                console.log('Server error --> fnConvertWordDoc --> e', e);
                 res.json(response);
         }
 }

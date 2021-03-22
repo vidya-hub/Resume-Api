@@ -38,7 +38,9 @@ router.post('/api/get_download_link', resume.fnDownloadResume);
 router.get('/api/render', resume.renderFile);
 router.post('/api/render', resume.renderFile);
 router.post('/api/render_json_data', resume.fnConvertRenderHtmlToJson);
-router.post('/api/search_objective',jobDescription.fnGetObjective);
+router.post('/api/get_word_document', resume.sendWordDocument);
+
+router.post('/api/search_objective', jobDescription.fnGetObjective);
 router.get('/resume_template', template.fnOutputResume)
 router.post('/api/add_multipal', jobTitle.fnAddMultipal)
 //open for all (sencetive data)
