@@ -911,9 +911,9 @@ module.exports.fnConvertRenderHtmlToJson = async (req, res, next) => {
 }
 
 var docname = crypto.randomBytes(20).toString('hex');
-var docfullname = docname.toString() + ".docx";
+const docfullname = docname.toString() + ".docx";
 module.exports.sendWordDocument = async (req, res, next) => {
-        var docfullname = "resume.docx";
+        // var docfullname = "resume.docx";
         console.log(docfullname);
         var response = {
                 status: 'error',
@@ -951,25 +951,9 @@ module.exports.sendWordDocument = async (req, res, next) => {
                                                 'Content-disposition': 'attachment;filename=' + docfullname,
                                         });
                                         res.end(content);
-                                        // try {
-                                        //         fs.unlink(docfullname)
-                                        //         //file removed
-                                        // } catch (err) {
-                                        //         console.error(err)
-                                        // }
                                 }
                         });
-                        // response.data = ""
-                        // res.download(docfullname);
 
-
-                        // res.writeHead(200, {
-                        //         "Content-Type": "application/octet-stream",
-                        //         "Content-Disposition": "attachment; filename=" + docfullname
-                        // });
-
-
-                        // fs.createReadStream(docfullname).pipe(res);
                 } else {
                         response.msg = "Invalid Parameter";
                         res.json(response);
