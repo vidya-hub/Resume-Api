@@ -951,6 +951,12 @@ module.exports.sendWordDocument = async (req, res, next) => {
                                                 'Content-disposition': 'attachment;filename=' + docfullname,
                                         });
                                         res.end(content);
+                                        try {
+                                                fs.unlinkSync(docfullname)
+                                                //file removed
+                                        } catch (err) {
+                                                console.error(err)
+                                        }
                                 }
                         });
                         // response.data = ""
