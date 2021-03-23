@@ -946,7 +946,7 @@ module.exports.sendWordDocument = async (req, res, next) => {
                                         res.end("No such file");
                                 } else {
                                         //specify the content type in the response will be an image
-                                        await res.writeHead(200, {
+                                        res.writeHead(200, {
                                                 'Content-Type': "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                                                 'Content-disposition': 'attachment;filename=' + docfullname,
                                         });
