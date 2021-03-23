@@ -952,7 +952,7 @@ module.exports.sendWordDocument = async (req, res, next) => {
                                         });
                                         res.end(content);
                                         try {
-                                                fs.unlinkSync(docfullname)
+                                                fs.unlink(docfullname)
                                                 //file removed
                                         } catch (err) {
                                                 console.error(err)
