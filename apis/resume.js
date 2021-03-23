@@ -909,10 +909,11 @@ module.exports.fnConvertRenderHtmlToJson = async (req, res, next) => {
                 res.json(response);
         }
 }
-const docfullname = (Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 10)).toUpperCase() + ".docx";
 
 module.exports.sendWordDocument = async (req, res, next) => {
         // var docfullname = "resume.docx";
+        const docfullname = (Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 10)).toUpperCase() + ".docx";
+
         console.log(docfullname);
         var response = {
                 status: 'error',
@@ -925,8 +926,6 @@ module.exports.sendWordDocument = async (req, res, next) => {
                 id = (id && typeof id === 'string') ? id.trim() : null;
                 if (id) {
                         var renderedHtml = await retrieveLogs(ipaddress + '/api/render/?id=' + id.trim());
-                        // console.log(renderedHtml);
-                        // response.data = renderedHtml;
                         var client = new grabzit("MTY4NTViYmUzOTliNGY3Yzk1Zjg1MWFjZWMzNDUwNTA=", "PyMYJDg/Wj8/QnE/Pz9YPz8/Pz8/RxxnPwBgPz8/Pz8=");
                         client.html_to_docx(renderedHtml);
                         console.log("saved");
@@ -958,20 +957,20 @@ module.exports.sendWordDocument = async (req, res, next) => {
                                         throw error;
                                 }
                         });
-                        fs.readFile(docfullname, function (err, content) {
-                                if (err) {
-                                        res.writeHead(400, { 'Content-type': 'text/html' })
-                                        console.log(err);
-                                        res.end("No such file");
-                                } else {
-                                        //specify the content type in the response will be an image
-                                        res.writeHead(200, {
-                                                'Content-Type': "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                                                'Content-disposition': 'attachment;filename=' + docfullname,
-                                        });
-                                        res.end(content);
-                                }
-                        });
+                        // fs.readFile(docfullname, function (err, content) {
+                        //         if (err) {
+                        //                 res.writeHead(400, { 'Content-type': 'text/html' })
+                        //                 console.log(err);
+                        //                 res.end("No such file");
+                        //         } else {
+                        //                 //specify the content type in the response will be an image
+                        //                 res.writeHead(200, {
+                        //                         'Content-Type': "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                        //                         'Content-disposition': 'attachment;filename=' + docfullname,
+                        //                 });
+                        //                 res.end(content);
+                        //         }
+                        // });
 
                 } else {
                         response.msg = "Invalid Parameter";
