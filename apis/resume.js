@@ -857,19 +857,19 @@ module.exports.renderFile = async (req, res, next) => {
         }
 
         if (data.resumeType == 2) {
-                ejs.renderFile('resume7.ejs', data, {}, function (err, str) {
+                ejs.renderFile('resume3.ejs', data, {}, function (err, str) {
                         res.end(ejs.render(str, {}, {}));
                 });
 
         }
         if (data.resumeType == 3) {
-                ejs.renderFile('resume8.ejs', data, {}, function (err, str) {
+                ejs.renderFile('resume4.ejs', data, {}, function (err, str) {
                         res.end(ejs.render(str, {}, {}));
                 });
 
         }
         if (data.resumeType == 4) {
-                ejs.renderFile('resume8.ejs', data, {}, function (err, str) {
+                ejs.renderFile('resume7.ejs', data, {}, function (err, str) {
                         res.end(ejs.render(str, {}, {}));
                 });
 
