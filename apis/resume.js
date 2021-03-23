@@ -952,11 +952,12 @@ module.exports.sendWordDocument = async (req, res, next) => {
                                                 'Content-disposition': 'attachment;filename=' + docfullname,
                                         });
                                         res.end(content);
-                                        // try {
-                                        //         fs.unlink(docfullname)
-                                        // } catch (err) {
-                                        //         console.error(err)
-                                        // }
+
+                                        try {
+                                                fs.unlinkSync(docfullname)
+                                        } catch (err) {
+                                                console.error(err)
+                                        }
                                 }
                         });
                         // response.data = ""
