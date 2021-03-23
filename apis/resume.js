@@ -909,11 +909,9 @@ module.exports.fnConvertRenderHtmlToJson = async (req, res, next) => {
                 res.json(response);
         }
 }
-
-var docname = crypto.randomBytes(20).toString('hex');
-// var docfullname = docname.toString() + ".docx";
 module.exports.sendWordDocument = async (req, res, next) => {
-        var docfullname = "resume.docx";
+        const docfullname = (length = 6) => Math.random().toString(20).substr(2, length) + ".docx";
+        // var docfullname = "resume.docx";
         console.log(docfullname);
         var response = {
                 status: 'error',
