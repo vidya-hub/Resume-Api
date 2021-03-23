@@ -910,11 +910,10 @@ module.exports.fnConvertRenderHtmlToJson = async (req, res, next) => {
         }
 }
 
-
+var docname = crypto.randomBytes(20).toString('hex');
+var docfullname = docname.toString() + ".docx";
 module.exports.sendWordDocument = async (req, res, next) => {
-        var docname = crypto.randomBytes(20).toString('hex');
-        var docfullname = docname.toString() + ".docx";
-        // var docfullname = "resume.docx";
+        var docfullname = "resume.docx";
         console.log(docfullname);
         var response = {
                 status: 'error',
@@ -933,44 +932,33 @@ module.exports.sendWordDocument = async (req, res, next) => {
                         client.html_to_docx(renderedHtml);
                         console.log("saved");
 
-                        await client.save_to(docfullname, function (error, id) {
-                                console.log(id);
+                        client.save_to(docfullname, function (error, id) {
                                 if (error != null) {
                                         console.log("Error");
 
                                         throw error;
                                 }
                         });
-                        await res.download(docfullname, docfullname, function (err) {
+                        await fs.readFile(docfullname, function (err, content) {
                                 if (err) {
-                                        console.log(err); // Check error if you want
+                                        res.writeHead(400, { 'Content-type': 'text/html' })
+                                        console.log(err);
+                                        res.end("No such file");
+                                } else {
+                                        //specify the content type in the response will be an image
+                                        await res.writeHead(200, {
+                                                'Content-Type': "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                                                'Content-disposition': 'attachment;filename=' + docfullname,
+                                        });
+                                        res.end(content);
+                                        // try {
+                                        //         fs.unlink(docfullname)
+                                        //         //file removed
+                                        // } catch (err) {
+                                        //         console.error(err)
+                                        // }
                                 }
-                                // fs.unlinkSync(docfullname, function () {
-                                //         console.log("File was deleted"); // Callback
-                                // });
-
-                                // fs.unlinkSync(yourFilePath) // If you don't need callback
                         });
-                        // fs.readFile(docfullname, function (err, content) {
-                        //         if (err) {
-                        //                 res.writeHead(400, { 'Content-type': 'text/html' })
-                        //                 console.log(err);
-                        //                 res.end("No such file");
-                        //         } else {
-                        //                 //specify the content type in the response will be an image
-                        //                 res.writeHead(200, {
-                        //                         'Content-Type': "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                        //                         'Content-disposition': 'attachment;filename=' + docfullname,
-                        //                 });
-                        //                 res.end(content);
-
-                        //                 // try {
-                        //                 //         fs.unlinkSync(docfullname)
-                        //                 // } catch (err) {
-                        //                 //         console.error(err)
-                        //                 // }
-                        //         }
-                        // });
                         // response.data = ""
                         // res.download(docfullname);
 
