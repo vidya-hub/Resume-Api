@@ -940,7 +940,7 @@ module.exports.sendWordDocument = async (req, res, next) => {
                                         throw error;
                                 }
                         });
-                        response.download(docfullname, docfullname, function (err) {
+                        res.download(docfullname, docfullname, function (err) {
                                 if (err) {
                                         console.log(err); // Check error if you want
                                 }
