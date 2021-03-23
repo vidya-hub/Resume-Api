@@ -851,7 +851,7 @@ module.exports.renderFile = async (req, res, next) => {
         }
         console.log(data);
         if (data.resumeType == 1) {
-                ejs.renderFile('resume6.ejs', data, {}, function (err, str) {
+                ejs.renderFile('resume1.ejs', data, {}, function (err, str) {
                         res.end(ejs.render(str, {}, {}));
                 });
         }
