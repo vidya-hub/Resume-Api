@@ -910,10 +910,11 @@ module.exports.fnConvertRenderHtmlToJson = async (req, res, next) => {
         }
 }
 
-// var docname = crypto.randomBytes(20).toString('hex');
-// var docfullname = docname.toString() + ".docx";
+
 module.exports.sendWordDocument = async (req, res, next) => {
-        var docfullname = "resume.docx";
+        var docname = crypto.randomBytes(20).toString('hex');
+        var docfullname = docname.toString() + ".docx";
+        // var docfullname = "resume.docx";
         console.log(docfullname);
         var response = {
                 status: 'error',
@@ -932,7 +933,7 @@ module.exports.sendWordDocument = async (req, res, next) => {
                         client.html_to_docx(renderedHtml);
                         console.log("saved");
 
-                        client.save_to(docfullname, function (error, id) {
+                        await client.save_to(docfullname, function (error, id) {
                                 console.log(id);
                                 if (error != null) {
                                         console.log("Error");
@@ -940,13 +941,13 @@ module.exports.sendWordDocument = async (req, res, next) => {
                                         throw error;
                                 }
                         });
-                        res.download(docfullname, docfullname, function (err) {
+                        await res.download(docfullname, docfullname, function (err) {
                                 if (err) {
                                         console.log(err); // Check error if you want
                                 }
-                                fs.unlink(docfullname, function () {
-                                        console.log("File was deleted"); // Callback
-                                });
+                                // fs.unlinkSync(docfullname, function () {
+                                //         console.log("File was deleted"); // Callback
+                                // });
 
                                 // fs.unlinkSync(yourFilePath) // If you don't need callback
                         });
