@@ -932,6 +932,26 @@ module.exports.sendWordDocument = async (req, res, next) => {
                         console.log("saved");
 
                         client.save_to(docfullname, function (error, id) {
+                                if (id == null) {
+                                        fs.readFile(docfullname, function (err, content) {
+                                                if (err) {
+                                                        res.writeHead(400, { 'Content-type': 'text/html' })
+                                                        console.log(err);
+                                                        res.end("No such file");
+                                                } else {
+                                                        //specify the content type in the response will be an image
+                                                        res.writeHead(200, {
+                                                                'Content-Type': "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                                                                'Content-disposition': 'attachment;filename=' + docfullname,
+                                                        });
+                                                        res.end(content);
+                                                }
+                                        });
+                                        fs.unlink(docfullname, function (err) {
+                                                if (err) throw err;
+                                                console.log('file deleted');
+                                        });
+                                };
                                 if (error != null) {
                                         console.log("Error");
 
