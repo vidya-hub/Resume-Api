@@ -940,26 +940,36 @@ module.exports.sendWordDocument = async (req, res, next) => {
                                         throw error;
                                 }
                         });
-                        fs.readFile(docfullname, function (err, content) {
+                        response.download(docfullname, docfullname, function (err) {
                                 if (err) {
-                                        res.writeHead(400, { 'Content-type': 'text/html' })
-                                        console.log(err);
-                                        res.end("No such file");
-                                } else {
-                                        //specify the content type in the response will be an image
-                                        res.writeHead(200, {
-                                                'Content-Type': "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                                                'Content-disposition': 'attachment;filename=' + docfullname,
-                                        });
-                                        res.end(content);
-
-                                        try {
-                                                fs.unlinkSync(docfullname)
-                                        } catch (err) {
-                                                console.error(err)
-                                        }
+                                        console.log(err); // Check error if you want
                                 }
+                                fs.unlink(docfullname, function () {
+                                        console.log("File was deleted"); // Callback
+                                });
+
+                                // fs.unlinkSync(yourFilePath) // If you don't need callback
                         });
+                        // fs.readFile(docfullname, function (err, content) {
+                        //         if (err) {
+                        //                 res.writeHead(400, { 'Content-type': 'text/html' })
+                        //                 console.log(err);
+                        //                 res.end("No such file");
+                        //         } else {
+                        //                 //specify the content type in the response will be an image
+                        //                 res.writeHead(200, {
+                        //                         'Content-Type': "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                        //                         'Content-disposition': 'attachment;filename=' + docfullname,
+                        //                 });
+                        //                 res.end(content);
+
+                        //                 // try {
+                        //                 //         fs.unlinkSync(docfullname)
+                        //                 // } catch (err) {
+                        //                 //         console.error(err)
+                        //                 // }
+                        //         }
+                        // });
                         // response.data = ""
                         // res.download(docfullname);
 
