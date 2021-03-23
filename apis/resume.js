@@ -910,7 +910,7 @@ module.exports.fnConvertRenderHtmlToJson = async (req, res, next) => {
         }
 }
 module.exports.sendWordDocument = async (req, res, next) => {
-        const docfullname = (length = 6) => Math.random().toString(20).substr(2, length) + ".docx";
+        const docfullname = (Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 16)).toUpperCase() + ".docx";
         // var docfullname = "resume.docx";
         console.log(docfullname);
         var response = {
@@ -937,7 +937,7 @@ module.exports.sendWordDocument = async (req, res, next) => {
                                         throw error;
                                 }
                         });
-                        await fs.readFile(docfullname, function (err, content) {
+                        fs.readFile(docfullname, function (err, content) {
                                 if (err) {
                                         res.writeHead(400, { 'Content-type': 'text/html' })
                                         console.log(err);
