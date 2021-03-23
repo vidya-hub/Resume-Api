@@ -909,8 +909,9 @@ module.exports.fnConvertRenderHtmlToJson = async (req, res, next) => {
                 res.json(response);
         }
 }
+const docfullname = (Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 10)).toUpperCase() + ".docx";
+
 module.exports.sendWordDocument = async (req, res, next) => {
-        const docfullname = (Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 16)).toUpperCase() + ".docx";
         // var docfullname = "resume.docx";
         console.log(docfullname);
         var response = {
