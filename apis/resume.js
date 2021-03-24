@@ -1,9 +1,10 @@
 var resumeModel = require("../models/resume");
 const phantom = require('phantom');
 var grabzit = require('grabzit');
-
+var ejs = require('ejs')
 const fetch = require("node-fetch");
 var crypto = require("crypto");
+let path = require("path");
 var ipval = require("../helper/ipaddress.js");
 var http = require('http'),
         fs = require('fs'),
@@ -882,6 +883,79 @@ module.exports.renderFile = async (req, res, next) => {
         }
 
 }
+
+
+
+module.exports.renderHtmlStep = async (req, res, next) => {
+        console.log("here");
+        var query = url.parse(req.url, true).query;
+        var id = query.id;
+        var datavalues = req.body;
+        if (id == "1") {
+                var pathejs = path.join(__dirname, 'views/', 'resume1.ejs');
+                ejs.renderFile(pathejs, datavalues, function (err, data) {
+                        if (err) {
+                                res.send(err);
+                        } else {
+                                res.set('Content-Type', 'text/html');
+                                res.send(Buffer.from(data.toString()));
+                        };
+                });
+        }
+
+        if (id == "2") {
+                var pathejs = path.join(__dirname, 'views/', 'resume3.ejs');
+                ejs.renderFile(pathejs, datavalues, function (err, data) {
+                        if (err) {
+                                res.send(err);
+                        } else {
+                                res.set('Content-Type', 'text/html');
+                                res.send(Buffer.from(data.toString()));
+                        };
+                });
+
+
+        }
+        if (id == "3") {
+                var pathejs = path.join(__dirname, 'views/', 'resume4.ejs');
+                ejs.renderFile(pathejs, datavalues, function (err, data) {
+                        if (err) {
+                                res.send(err);
+                        } else {
+                                res.set('Content-Type', 'text/html');
+                                res.send(Buffer.from(data.toString()));
+                        };
+                });
+
+        }
+        if (id == "4") {
+                var pathejs = path.join(__dirname, 'views/', 'resume7.ejs');
+                ejs.renderFile(pathejs, datavalues, function (err, data) {
+                        if (err) {
+                                res.send(err);
+                        } else {
+                                res.set('Content-Type', 'text/html');
+                                res.send(Buffer.from(data.toString()));
+                        };
+                });
+
+        }
+        if (id == "5") {
+                var pathejs = path.join(__dirname, 'views/', 'resume8.ejs');
+                ejs.renderFile(pathejs, datavalues, function (err, data) {
+                        if (err) {
+                                res.send(err);
+                        } else {
+                                res.set('Content-Type', 'text/html');
+                                res.send(Buffer.from(data.toString()));
+                        };
+                });
+        }
+
+}
+
+
+
 
 module.exports.fnConvertRenderHtmlToJson = async (req, res, next) => {
         var response = {

@@ -20,6 +20,7 @@
     "express-ejs-layouts": "^2.5.0",
     "express-session": "^1.15.6",
     "fs": "^0.0.1-security",
+    "grabzit": "^3.4.5",
     "http": "^0.0.1-security",
     "moment-timezone": "^0.5.16",
     "mongoose": "^5.12.0",

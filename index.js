@@ -1,13 +1,14 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+
 var http = require('http');
 var path = require('path');
 var cors = require('cors');
 var http = require('http'),
-    fs = require('fs'),
-    url = require('url');
-var  ipval  = require("./helper/ipaddress.js");
+	fs = require('fs'),
+	url = require('url');
+var ipval = require("./helper/ipaddress.js");
 
 // var ipval = require("./")
 
@@ -21,7 +22,7 @@ var session = require('express-session')({
 	saveUninitialized: false,
 	resave: false
 });
-var ipaddress =  ipval.ipvalreturnwithoutport();
+var ipaddress = ipval.ipvalreturnwithoutport();
 // var ipaddress =  ipaddressreturn();
 // var mongoclient = 'mongodb://52.66.242.48:27017/resume_app_db'
 var mongoclient = 'mongodb://localhost:27017/resume_app_db'
@@ -31,18 +32,20 @@ mongoose.connect(mongoclient, { useNewUrlParser: true });
 var route = require('./routes/route');
 const port = 3001;
 var app = express();
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 app.use(session);
-app.use( function(req, res, next) {
+app.use(function (req, res, next) {
 	res.header("Access-Control-Allow-Origin", "YOUR-DOMAIN.TLD"); // update to match the domain you will make the request from
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	next();
-  });
+});
 
 app.set('port', port);
 var server = http.createServer(app, session);
 app.set('view engine', 'ejs')     // Setamos que nossa engine será o ejs
-app.use(expressLayouts)   
+app.use(expressLayouts)
 
 server.listen(port);
 server.on('error', function (error) {
@@ -82,10 +85,10 @@ mongoose.connection.once('open', function () {
 	app.use('/uploads/', express.static(path.join(__dirname, 'uploads')));
 	app.use(cors());
 	app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-	
+	app.use(bodyParser.urlencoded({
+		extended: true
+	}));
+
 	//app.use(cookieParser());
 
 	app.use(express.static(path.join(__dirname, 'public')));
