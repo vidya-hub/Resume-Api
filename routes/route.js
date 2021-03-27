@@ -50,6 +50,11 @@ router.post('/api/add_multipal', jobTitle.fnAddMultipal)
 // open for users
 // router.post('/api/*', fnAuthoriseToken(), main.fnAuthoriseToken);
 router.post('/api/get_login_user_detail', main.fnGetLoginUserDetails);
+router.post('/api/send_otp_to_email', main.fnForgotPasswordEmailSend);
+router.post('/api/verify_otp_changepassword', main.fnVerifyOtpForForgotPassword);
+
+
+
 router.post('/api/get_users_resumes', resume.fnGetResumeList);
 router.post('/api/update_resume', resume.fnUpdateResume);
 router.post('/api/update_resume_type', resume.fnUpdateResumeType);

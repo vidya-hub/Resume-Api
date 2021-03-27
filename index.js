@@ -22,7 +22,7 @@ var session = require('express-session')({
 	saveUninitialized: false,
 	resave: false
 });
-var ipaddress = ipval.ipvalreturnwithoutport();
+// var ipaddress = ipval.ipvalreturnwithoutport();
 // var ipaddress =  ipaddressreturn();
 // var mongoclient = 'mongodb://52.66.242.48:27017/resume_app_db'
 var mongoclient = 'mongodb://localhost:27017/resume_app_db'
