@@ -488,10 +488,10 @@ module.exports.fnUpdateResume = async (req, res, next) => {
                                 birthDate: birthDate,
                                 resumeDate: resumeDate,
                                 resumeType: resumeType,
-                                environment: JSON.parse(environment),
+                                environment:environment ? JSON.parse(environment) : [],
                                 refrences: refrences ? JSON.parse(refrences) : [],
-                                objectives: JSON.parse(objectives),
-                                additionalDetails: JSON.parse(additionalDetails),
+                                objectives:  objectives ? JSON.parse(objectives) : [],
+                                additionalDetails:additionalDetails ? JSON.parse(additionalDetails) : [],
                                 summary: summary
                         }
 

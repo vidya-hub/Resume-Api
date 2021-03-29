@@ -153,4 +153,5 @@ var resumeSchema = mongoose.Schema({
     resumeType: { type: Number, default: 1 },
     isDeleted: { type: Boolean, default: false },
 });
-var resumeModel = module.exports = mongoose.model('resume_data', resumeSchema);
+// var resumeModel = module.exports = mongoose.model('resume_data', resumeSchema);
+var resumeModel = module.exports = mongoose.model('resume_new_data', resumeSchema);
