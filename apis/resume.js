@@ -278,8 +278,6 @@ module.exports.fnAddResume = async (req, res, next) => {
         }
 }
 
-
-
 module.exports.fnUpdateResume = async (req, res, next) => {
         var response = {
                 status: 'error',
@@ -319,7 +317,7 @@ module.exports.fnUpdateResume = async (req, res, next) => {
                 var resumeType = req.body.resumeType;
                 var refrences = req.body.refrences;
 
-                var environment = req.body.environment;
+                // var environment = req.body.environment;
                 var objectives = req.body.objectives;
                 var additionalDetails = req.body.additionalDetails;
                 var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -490,16 +488,15 @@ module.exports.fnUpdateResume = async (req, res, next) => {
                                 birthDate: birthDate,
                                 resumeDate: resumeDate,
                                 resumeType: resumeType,
-                                environment:environment ? JSON.parse(environment) : [],
+                                // environment: JSON.parse(environment),
                                 refrences: refrences ? JSON.parse(refrences) : [],
-                                objectives:  objectives ? JSON.parse(objectives) : [],
-                                additionalDetails:additionalDetails ? JSON.parse(additionalDetails) : [],
+                                objectives: JSON.parse(objectives),
+                                additionalDetails: JSON.parse(additionalDetails),
                                 summary: summary
                         }
 
                         resumeModel.findByIdAndUpdate(resumeId, resumeData, { new: true }, function (e1, result) {
                                 if (!e1) {
-                                        console.log(result);
                                         response.status = 'success';
                                         response.msg = 'Resume is updated.';
                                         response.data = result;
