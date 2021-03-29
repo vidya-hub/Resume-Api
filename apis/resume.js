@@ -278,6 +278,8 @@ module.exports.fnAddResume = async (req, res, next) => {
         }
 }
 
+
+
 module.exports.fnUpdateResume = async (req, res, next) => {
         var response = {
                 status: 'error',
@@ -497,6 +499,7 @@ module.exports.fnUpdateResume = async (req, res, next) => {
 
                         resumeModel.findByIdAndUpdate(resumeId, resumeData, { new: true }, function (e1, result) {
                                 if (!e1) {
+                                        console.log(result);
                                         response.status = 'success';
                                         response.msg = 'Resume is updated.';
                                         response.data = result;
