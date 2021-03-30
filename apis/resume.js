@@ -316,9 +316,12 @@ module.exports.fnUpdateResume = async (req, res, next) => {
                 var resumeDate = req.body.resumeDate;
                 var resumeType = req.body.resumeType;
                 var refrences = req.body.refrences;
+                // console.log(additionalContacts)
 
                 // var environment = req.body.environment;
                 var objectives = req.body.objectives;
+                // console.log(JSON.parse(objectives));
+
                 var additionalDetails = req.body.additionalDetails;
                 var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -330,8 +333,14 @@ module.exports.fnUpdateResume = async (req, res, next) => {
                 birthDate = (birthDate && typeof birthDate === 'string') ? birthDate.trim() : null;
                 email = (email && typeof email === 'string' && re.test(String(email).toLowerCase())) ? email.trim() : null;
 
+                console.log(resumeId);
+                console.log(firstName) 
+                console.log( jobTitle );
+                console.log(phoneNo)
+                console.log(birthDate)
+                console.log(email)
+                console.log(resumeType);
                 if (resumeId && firstName && jobTitle && phoneNo && birthDate && email && resumeType) {
-
                         var additionalContactsForVerify = additionalContacts && JSON.parse(additionalContacts) ? JSON.parse(additionalContacts) : [];
 
                         if (additionalContactsForVerify && additionalContactsForVerify.length > 0) {
@@ -345,7 +354,7 @@ module.exports.fnUpdateResume = async (req, res, next) => {
                         } else {
                                 additionalContacts = []
                         }
-                        console.log(additionalContacts)
+
                         var summary = professionalSummary && JSON.parse(professionalSummary) ? JSON.parse(professionalSummary) : [];
                         if (summary && summary.length > 0) {
                                 for (let index = 0; index < summary.length; index++) {
@@ -355,7 +364,7 @@ module.exports.fnUpdateResume = async (req, res, next) => {
                                         }
                                 }
                         }
-                        console.log(summary)
+                        // console.log(summary)
                         var tempSummary = "";
                         if (summary && summary.length > 0) {
                                 for (let index = 0; index < summary.length; index++) {
@@ -378,6 +387,8 @@ module.exports.fnUpdateResume = async (req, res, next) => {
                         }
 
                         var workHistoryForVerify = workHistory && JSON.parse(workHistory) ? JSON.parse(workHistory) : [];
+                        console.log(workHistoryForVerify)
+
                         if (workHistoryForVerify && workHistoryForVerify.length > 0) {
                                 workHistory = JSON.parse(workHistory)
                                 for (let index = 0; index < workHistoryForVerify.length; index++) {
@@ -461,6 +472,7 @@ module.exports.fnUpdateResume = async (req, res, next) => {
                         } else {
                                 additionalInformation = []
                         }
+         
 
                         var resumeData = {
                                 userId: userId,
@@ -490,12 +502,13 @@ module.exports.fnUpdateResume = async (req, res, next) => {
                                 resumeType: resumeType,
                                 // environment: JSON.parse(environment),
                                 refrences: refrences ? JSON.parse(refrences) : [],
-                                objectives: JSON.parse(objectives),
+                                objectives:objectives ? JSON.parse(objectives) : [],
                                 additionalDetails: JSON.parse(additionalDetails),
                                 summary: summary
-                        }
-
+                        };
+                       
                         resumeModel.findByIdAndUpdate(resumeId, resumeData, { new: true }, function (e1, result) {
+                                
                                 if (!e1) {
                                         response.status = 'success';
                                         response.msg = 'Resume is updated.';
@@ -1000,7 +1013,7 @@ module.exports.sendWordDocument = async (req, res, next) => {
                 id = (id && typeof id === 'string') ? id.trim() : null;
                 if (id) {
                         var renderedHtml = await retrieveLogs(ipaddress + '/api/render/?id=' + id.trim());
-                        var client = new grabzit("MTY4NTViYmUzOTliNGY3Yzk1Zjg1MWFjZWMzNDUwNTA=", "PyMYJDg/Wj8/QnE/Pz9YPz8/Pz8/RxxnPwBgPz8/Pz8=");
+                        var client = new grabzit("OGMyYzcwMzViNmZlNDg2ZGI0MmE1Y2ZmZDI2NDY0ODU=", "WVgsZT8/XXs/PwQ/Pz8KfV5SPz8zEz95Pz8/LVg/Pz8=");
                         client.html_to_docx(renderedHtml);
                         console.log("saved");
 
