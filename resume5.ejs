@@ -1,6 +1,5 @@
 <!doctype html>
-<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
-
+<html moznomarginboxes mozdisallowselectionprint>
 
 <head>
     <meta charset="utf-8">
@@ -99,19 +98,6 @@
                                                 </ul>
                                             </div>
                                             <% } %>
-                                            <% if (objectives && objectives.length>0) { %>
-                                                <div style="padding-bottom: 30px;">
-                                                    <p
-                                                        style="font-size: 18px; line-height: 24px; color: #000; margin-bottom: 15px; margin-top: 0; text-transform: uppercase;">
-                                                        objectives</p>
-                                                    <ul style="">
-                                                        <% for(var i=0; i < objectives.length; i++) { %>
-                                                        <li style="margin-bottom: 5px; font-size: 16px; "><%=objectives[i]%>
-                                                        </li>
-                                                        <% } %>
-                                                    </ul>
-                                                </div>
-                                                <% } %>
                                             <% if (education && education.length>0) { %>
                                             <div style="padding-bottom: 30px;">
                                                 <p
@@ -209,6 +195,22 @@
                                                 <% } %>
                                             </div>
                                             <% } %>
+                                            <% if (refrences && refrences.length>0) { %>
+                                                <div style="padding-bottom: 30px;">
+                                                    <p
+                                                        style="font-size: 18px; line-height: 24px; color: #000; margin-bottom: 15px; margin-top: 0; text-transform: uppercase;">
+                                                        references information</p>
+                                                    <% for(var i=0; i < refrences.length; i++) { %>
+                                                <li>
+                                                    <span style="padding-left: 20px;"><%=refrences[i].name%> </span>
+                                                    <span><%=refrences[i].position%> </span>
+                                                    <span><%=refrences[i].email%> </span>
+                                                    <span><%=refrences[i].phone%> </span>
+                                                </li>
+                                                       
+                                                    <% } %>
+                                                </div>
+                                                <% } %>
                                         </td>
                                     </tr>
 

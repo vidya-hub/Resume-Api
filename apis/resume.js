@@ -609,6 +609,7 @@ module.exports.fnDeleteResume = async (req, res, next) => {
                                 if (!e1) {
                                         response.status = 'success';
                                         response.msg = 'Resume is deleted.';
+                                        response.data = result,
                                         res.json(response);
                                 } else {
                                         console.log('Server error --> fnDeleteResume --> e1', e1);
