@@ -96,6 +96,20 @@
                                                 </ul>
                                             </td>
                                         </tr>
+                                        <% if (objectives && objectives.length>0) { %>
+                                            <tr>
+                                                <td style="padding-bottom: 30px;">
+                                                    <p
+                                                        style="color: #000; font-size: 30px; font-weight: 700; line-height: 36px; margin: 0; margin-bottom: 15px; font-weight: 700;">
+                                                        objectives</p>
+                                                    <ul
+                                                        style="text-align: left;list-style-position: inside;margin: 0;padding: 0;display: flex;flex-wrap: wrap;">
+                                                        <% for(var i=0; i < objectives.length; i++) { %>
+                                                        <li style="width: 50%;"><%=objectives[i]%></li>
+                                                        <% } %>
+                                                    </ul>
+                                                </td>
+                                            </tr>
                                         <% } %>
                                         <% if (workHistory && workHistory.length>0) { %>
                                         <tr>

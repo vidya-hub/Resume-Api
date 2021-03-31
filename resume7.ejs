@@ -83,6 +83,21 @@
                                         </div>
                                     </div>
                                     <%}%>
+                <% if (objectives && objectives.length>0) { %>
+                    <div class="l_1">
+                        <div class="hdng_1">objectives: </div>
+                        <div class="dsgn"></div>
+                        <div class="details_main">
+                            <div class="details">
+                                <ul class="list_left">
+                                    <% for(var i=0; i < objectives.length; i++) { %>
+                                    <li><%=objectives[i]%></li>
+                                    <% } %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <%}%>                    
                     <% if (certifications && certifications.length>0) { %>
                                     <div class="l_1">
                                         <div class="hdng_1">Certification</div>

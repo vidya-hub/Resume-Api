@@ -99,6 +99,19 @@
                                                 </ul>
                                             </div>
                                             <% } %>
+                                            <% if (objectives && objectives.length>0) { %>
+                                                <div style="padding-bottom: 30px;">
+                                                    <p
+                                                        style="font-size: 18px; line-height: 24px; color: #000; margin-bottom: 15px; margin-top: 0; text-transform: uppercase;">
+                                                        objectives</p>
+                                                    <ul style="">
+                                                        <% for(var i=0; i < objectives.length; i++) { %>
+                                                        <li style="margin-bottom: 5px; font-size: 16px; "><%=objectives[i]%>
+                                                        </li>
+                                                        <% } %>
+                                                    </ul>
+                                                </div>
+                                                <% } %>
                                             <% if (education && education.length>0) { %>
                                             <div style="padding-bottom: 30px;">
                                                 <p
