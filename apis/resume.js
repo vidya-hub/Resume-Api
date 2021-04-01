@@ -334,8 +334,8 @@ module.exports.fnUpdateResume = async (req, res, next) => {
                 email = (email && typeof email === 'string' && re.test(String(email).toLowerCase())) ? email.trim() : null;
 
                 console.log(resumeId);
-                console.log(firstName) 
-                console.log( jobTitle );
+                console.log(firstName)
+                console.log(jobTitle);
                 console.log(phoneNo)
                 console.log(birthDate)
                 console.log(email)
@@ -472,7 +472,7 @@ module.exports.fnUpdateResume = async (req, res, next) => {
                         } else {
                                 additionalInformation = []
                         }
-         
+
 
                         var resumeData = {
                                 userId: userId,
@@ -502,13 +502,13 @@ module.exports.fnUpdateResume = async (req, res, next) => {
                                 resumeType: resumeType,
                                 // environment: JSON.parse(environment),
                                 refrences: refrences ? JSON.parse(refrences) : [],
-                                objectives:objectives ? JSON.parse(objectives) : [],
+                                objectives: objectives ? JSON.parse(objectives) : [],
                                 additionalDetails: JSON.parse(additionalDetails),
                                 summary: summary
                         };
-                       
+
                         resumeModel.findByIdAndUpdate(resumeId, resumeData, { new: true }, function (e1, result) {
-                                
+
                                 if (!e1) {
                                         response.status = 'success';
                                         response.msg = 'Resume is updated.';
@@ -549,24 +549,43 @@ module.exports.fnUpdateResumeType = async (req, res, next) => {
                                         console.log("result");
                                         console.log("result");
                                         var demoResumeArray = [
-                                                ipaddress + "/api/get_resume_with_filename/?image=resume6.PNG",
-                                                ipaddress + "/api/get_resume_with_filename/?image=resume7.PNG",
-                                                ipaddress + "/api/get_resume_with_filename/?image=resume8.PNG",
+                                                "resume1.PNG",
+                                                "resume2.PNG",
+                                                "resume3.PNG",
+                                                "resume4.PNG",
+                                                "resume6.PNG",
+                                                "resume7.PNG",
+                                                "resume8.PNG",
+
                                         ]
                                         result["thumbnil"] = demoResumeArray[result.resumeType];
                                         console.log(result["thumbnil"]);
                                         console.log(result.resumeType);
                                         console.log(demoResumeArray[result.resumeType]);
                                         if (result.resumeType == 1) {
-                                                result.thumbnil = ipaddress + "/api/get_resume_with_filename/?image=resume6.PNG";
+                                                result.thumbnil = "resume1.PNG";
                                         }
 
                                         if (result.resumeType == 2) {
-                                                result.thumbnil = ipaddress + "/api/get_resume_with_filename/?image=resume7.PNG";
+                                                result.thumbnil = "resume2.PNG";
                                         }
 
                                         if (result.resumeType == 3) {
-                                                result.thumbnil = ipaddress + "/api/get_resume_with_filename/?image=resume8.PNG";
+                                                result.thumbnil = "resume3.PNG";
+                                        }
+                                        if (result.resumeType == 4) {
+                                                result.thumbnil = "resume4.PNG";
+                                        }
+
+                                        if (result.resumeType == 5) {
+                                                result.thumbnil =  "resume6.PNG";
+                                        }
+
+                                        if (result.resumeType == 6) {
+                                                result.thumbnil = "resume7.PNG";
+                                        }
+                                        if (result.resumeType == 7) {
+                                                result.thumbnil = "resume8.PNG";
                                         }
 
                                         response.status = 'success';
@@ -610,7 +629,7 @@ module.exports.fnDeleteResume = async (req, res, next) => {
                                         response.status = 'success';
                                         response.msg = 'Resume is deleted.';
                                         response.data = result,
-                                        res.json(response);
+                                                res.json(response);
                                 } else {
                                         console.log('Server error --> fnDeleteResume --> e1', e1);
                                         res.json(response);
@@ -727,9 +746,13 @@ module.exports.fnGetResumeList = async (req, res, next) => {
                                 console.log(result);
                                 console.log(userId);
                                 var demoResumeArray = [
-                                        ipaddress + "/api/get_resume_with_filename/?image=resume6.PNG",
-                                        ipaddress + "/api/get_resume_with_filename/?image=resume7.PNG",
-                                        ipaddress + "/api/get_resume_with_filename/?image=resume8.PNG"
+                                        "resume1.PNG",
+                                        "resume2.PNG",
+                                        "resume3.PNG",
+                                        "resume4.PNG",
+                                        "resume6.PNG",
+                                        "resume7.PNG",
+                                        "resume8.PNG",
                                 ]
                                 if (result.length > 0) {
                                         for (let index = 0; index < result.length; index++) {
@@ -763,9 +786,21 @@ module.exports.fnGetDemoResumes = (req, res, next) => {
         }
         try {
                 var resume = [
-                        { resumeType: 1, thumbnil: ipaddress + "/api/get_resume_with_filename/?image=resume6.PNG" },
-                        { resumeType: 2, thumbnil: ipaddress + "/api/get_resume_with_filename/?image=resume7.PNG" },
-                        { resumeType: 3, thumbnil: ipaddress + "/api/get_resume_with_filename/?image=resume8.PNG" },
+                        // { resumeType: 1, thumbnil: ipaddress + "/api/get_resume_with_filename/?image=resume1.PNG" },
+                        // { resumeType: 2, thumbnil: ipaddress + "/api/get_resume_with_filename/?image=resume2.PNG" },
+                        // { resumeType: 3, thumbnil: ipaddress + "/api/get_resume_with_filename/?image=resume3.PNG" },
+                        // { resumeType: 4, thumbnil: ipaddress + "/api/get_resume_with_filename/?image=resume4.PNG" },
+                        // { resumeType: 5, thumbnil: ipaddress + "/api/get_resume_with_filename/?image=resume5.PNG" },
+                        // { resumeType: 6, thumbnil: ipaddress + "/api/get_resume_with_filename/?image=resume6.PNG" },
+                        // { resumeType: 7, thumbnil: ipaddress + "/api/get_resume_with_filename/?image=resume7.PNG" },
+                        { resumeType: 1, thumbnil:"resume1.PNG" },
+                        { resumeType: 2, thumbnil:"resume2.PNG" },
+                        { resumeType: 3, thumbnil:"resume3.PNG" },
+                        { resumeType: 4, thumbnil:"resume4.PNG" },
+                        { resumeType: 5, thumbnil:"resume5.PNG" },
+                        { resumeType: 6, thumbnil:"resume6.PNG" },
+                        { resumeType: 7, thumbnil:"resume7.PNG" },
+
                 ];
                 console.log(resume)
                 response.msg = '';
@@ -884,12 +919,24 @@ module.exports.renderFile = async (req, res, next) => {
 
         }
         if (data.resumeType == 4) {
-                ejs.renderFile('resume7.ejs', data, {}, function (err, str) {
+                ejs.renderFile('resume5.ejs', data, {}, function (err, str) {
                         res.end(ejs.render(str, {}, {}));
                 });
 
         }
         if (data.resumeType == 5) {
+                ejs.renderFile('resume6.ejs', data, {}, function (err, str) {
+                        res.end(ejs.render(str, {}, {}));
+                });
+
+        }
+        if (data.resumeType == 6) {
+                ejs.renderFile('resume7.ejs', data, {}, function (err, str) {
+                        res.end(ejs.render(str, {}, {}));
+                });
+
+        }
+        if (data.resumeType == 7) {
                 ejs.renderFile('resume8.ejs', data, {}, function (err, str) {
                         res.end(ejs.render(str, {}, {}));
                 });
@@ -943,7 +990,7 @@ module.exports.renderHtmlStep = async (req, res, next) => {
 
         }
         if (id == "4") {
-                var pathejs = path.join(__dirname, 'views/', 'resume7.ejs');
+                var pathejs = path.join(__dirname, 'views/', 'resume5.ejs');
                 ejs.renderFile(pathejs, datavalues, function (err, data) {
                         if (err) {
                                 res.send(err);
@@ -955,6 +1002,28 @@ module.exports.renderHtmlStep = async (req, res, next) => {
 
         }
         if (id == "5") {
+                var pathejs = path.join(__dirname, 'views/', 'resume6.ejs');
+                ejs.renderFile(pathejs, datavalues, function (err, data) {
+                        if (err) {
+                                res.send(err);
+                        } else {
+                                res.set('Content-Type', 'text/html');
+                                res.send(Buffer.from(data.toString()));
+                        };
+                });
+        }
+        if (id == "6") {
+                var pathejs = path.join(__dirname, 'views/', 'resume7.ejs');
+                ejs.renderFile(pathejs, datavalues, function (err, data) {
+                        if (err) {
+                                res.send(err);
+                        } else {
+                                res.set('Content-Type', 'text/html');
+                                res.send(Buffer.from(data.toString()));
+                        };
+                });
+        }
+        if (id == "7") {
                 var pathejs = path.join(__dirname, 'views/', 'resume8.ejs');
                 ejs.renderFile(pathejs, datavalues, function (err, data) {
                         if (err) {
