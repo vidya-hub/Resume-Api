@@ -797,9 +797,9 @@ module.exports.fnGetDemoResumes = (req, res, next) => {
                         { resumeType: 2, thumbnil:"resume2.PNG" },
                         { resumeType: 3, thumbnil:"resume3.PNG" },
                         { resumeType: 4, thumbnil:"resume4.PNG" },
-                        { resumeType: 5, thumbnil:"resume5.PNG" },
-                        { resumeType: 6, thumbnil:"resume6.PNG" },
-                        { resumeType: 7, thumbnil:"resume7.PNG" },
+                        { resumeType: 5, thumbnil:"resume6.PNG" },
+                        { resumeType: 6, thumbnil:"resume7.PNG" },
+                        { resumeType: 7, thumbnil:"resume8.PNG" },
 
                 ];
                 console.log(resume)
