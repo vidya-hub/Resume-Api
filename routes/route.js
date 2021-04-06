@@ -3,6 +3,7 @@ var router = express.Router();
 var multer = require('multer');
 var crypto = require("crypto-js");
 var AES_KEY = '6fnhkgo71s0caeqma6ojjftu4n1m1d85';
+var pdf = require('html-pdf');
 
 var userModel = require("../models/user");
 
@@ -40,6 +41,8 @@ router.post('/api/render', resume.renderFile);
 router.post('/api/renderhtml', resume.renderHtmlStep);
 
 router.post('/api/render_json_data', resume.fnConvertRenderHtmlToJson);
+router.post('/api/get_pdf', resume.sendPdf);
+
 router.post('/api/get_word_document', resume.sendWordDocument);
 
 router.post('/api/search_objective', jobDescription.fnGetObjective);

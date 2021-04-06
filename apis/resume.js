@@ -2,6 +2,8 @@ var resumeModel = require("../models/resume");
 const phantom = require('phantom');
 var grabzit = require('grabzit');
 var ejs = require('ejs')
+var pdf = require('html-pdf');
+
 const fetch = require("node-fetch");
 var crypto = require("crypto");
 let path = require("path");
@@ -578,7 +580,7 @@ module.exports.fnUpdateResumeType = async (req, res, next) => {
                                         }
 
                                         if (result.resumeType == 5) {
-                                                result.thumbnil =  "resume6.PNG";
+                                                result.thumbnil = "resume6.PNG";
                                         }
 
                                         if (result.resumeType == 6) {
@@ -793,13 +795,13 @@ module.exports.fnGetDemoResumes = (req, res, next) => {
                         // { resumeType: 5, thumbnil: ipaddress + "/api/get_resume_with_filename/?image=resume5.PNG" },
                         // { resumeType: 6, thumbnil: ipaddress + "/api/get_resume_with_filename/?image=resume6.PNG" },
                         // { resumeType: 7, thumbnil: ipaddress + "/api/get_resume_with_filename/?image=resume7.PNG" },
-                        { resumeType: 1, thumbnil:"resume1.PNG" },
-                        { resumeType: 2, thumbnil:"resume2.PNG" },
-                        { resumeType: 3, thumbnil:"resume3.PNG" },
-                        { resumeType: 4, thumbnil:"resume4.PNG" },
-                        { resumeType: 5, thumbnil:"resume6.PNG" },
-                        { resumeType: 6, thumbnil:"resume7.PNG" },
-                        { resumeType: 7, thumbnil:"resume8.PNG" },
+                        { resumeType: 1, thumbnil: "resume1.PNG" },
+                        { resumeType: 2, thumbnil: "resume2.PNG" },
+                        { resumeType: 3, thumbnil: "resume3.PNG" },
+                        { resumeType: 4, thumbnil: "resume4.PNG" },
+                        { resumeType: 5, thumbnil: "resume6.PNG" },
+                        { resumeType: 6, thumbnil: "resume7.PNG" },
+                        { resumeType: 7, thumbnil: "resume8.PNG" },
 
                 ];
                 console.log(resume)
@@ -1067,6 +1069,33 @@ module.exports.fnConvertRenderHtmlToJson = async (req, res, next) => {
         }
 }
 
+module.exports.senpdf = async (req, res, next) => {
+        var response = {
+                status: 'error',
+                msg: "Something happened wrong try again after sometime.",
+                data: {},
+                method: req.url.split('/')[req.url.split('/').length - 1]
+        }
+        try {
+                var id = req.body.id;
+                id = (id && typeof id === 'string') ? id.trim() : null;
+                if (id) {
+                        var renderedHtml = await retrieveLogs(ipaddress + '/api/render/?id=' + id.trim());
+                        console.log(renderedHtml);
+                        response.data = renderedHtml;
+                        response.status = "success";
+                        response.msg = "";
+                        res.json(response);
+                } else {
+                        response.msg = "Invalid Parameter";
+                        res.json(response);
+                }
+        } catch (e) {
+                console.log('Server error --> fnConvertRenderHtmlToJson --> e', e);
+                res.json(response);
+        }
+}
+
 module.exports.sendWordDocument = async (req, res, next) => {
         // var docfullname = "resume.docx";
         const docfullname = (Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 10)).toUpperCase() + ".docx";
@@ -1114,20 +1143,7 @@ module.exports.sendWordDocument = async (req, res, next) => {
                                         throw error;
                                 }
                         });
-                        // fs.readFile(docfullname, function (err, content) {
-                        //         if (err) {
-                        //                 res.writeHead(400, { 'Content-type': 'text/html' })
-                        //                 console.log(err);
-                        //                 res.end("No such file");
-                        //         } else {
-                        //                 //specify the content type in the response will be an image
-                        //                 res.writeHead(200, {
-                        //                         'Content-Type': "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                        //                         'Content-disposition': 'attachment;filename=' + docfullname,
-                        //                 });
-                        //                 res.end(content);
-                        //         }
-                        // });
+
 
                 } else {
                         response.msg = "Invalid Parameter";
@@ -1138,7 +1154,63 @@ module.exports.sendWordDocument = async (req, res, next) => {
                 res.json(response);
         }
 }
+module.exports.sendPdf = async (req, res, next) => {
+        console.log("here")
+        // var docfullname = "resume.docx";
+        const docfullname = (Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 10)).toUpperCase() + ".pdf";
 
+        console.log(docfullname);
+        var response = {
+                status: 'error',
+                msg: "Something happened wrong try again after sometime.",
+                data: {},
+                method: req.url.split('/')[req.url.split('/').length - 1]
+        }
+        try {
+                var id = req.body.id;
+                id = (id && typeof id === 'string') ? id.trim() : null;
+                if (id) {
+                        var renderedHtml = await retrieveLogs(ipaddress + '/api/render/?id=' + id.trim());
+
+                        const filePath = './' + "pdf/" + (Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 10)).toUpperCase() + ".pdf";
+                        pdf.create(renderedHtml).toFile(filePath, (error, out) => {
+
+                                fs.readFile(out.filename, function (err, content) {
+                                        if (err) {
+                                                res.writeHead(400, { 'Content-type': 'text/html' })
+                                                console.log(err);
+                                                res.end("No such file");
+                                        } else {
+
+                                                res.writeHead(200, {
+
+                                                        'Content-disposition': 'attachment;filename=' + filePath,
+                                                });
+                                                res.end(content);
+                                        }
+                                });
+                                fs.unlink(out.filename, function (err) {
+                                        if (err) throw err;
+                                        console.log('file deleted');
+                                });
+
+                                if (error != null) {
+                                        console.log("Error");
+
+                                        throw error;
+                                }
+                        });
+
+
+                } else {
+                        response.msg = "Invalid Parameter";
+                        res.json(response);
+                }
+        } catch (e) {
+                console.log('Server error --> fnConvertWordDoc --> e', e);
+                res.json(response);
+        }
+}
 async function retrieveLogs(url) {
         return await fetch(url)
                 .then(res => res.text())
