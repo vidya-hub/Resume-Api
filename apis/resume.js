@@ -1174,26 +1174,26 @@ module.exports.sendPdf = async (req, res, next) => {
 
                         const filePath = './' + "pdf/" + (Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 10)).toUpperCase() + ".pdf";
                         pdf.create(renderedHtml).toFile(filePath, (error, out) => {
-                                console.log(out.filename)
-                                fs.readFile(out.filename, function (err, content) {
-                                        if (err) {
-                                                res.writeHead(400, { 'Content-type': 'text/html' })
-                                                console.log(err);
-                                                res.end("No such file");
-                                        } else {
+                                if (out.filename) {
+                                        fs.readFile(out.filename, function (err, content) {
+                                                if (err) {
+                                                        res.writeHead(400, { 'Content-type': 'text/html' })
+                                                        console.log(err);
+                                                        res.end("No such file");
+                                                } else {
 
-                                                res.writeHead(200, {
+                                                        res.writeHead(200, {
 
-                                                        'Content-disposition': 'attachment;filename=' + filePath,
-                                                });
-                                                res.end(content);
-                                        }
-                                });
-                                fs.unlink(out.filename, function (err) {
-                                        if (err) throw err;
-                                        console.log('file deleted');
-                                });
-
+                                                                'Content-disposition': 'attachment;filename=' + filePath,
+                                                        });
+                                                        res.end(content);
+                                                }
+                                        });
+                                        fs.unlink(out.filename, function (err) {
+                                                if (err) throw err;
+                                                console.log('file deleted');
+                                        });
+                                }
                                 if (error != null) {
                                         console.log("Error");
 
