@@ -1174,6 +1174,7 @@ module.exports.sendPdf = async (req, res, next) => {
 
                         const filePath = './' + "pdf/" + (Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 10)).toUpperCase() + ".pdf";
                         pdf.create(renderedHtml).toFile(filePath, (error, out) => {
+                                console.log(out)
                                 if (out.filename) {
                                         fs.readFile(out.filename, function (err, content) {
                                                 if (err) {
