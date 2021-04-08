@@ -1145,6 +1145,7 @@ module.exports.sendWordDocument = async (req, res, next) => {
                                         };
                                         if (error != null) {
                                                 console.log("Error");
+                                                res.end("No such file");
 
                                                 console.log('Server error --> fnConvertWordDoc --> e', error);
                                                 res.json(response);
