@@ -1144,7 +1144,8 @@ module.exports.sendWordDocument = async (req, res, next) => {
                                         if (error != null) {
                                                 console.log("Error");
 
-                                                throw error;
+                                                console.log('Server error --> fnConvertWordDoc --> e', e);
+                                                res.json(response);
                                         }
                                 });
                         } catch (error) {
@@ -1215,7 +1216,7 @@ module.exports.sendPdf = async (req, res, next) => {
                         res.json(response);
                 }
         } catch (e) {
-                console.log('Server error --> fnConvertWordDoc --> e', e);
+                console.log('Server error --> fnConvertPdfDoc --> e', e);
                 res.json(response);
         }
 }
