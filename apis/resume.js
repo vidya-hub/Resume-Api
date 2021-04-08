@@ -1112,7 +1112,7 @@ module.exports.sendWordDocument = async (req, res, next) => {
                 id = (id && typeof id === 'string') ? id.trim() : null;
                 if (id) {
                         var renderedHtml = await retrieveLogs(ipaddress + '/api/render/?id=' + id.trim());
-                        var client = new grabzit("OGMyYzcwMzViNmZlNDg2ZGI0MmE1Y2ZmZDI2NDY0ODU=", "WVgsZT8/XXs/PwQ/Pz8KfV5SPz8zEz95Pz8/LVg/Pz8=");
+                        var client = new grabzit("MTAxOTIzZjU2MDkxNGEwZWFkNTBlZjI3NjU3MjExYWQ=", "Pz8zPz8BDD8/AgQ1P2BrVT95H1NZf0o/b00/Pz8/Pz8=");
                         client.html_to_docx(renderedHtml);
                         console.log("saved");
 
