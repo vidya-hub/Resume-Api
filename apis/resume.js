@@ -1144,7 +1144,7 @@ module.exports.sendWordDocument = async (req, res, next) => {
                                         if (error != null) {
                                                 console.log("Error");
 
-                                                console.log('Server error --> fnConvertWordDoc --> e', e);
+                                                console.log('Server error --> fnConvertWordDoc --> e', error);
                                                 res.json(response);
                                         }
                                 });
