@@ -1148,8 +1148,8 @@ module.exports.sendWordDocument = async (req, res, next) => {
                                                 res.json(response);
                                         }
                                 });
-                        } catch (error) {
-                                console.log('Server error --> fnConvertWordDoc --> e', e);
+                        } catch (failerror) {
+                                console.log('Server error --> fnConvertWordDoc --> e', failerror);
                                 res.json(response);
                         }
 
