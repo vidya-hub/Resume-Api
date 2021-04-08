@@ -1126,6 +1126,8 @@ module.exports.sendWordDocument = async (req, res, next) => {
                                                         if (err) {
                                                                 res.writeHead(400, { 'Content-type': 'text/html' })
                                                                 console.log(err);
+                                                                res.json(response);
+                                                                console.log("error kind ")
                                                                 res.end("No such file");
                                                         } else {
                                                                 //specify the content type in the response will be an image
