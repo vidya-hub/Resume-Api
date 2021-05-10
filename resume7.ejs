@@ -234,7 +234,7 @@
                   <ul class="summry">
                     <% for(var j=0; j < workHistory[i].responsibility.length;
                     j++) { %>
-                    <li><%= workHistory[i].responsibility[j] %></li>
+                    <li><%= workHistory[i].responsibility[j][0] %></li>
                     <%}%>
                   </ul>
                 </div>
@@ -250,7 +250,7 @@
                   <ul class="summry">
                     <% for(var j=0; j < workHistory[i].environment.length; j++)
                     { %>
-                    <li><%= workHistory[i].environment[j] %></li>
+                    <li><%= workHistory[i].environment[j][0] %></li>
                     <%}%>
                   </ul>
                 </div>
