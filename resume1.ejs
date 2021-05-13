@@ -194,8 +194,8 @@
                           <p style="color: #000; font-size: 16px">
                             <span style="font-weight: bold"
                               ><%=workHistory[i].jobTitle%></span
-                            >, <%= new Date(workHistory[i].startDate).getMonth()
-                            + 1 +'/'+new
+                            ><%= new Date(workHistory[i].startDate).getMonth() +
+                            1 +'/'+new
                             Date(workHistory[i].startDate).getFullYear() %> to
                             <% if (workHistory[i].currentlyWorkHere) { %>
                             <span>Currant </span>
@@ -213,18 +213,37 @@
                             <%=workHistory[i].employer%> -
                             <%=workHistory[i].city%>,<%=workHistory[i].state%>
                           </p>
-                          <!-- <ul>
-                                                                    <li style="font-size: 16px; margin-bottom: 5px;">
-                                                                        https://www.google.com/</li>
-                                                                    <li style="font-size: 16px; margin-bottom: 5px;">
-                                                                        https://www.google.com/</li>
-                                                                    <li style="font-size: 16px; margin-bottom: 5px;">
-                                                                        https://www.google.com/</li>
-                                                                </ul> -->
+                          <% if (workHistory[i] &&
+                          workHistory[i].environment.length>0 &&
+                          workHistory[i].environment[0] &&
+                          workHistory[i].environment[0].trim()) { %>
+                          <div class="r_1 last">
+                            <h4>Environment:</h4>
+                            <div class="details_main">
+                              <div class="details">
+                                <ul class="summry">
+                                  <% for(var j=0; j <
+                                  workHistory[i].environment.length; j++) { %>
+                                  <li><%= workHistory[i].environment[j] %></li>
+                                  <%}%>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <%}%> <% if (workHistory[i] &&
+                          workHistory[i].responsibility.length>0) { %>
+                          <h4>Responsibilities</h4>
+                          <ul class="summry">
+                            <% for(var j=0; j <
+                            workHistory[i].responsibility.length; j++) { %>
+                            <li><%= workHistory[i].responsibility[j] %></li>
+                            <%}%>
+                          </ul>
                         </td>
                       </tr>
-                      <% } %> <% } %> <% if (education && education.length>0) {
-                      %>
+
+                      <%}%> <% } %> <% } %> <% if (education &&
+                      education.length>0) { %>
                       <tr>
                         <td>
                           <p

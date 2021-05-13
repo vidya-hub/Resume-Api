@@ -227,7 +227,43 @@
                               <% } %>
                             </p>
                           </div>
-                          <% } %>
+
+                          <% if (workHistory[i] &&
+                          workHistory[i].environment.length>0 &&
+                          workHistory[i].environment[0] &&
+                          workHistory[i].environment[0].trim()) { %>
+                          <div class="r_1 last">
+                            <h4>Environment:</h4>
+                            <div class="details_main">
+                              <div class="details">
+                                <ul class="summry">
+                                  <% for(var j=0; j <
+                                  workHistory[i].environment.length; j++) { %>
+                                  <li><%= workHistory[i].environment[j] %></li>
+                                  <%}%>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <%}%> <% if (workHistory[i] &&
+                          workHistory[i].responsibility.length>0) { %>
+                          <div class="r_1 last">
+                            <h4>Responsibilities:</h4>
+                            <div class="details_main">
+                              <div class="details">
+                                <ul class="summry">
+                                  <% for(var j=0; j <
+                                  workHistory[i].responsibility.length; j++) {
+                                  %>
+                                  <li>
+                                    <%= workHistory[i].responsibility[j] %>
+                                  </li>
+                                  <%}%>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <%}%> <% } %>
                         </td>
                       </tr>
                       <% } %> <% if (education && education.length>0) { %>
