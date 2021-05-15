@@ -316,9 +316,9 @@ module.exports.fnUpdateProfile = (req, res, next) => {
         data: {
         },
         method: req.url.split('/')[req.url.split('/').length - 1]
-}
+    }
 
-try {
+    try {
         var userId = req.body.userId;
         var firstName = req.body.firstName;
         var lastName = req.body.lastName;
@@ -329,35 +329,49 @@ try {
         lastName = (lastName && typeof lastName === 'string') ? lastName.trim() : null;
         phoneNo = (phoneNo && typeof phoneNo === 'string') ? phoneNo.trim() : null;
         email = (email && typeof email === 'string' && re.test(String(email).toLowerCase())) ? email.trim() : null;
-        if ( firstName && lastName &&  phoneNo && email ) {
-                var userUpdatedData = {
-                        userId: userId,
-                        firstName: firstName,
-                        lastName: lastName,
-                        phone: phoneNo,
-                        email: email,
-                        name: firstName + ' ' + lastName,
-                };
-                console.log(userUpdatedData);
-                userModel.findByIdAndUpdate(userId, userUpdatedData, { new: true }, function (e1, result) {
-                        if (!e1) {
+        if (firstName && lastName && phoneNo && email) {
+            var userUpdatedData = {
+                userId: userId,
+                firstName: firstName,
+                lastName: lastName,
+                phone: phoneNo,
+                email: email,
+                name: firstName + ' ' + lastName,
+            };
+            userModel.findOne({ $or: [{ email: email }, { phone: phoneNo }] }).exec(function (e1, result) {
+                console.log(result);
+
+                if (!e1) {
+                    if (result && result._id && userId != result._id) {
+                        console.log("registered Acc")
+                        response.msg = 'Already registered';
+                        res.json(response);
+                    } else {
+                        console.log(userUpdatedData);
+                        userModel.findByIdAndUpdate(userId, userUpdatedData, { new: true }, function (e1, result) {
+                            if (!e1 ) {
+                                
                                 response.status = 'success';
                                 response.msg = 'User Details Updated is updated.';
                                 response.data = result;
                                 res.json(response);
-                        } else {
+                            } else {
                                 console.log('Server error --> FnUpdate User Details --> e1', e1);
                                 res.json(response);
-                        }
-                })
+                            }
+                        })
+                    }
+                }
+            });
+
         } else {
-                response.msg = "Invalid Parameters.";
-                res.json(response);
+            response.msg = "Invalid Parameters.";
+            res.json(response);
         }
-} catch (e) {
+    } catch (e) {
         console.log('Server error --> fnUpdateResume --> e', e);
         res.json(response);
-}
+    }
 
 }
 
