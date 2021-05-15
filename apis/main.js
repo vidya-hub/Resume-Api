@@ -310,6 +310,54 @@ module.exports.fnRegister = (req, res, next) => {
 
 
 module.exports.fnUpdateProfile = (req, res, next) => {
+    var response = {
+        status: 'error',
+        msg: 'Something happened wrong, please try again after sometime.',
+        data: {
+        },
+        method: req.url.split('/')[req.url.split('/').length - 1]
+}
+
+try {
+        var userId = req.body.userId;
+        var firstName = req.body.firstName;
+        var lastName = req.body.lastName;
+        var phoneNo = req.body.phone;
+        var email = req.body.email;
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        firstName = (firstName && typeof firstName === 'string') ? firstName.trim() : null;
+        lastName = (lastName && typeof lastName === 'string') ? lastName.trim() : null;
+        phoneNo = (phoneNo && typeof phoneNo === 'string') ? phoneNo.trim() : null;
+        email = (email && typeof email === 'string' && re.test(String(email).toLowerCase())) ? email.trim() : null;
+        if ( firstName && lastName &&  phoneNo && email ) {
+                var userUpdatedData = {
+                        userId: userId,
+                        firstName: firstName,
+                        lastName: lastName,
+                        phone: phoneNo,
+                        email: email,
+                        name: firstName + ' ' + lastName,
+                };
+                console.log(userUpdatedData);
+                userModel.findByIdAndUpdate(userId, userUpdatedData, { new: true }, function (e1, result) {
+                        if (!e1) {
+                                response.status = 'success';
+                                response.msg = 'User Details Updated is updated.';
+                                response.data = result;
+                                res.json(response);
+                        } else {
+                                console.log('Server error --> FnUpdate User Details --> e1', e1);
+                                res.json(response);
+                        }
+                })
+        } else {
+                response.msg = "Invalid Parameters.";
+                res.json(response);
+        }
+} catch (e) {
+        console.log('Server error --> fnUpdateResume --> e', e);
+        res.json(response);
+}
 
 }
 

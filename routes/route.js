@@ -27,6 +27,7 @@ module.exports = router;
 router.post('/api/login', main.fnLogin);
 router.get('/api/test', main.fnTest);
 router.post('/api/register', main.fnRegister);
+router.post("/api/updateUserProfile",main.fnUpdateProfile);
 router.post('/api/login_with_linkedin', main.fnLoginWithLinkedin);
 router.post('/api/login_with_google', main.fnLoginWithGoogle);
 router.post('/api/add_resume', resume.fnAddResume);
