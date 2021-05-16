@@ -44,6 +44,23 @@
       <table class="main_table_th" style="width: 100%; border-spacing: 0">
         <tr>
           <th class="left" style="border-top: 0">
+
+
+            <% if (objectives && objectives.length>0) { %>
+            <div class="l_1">
+              <div class="hdng_1">OBJECTIVES</div>
+              <div class="details_main">
+                <div class="details">
+                  <ul class="summry">
+                    <%  for(var i=0; i < objectives.length; i++) { %>
+                    <li><%=objectives[i]%></li>
+                    <%}%>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <%}%> 
+            
             <% if (summary && summary.length>0) { %>
             <div class="l_1">
               <div class="hdng_1">PROFESSIONAL SUMMARY</div>
@@ -57,7 +74,8 @@
                 </div>
               </div>
             </div>
-            <%}%> <% if (workHistory && workHistory.length>0) { %>
+            <%}%> 
+            <% if (workHistory && workHistory.length>0) { %>
             <div class="l_1">
               <div class="hdng_1">PROFESSIONAL EXPERIENCE:</div>
             </div>
@@ -71,7 +89,7 @@
                     <%= new Date(workHistory[i].startDate).getMonth() + 1
                     +'/'+new Date(workHistory[i].startDate).getFullYear() %> to
                     <% if (workHistory[i].currentlyWorkHere) { %>
-                    <span> Current </span>
+                    <span>Currant </span>
                     <% } %> <% if (!workHistory[i].currentlyWorkHere) { %>
                     <span
                       ><%= new Date(workHistory[i].endDate).getMonth() + 1

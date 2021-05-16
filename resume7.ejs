@@ -65,16 +65,7 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="l_1">
-						<div class="hdng_1">EXECUTIVE SUMMARY</div>
-						<div class="dsgn"></div>
-						<div class="details_main">
-							<div class="details list_left">
-								7+ years of solid, diverse business analysis experience with demonstrated ability in improving business value through change initiatives from concept to completion.</li>
-								</ul>
-							</div>
-						</div>	
-                    </div> -->
+
             <% if (skills && skills.length>0) { %>
             <div class="l_1">
               <div class="hdng_1">Technical skills:</div>
@@ -174,17 +165,21 @@
             <%}%>
           </th>
           <th class="right" style="border-top: 0; border-left: 0">
+            <% if (objectives && objectives.length>0) { %>
             <div class="r_1">
-              <div class="hdng_1">EXECUTIVE SUMMARY</div>
+              <div class="hdng_1">Objectives</div>
               <div class="dsgn"></div>
               <div class="details_main">
                 <div class="details list_left">
                   <ul>
-                    <li><%=professionalSummary%></li>
+                    <% for(var i=0; i < objectives.length; i++) { %>
+                    <li><%=objectives[i]%></li>
+                    <% } %>
                   </ul>
                 </div>
               </div>
             </div>
+            <% } %>
             <% if (summary && summary.length>0) { %>
             <div class="r_1">
               <div class="hdng_1">PROFESSIONAL SUMMARY</div>
@@ -212,7 +207,7 @@
                   <%= new Date(workHistory[i].startDate).getMonth() + 1 +'/'+new
                   Date(workHistory[i].startDate).getFullYear() %> to <% if
                   (workHistory[i].currentlyWorkHere) { %>
-                  <span> Current </span>
+                  <span>Currant </span>
                   <% } %> <% if (!workHistory[i].currentlyWorkHere) { %>
                   <span
                     ><%= new Date(workHistory[i].endDate).getMonth() + 1

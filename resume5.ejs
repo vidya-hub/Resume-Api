@@ -174,11 +174,31 @@
                         </p>
                         <% } %> <% } %>
                       </td>
-                      <% if (professionalSummary) { %>
+                      <% if (professionalSummary && objectives &&
+                      objectives.length>0) { %>
                       <td
                         width="65%"
                         style="padding: 30px; background: #fcf7f7"
                       >
+                      <p
+                          style="
+                            color: grey;
+                            font-size: 26px;
+                            font-weight: 700;
+                            line-height: 26px;
+                            margin: 0;
+                            padding-bottom: 20px;
+                            font-weight: 700;
+                            text-transform: uppercase;
+                          "
+                        >
+                          Objectives
+                        </p>
+                        <% for(var i=0; i < objectives.length; i++) { %>
+                          <p style="color: #000; font-size: 16px">
+                          <%=objectives[i]%>
+                        </p>
+                        <% } %>
                         <p
                           style="
                             color: grey;
@@ -186,7 +206,6 @@
                             font-weight: 700;
                             line-height: 26px;
                             margin: 0;
-                            margin-bottom: 15px;
                             font-weight: 700;
                             text-transform: uppercase;
                           "
@@ -200,7 +219,6 @@
                       <% } %>
                     </tr>
 
-                    <!--  -->
                     <tr>
                       <td
                         width="35%"
@@ -211,28 +229,26 @@
                           word-break: break-word;
                         "
                       >
-                        <% if (skills && skills.length>0) { %>
-                        <div style="padding-bottom: 30px">
-                          <p
-                            style="
-                              font-size: 18px;
-                              line-height: 24px;
-                              color: #000;
-                              margin-bottom: 15px;
-                              margin-top: 0;
-                              text-transform: uppercase;
-                            "
-                          >
-                            SKILLs
-                          </p>
-                          <ul>
-                            <% for(var i=0; i < skills.length; i++) { %>
-                            <li style="margin-bottom: 5px; font-size: 16px">
-                              <%=skills[i]%>
-                            </li>
-                            <% } %>
-                          </ul>
-                        </div>
+                        <% if (skills && skills.length>0) { %> <div ">
+                        <p
+                          style="
+                            font-size: 18px;
+                            line-height: 24px;
+                            color: #000;
+                            margin-bottom: 15px;
+                            margin-top: 0;
+                            text-transform: uppercase;
+                          "
+                        >
+                          SKILLs
+                        </p>
+                        <ul>
+                          <% for(var i=0; i < skills.length; i++) { %>
+                          <li style="margin-bottom: 5px; font-size: 16px">
+                            <%=skills[i]%>
+                          </li>
+                          <% } %>
+                        </ul>
                         <% } %> <% if (education && education.length>0) { %>
                         <div style="padding-bottom: 30px">
                           <p
@@ -245,7 +261,7 @@
                               text-transform: uppercase;
                             "
                           >
-                            educations
+                            Educations
                           </p>
                           <% for(var i=0; i < education.length; i++) { %>
                           <p

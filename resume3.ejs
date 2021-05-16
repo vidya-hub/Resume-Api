@@ -122,7 +122,44 @@
                         <% } %> <% } %>
                       </td>
                     </tr>
-
+                    <% if (objectives && objectives.length>0) { %>
+                    <tr>
+                      <td
+                        width="25%"
+                        valign="top"
+                        style="
+                          padding-right: 15px;
+                          text-align: right;
+                          border-right: 1px solid #000;
+                        "
+                      >
+                        <p
+                          style="
+                            font-size: 18px;
+                            margin-top: 0;
+                            margin-bottom: 5px;
+                            text-transform: uppercase;
+                            color: #35a0e5;
+                            font-weight: 700;
+                          "
+                        >
+                          objectives
+                        </p>
+                      </td>
+                      <td
+                        width="75%"
+                        style="padding-bottom: 30px; padding-left: 15px"
+                      >
+                        <ul style="margin: 0; padding-left: 20px">
+                          <% for(var i=0; i < objectives.length; i++) { %>
+                          <li style="font-size: 16px; margin-bottom: 5px">
+                            <%=objectives[i]%>
+                          </li>
+                          <% } %>
+                        </ul>
+                      </td>
+                    </tr>
+                    <% } %>
                     <!--  -->
                     <% if (professionalSummary) { %>
                     <tr>
@@ -166,51 +203,7 @@
                     </tr>
                     <% } %>
                     <!--  -->
-                    <% if (skills && skills.length>0) { %>
-                    <tr>
-                      <td
-                        width="25%"
-                        valign="top"
-                        style="
-                          padding-right: 15px;
-                          text-align: right;
-                          border-right: 1px solid #000;
-                        "
-                      >
-                        <p
-                          style="
-                            font-size: 18px;
-                            margin-top: 0;
-                            margin-bottom: 5px;
-                            text-transform: uppercase;
-                            color: #35a0e5;
-                            font-weight: 700;
-                          "
-                        >
-                          skills
-                        </p>
-                      </td>
-                      <td
-                        width="75%"
-                        style="padding-bottom: 30px; padding-left: 15px"
-                      >
-                        <ul
-                          style="
-                            text-align: left;
-                            list-style-position: inside;
-                            margin: 0;
-                            padding: 0;
-                            display: flex;
-                            flex-wrap: wrap;
-                          "
-                        >
-                          <% for(var i=0; i < skills.length; i++) { %>
-                          <li style="width: 50%"><%=skills[i]%></li>
-                          <% } %>
-                        </ul>
-                      </td>
-                    </tr>
-                    <% } %>
+                   
 
                     <!--  -->
                     <% if (workHistory && workHistory.length>0) { %>
@@ -267,7 +260,7 @@
                           <%= new Date(workHistory[i].startDate).getMonth() + 1
                           +'/'+new Date(workHistory[i].startDate).getFullYear()
                           %> to <% if (workHistory[i].currentlyWorkHere) { %>
-                          <span> Current </span>
+                          <span>Currant </span>
                           <% } %> <% if (!workHistory[i].currentlyWorkHere) { %>
                           <span
                             ><%= new Date(workHistory[i].endDate).getMonth() + 1
@@ -294,25 +287,68 @@
                             </div>
                           </div>
                         </div>
-                        <%}%> 
-                        <% if (workHistory[i] &&
-                          workHistory[i].responsibility.length>0) { %>
+                        <%}%> <% if (workHistory[i] &&
+                        workHistory[i].responsibility.length>0) { %>
                         <div class="r_1 last">
                           <h4>Responsibilities:</h4>
                           <div class="details_main">
                             <div class="details">
                               <ul class="summry">
                                 <% for(var j=0; j <
-                            workHistory[i].responsibility.length; j++) { %>
+                                workHistory[i].responsibility.length; j++) { %>
                                 <li><%= workHistory[i].responsibility[j] %></li>
                                 <%}%>
                               </ul>
                             </div>
                           </div>
                         </div>
-                        <%}%>
-                        
-                        <% } %>
+                        <%}%> <% } %>
+                      </td>
+                    </tr>
+                    <% } %>
+                    <!--  -->
+                    <% if (skills && skills.length>0) { %>
+                    <tr>
+                      <td
+                        width="25%"
+                        valign="top"
+                        style="
+                          padding-right: 15px;
+                          text-align: right;
+                          border-right: 1px solid #000;
+                        "
+                      >
+                        <p
+                          style="
+                            font-size: 18px;
+                            margin-top: 0;
+                            margin-bottom: 5px;
+                            text-transform: uppercase;
+                            color: #35a0e5;
+                            font-weight: 700;
+                          "
+                        >
+                          skills
+                        </p>
+                      </td>
+                      <td
+                        width="75%"
+                        style="padding-bottom: 30px; padding-left: 15px"
+                      >
+                        <ul
+                          style="
+                            text-align: left;
+                            list-style-position: inside;
+                            margin: 0;
+                            padding: 0;
+                            display: flex;
+                            flex-wrap: wrap;
+                          "
+                        >
+                          <% for(var i=0; i < skills.length; i++) { %>
+                          <li style="width: 50%"><%=skills[i]%></li>
+                          <% } %>
+                        </ul>
                       </td>
                     </tr>
                     <% } %>
@@ -407,43 +443,6 @@
                           <% for(var i=0; i < accomplishments.length; i++) { %>
                           <li style="font-size: 16px; margin-bottom: 5px">
                             <%=accomplishments[i]%>
-                          </li>
-                          <% } %>
-                        </ul>
-                      </td>
-                    </tr>
-                    <% } %> <% if (objectives && objectives.length>0) { %>
-                    <tr>
-                      <td
-                        width="25%"
-                        valign="top"
-                        style="
-                          padding-right: 15px;
-                          text-align: right;
-                          border-right: 1px solid #000;
-                        "
-                      >
-                        <p
-                          style="
-                            font-size: 18px;
-                            margin-top: 0;
-                            margin-bottom: 5px;
-                            text-transform: uppercase;
-                            color: #35a0e5;
-                            font-weight: 700;
-                          "
-                        >
-                          objectives
-                        </p>
-                      </td>
-                      <td
-                        width="75%"
-                        style="padding-bottom: 30px; padding-left: 15px"
-                      >
-                        <ul style="margin: 0; padding-left: 20px">
-                          <% for(var i=0; i < objectives.length; i++) { %>
-                          <li style="font-size: 16px; margin-bottom: 5px">
-                            <%=objectives[i]%>
                           </li>
                           <% } %>
                         </ul>
