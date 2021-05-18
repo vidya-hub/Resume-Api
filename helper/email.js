@@ -1,7 +1,7 @@
 var nodemailer = require('nodemailer');
 const SMTPConnection = require("nodemailer/lib/smtp-connection");
 module.exports.sendMail = async (data) => {
-    var MAIL_SENDFROM_NAME = 'resume app';
+    var MAIL_SENDFROM_NAME = 'Resume app';
     var MAIL_SENDFROM_MAIL = 'sagarmavuduru@gmail.com';
 
     var transporter = nodemailer.createTransport({
@@ -11,8 +11,10 @@ module.exports.sendMail = async (data) => {
         secureConnection: true, // use SSL
         // transportMethod: 'SMTP',
         auth: {
-            user: 'sagarmavuduru@gmail.com',
-            pass: 'mav21121'
+            user: 'App.tekpillar@gmail.com',
+            pass: 'Dipal@0411'
+            // user: 'sagarmavuduru@gmail.com',
+            // pass: 'mav21121'
         },
     });
 
