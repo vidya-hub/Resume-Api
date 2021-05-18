@@ -47,7 +47,7 @@ module.exports.fnAddResume = async (req, res, next) => {
                 var affiliations = req.body.affiliations;
                 var additionalInformation = req.body.additionalInformation;
                 var birthDate = req.body.birthDate;
-                var resumeDate = req.body.resumeDate;
+                var resumeDate = parseInt(req.body.resumeDate);
                 var resumeType = req.body.resumeType;
                 var refrences = req.body.refrences;
 
@@ -315,7 +315,7 @@ module.exports.fnUpdateResume = async (req, res, next) => {
                 var affiliations = req.body.affiliations;
                 var additionalInformation = req.body.additionalInformation;
                 var birthDate = req.body.birthDate;
-                var resumeDate = req.body.resumeDate;
+                var resumeDate = parseInt(req.body.resumeDate);
                 var resumeType = req.body.resumeType;
                 var refrences = req.body.refrences;
                 // console.log(additionalContacts)

@@ -149,7 +149,7 @@ var resumeSchema = mongoose.Schema({
     ],
     expFlag: { type: String },
     birthDate: { type: String },
-    resumeDate: { type: String, default: () => Date.now().toString() },
+    resumeDate: { type: Number, default: () => Date.now() },
     resumeType: { type: Number, default: 1 },
     isDeleted: { type: Boolean, default: false },
 });
