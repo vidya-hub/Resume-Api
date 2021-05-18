@@ -545,7 +545,7 @@ module.exports.fnUpdateResumeType = async (req, res, next) => {
                 var resumeDate = req.body.resumeDate;
                 var resumeType = req.body.resumeType;
                 resumeId = (resumeId && typeof resumeId === 'string') ? resumeId.trim() : null;
-                resumeDate = (resumeDate && typeof resumeDate === 'string') ? resumeId.trim() : "";
+                resumeDate = (resumeDate && typeof resumeDate === 'string') ? resumeDate.trim() : "";
 
                 if (resumeId && resumeType) {
                         resumeModel.findByIdAndUpdate(resumeId, { resumeType: resumeType,resumeDate:parseInt(resumeDate) }, { new: true }, function (e1, result) {
