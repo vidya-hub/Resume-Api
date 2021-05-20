@@ -11,10 +11,8 @@ module.exports.sendMail = async (data) => {
         secureConnection: true, // use SSL
         // transportMethod: 'SMTP',
         auth: {
-            // user: 'App.tekpillar@gmail.com',
-            // pass: 'Dipal@0411'
-            user: 'sagarmavuduru@gmail.com',
-            pass: 'mav21121'
+            user: 'Noreplyresumebuilder7@gmail.com',
+            pass: 'Sanjay@6464'
         },
     });
 
