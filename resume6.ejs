@@ -257,7 +257,9 @@
               </ul>
             </td>
           </tr>
-          <% } %> <% if (additionalInformation &&
+          <% } %> 
+          
+          <% if (additionalInformation &&
           additionalInformation.length>0) { %>
           <tr>
             <td style="padding-bottom: 15px">
@@ -272,13 +274,33 @@
               <% } %>
             </td>
           </tr>
-          <% } %> <% if (refrences && refrences.length>0) { %>
+          <% } %>
+
+
+          <% if (additionalDetails &&
+          additionalDetails.length>0) { %>
+          <tr>
+            <td style="padding-bottom: 15px">
+              <p class="text-left font-weight-bold" style="padding-top: 12px">
+                Additional Details
+              </p>
+              <% for(var i=0; i < additionalDetails.length; i++) { %>
+              <p style="font-size: 16px; line-height: 16px">
+                <%=additionalDetails[i].key%> :-
+                <%=additionalDetails[i].value%>
+              </p>
+              <% } %>
+            </td>
+          </tr>
+          <% } %>
+          
+          <% if (refrences && refrences.length>0) { %>
           <tr>
             <td style="padding-bottom: 15px">
               <p class="text-left font-weight-bold" style="padding-top: 12px">
                 References Information
               </p>
-              <% for(var i=0; i < additionalInformation.length; i++) { %>
+              <% for(var i=0; i < refrences.length; i++) { %>
               <p style="font-size: 16px; line-height: 16px; margin-left: 20px">
                 <%=refrences[i].name%>
               </p>

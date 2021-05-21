@@ -427,7 +427,10 @@
                           </ul>
                         </td>
                       </tr>
-                      <% } %> <% if (additionalInformation &&
+                      <% } %> 
+                      
+                      
+                      <% if (additionalInformation &&
                       additionalInformation.length>0) { %>
                       <tr>
                         <td style="padding-bottom: 15px">
@@ -453,7 +456,9 @@
                           <% } %>
                         </td>
                       </tr>
-                      <% } %> <% if (refrences && refrences.length>0) { %>
+                      <% } %> 
+                      <% if (additionalDetails &&
+                      additionalDetails.length>0) { %>
                       <tr>
                         <td style="padding-bottom: 15px">
                           <p
@@ -467,9 +472,38 @@
                               font-weight: 700;
                             "
                           >
-                            references Information
+                            Additional Details
                           </p>
-                          <% for(var i=0; i < additionalInformation.length; i++)
+                          <% for(var i=0; i < additionalDetails.length; i++)
+                          { %>
+                          <p style="font-size: 16px; line-height: 16px">
+                            <%=additionalDetails[i].key%> :-
+                            <%=additionalDetails[i].value%>
+                          </p>
+                          <% } %>
+                        </td>
+                      </tr>
+                      <% } %> 
+                      
+                      
+                      
+                      <% if (refrences && refrences.length>0) { %>
+                      <tr>
+                        <td style="padding-bottom: 15px">
+                          <p
+                            style="
+                              color: #000;
+                              font-size: 30px;
+                              font-weight: 700;
+                              line-height: 36px;
+                              margin: 0;
+                              margin-bottom: 15px;
+                              font-weight: 700;
+                            "
+                          >
+                            References Information
+                          </p>
+                          <% for(var i=0; i < refrences.length; i++)
                           { %>
                           <p
                             style="

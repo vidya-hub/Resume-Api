@@ -44,24 +44,20 @@
       <table class="main_table_th" style="width: 100%; border-spacing: 0">
         <tr>
           <th class="left" style="border-top: 0">
-
-
             <% if (objectives && objectives.length>0) { %>
             <div class="l_1">
               <div class="hdng_1">OBJECTIVES</div>
               <div class="details_main">
                 <div class="details">
                   <ul class="summry">
-                    <%  for(var i=0; i < objectives.length; i++) { %>
+                    <% for(var i=0; i < objectives.length; i++) { %>
                     <li><%=objectives[i]%></li>
                     <%}%>
                   </ul>
                 </div>
               </div>
             </div>
-            <%}%> 
-            
-            <% if (summary && summary.length>0) { %>
+            <%}%> <% if (summary && summary.length>0) { %>
             <div class="l_1">
               <div class="hdng_1">PROFESSIONAL SUMMARY</div>
               <div class="details_main">
@@ -74,8 +70,7 @@
                 </div>
               </div>
             </div>
-            <%}%> 
-            <% if (workHistory && workHistory.length>0) { %>
+            <%}%> <% if (workHistory && workHistory.length>0) { %>
             <div class="l_1">
               <div class="hdng_1">PROFESSIONAL EXPERIENCE:</div>
             </div>
@@ -258,6 +253,18 @@
 
                     <% } %> <% } %>
                   </ol>
+                </div>
+              </div>
+            </div>
+            <%}%> <% if (additionalDetails && additionalDetails.length>0) { %>
+            <div class="r_1">
+              <div class="hdng_1">Additional Details:</div>
+              <div class="details_main"></div>
+                <div class="details">
+                  <% for(var i=0; i < additionalDetails.length; i++) { %>
+                  <li><%=additionalDetails[i].key%></li>
+                  <h5><%=additionalDetails[i].value%></h5>
+                  <%}%>
                 </div>
               </div>
             </div>

@@ -233,7 +233,9 @@
                 </div>
               </div>
             </div>
-            <%}%> <% if (workHistory[i] && workHistory[i].environment.length>0
+            <%}%> 
+            
+            <% if (workHistory[i] && workHistory[i].environment.length>0
             && workHistory[i].environment[0] &&
             workHistory[i].environment[0].trim()) { %>
             <div class="r_1 last">
@@ -249,7 +251,27 @@
                 </div>
               </div>
             </div>
-            <%}%> <%}%> <%}%>
+            <%}%>
+             <%}%> <%}%>
+
+             <% if (additionalDetails && additionalDetails.length>0) { %>
+            <div class="r_1">
+              <div class="hdng_1">Additional Details</div>
+              <div class="dsgn"></div>
+              <div class="details_main">
+                <div class="details">
+                  <ul class="summry">
+                    <% for(var i=0; i < additionalDetails.length; i++) { %>
+                    <li class="hdng2" style="padding-bottom: 10;"><%=additionalDetails[i].key%>  </li>
+                    <h8><%=additionalDetails[i].value%></h8>
+                    <%}%>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <%}%>
+
+
           </th>
         </tr>
       </table>

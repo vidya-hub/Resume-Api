@@ -551,7 +551,7 @@
                             font-weight: 700;
                           "
                         >
-                          additional informations
+                          Additional informations
                         </p>
                       </td>
                       <td
@@ -569,7 +569,51 @@
                         <% } %>
                       </td>
                     </tr>
-                    <% } %> <% if (refrences && refrences.length>0) { %>
+                    <% } %>
+                    
+                    <% if (additionalDetails &&
+                    additionalDetails.length>0) { %>
+                    <tr>
+                      <td
+                        width="25%"
+                        valign="top"
+                        style="
+                          padding-right: 15px;
+                          text-align: right;
+                          border-right: 1px solid #000;
+                        "
+                      >
+                        <p
+                          style="
+                            font-size: 18px;
+                            margin-top: 0;
+                            margin-bottom: 5px;
+                            text-transform: uppercase;
+                            color: #35a0e5;
+                            font-weight: 700;
+                          "
+                        >
+                          Additional Details
+                        </p>
+                      </td>
+                      <td
+                        width="75%"
+                        style="padding-bottom: 30px; padding-left: 15px"
+                      >
+                        <% for(var i=0; i < additionalInformation.length; i++) {
+                        %>
+                        <p style="font-size: 16px; line-height: 16px">
+                          <span style="font-weight: bold">
+                            <%=additionalDetails[i].key%>
+                          </span>
+                          <%=additionalDetails[i].value%>
+                        </p>
+                        <% } %>
+                      </td>
+                    </tr>
+                    <% } %>
+                    
+                    <% if (refrences && refrences.length>0) { %>
                     <tr>
                       <td
                         width="25%"

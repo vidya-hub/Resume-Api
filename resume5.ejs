@@ -444,7 +444,9 @@
                             <% } %>
                           </ul>
                         </div>
-                        <% } %> <% if (additionalInformation &&
+                        <% } %> 
+                        
+                        <% if (additionalInformation &&
                         additionalInformation.length>0) { %>
                         <div style="padding-bottom: 30px">
                           <p
@@ -468,7 +470,36 @@
                           </p>
                           <% } %>
                         </div>
-                        <% } %> <% if (refrences && refrences.length>0) { %>
+                        <% } %> 
+                        
+
+                        <% if (additionalDetails &&
+                        additionalDetails.length>0) { %>
+                        <div style="padding-bottom: 30px">
+                          <p
+                            style="
+                              font-size: 18px;
+                              line-height: 24px;
+                              color: #000;
+                              margin-bottom: 15px;
+                              margin-top: 0;
+                              text-transform: uppercase;
+                            "
+                          >
+                          Additional Details
+                          </p>
+                          <% for(var i=0; i < additionalDetails.length; i++)
+                          { %>
+                          <p style="font-size: 16px; line-height: 16px">
+                            <span style="font-weight: bold"
+                              ><%=additionalDetails[i].key%> </span
+                            >:- <%=additionalDetails[i].value%>
+                          </p>
+                          <% } %>
+                        </div>
+                        <% } %> 
+                        
+                        <% if (refrences && refrences.length>0) { %>
                         <div style="padding-bottom: 30px">
                           <p
                             style="

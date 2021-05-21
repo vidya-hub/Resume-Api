@@ -387,24 +387,27 @@
                               font-size: 30px;
                               font-weight: 700;
                               line-height: 36px;
+                              padding-left: 10;
                               margin: 0;
                               margin-bottom: 15px;
                               font-weight: 700;
                             "
                           >
-                            Additional Information
+                            Additional Details
                           </p>
                           <% for(var i=0; i < additionalInformation.length; i++)
                           { %>
-                          <p style="font-size: 16px; line-height: 16px">
-                            <span style="font-weight: bold"
-                              ><%=additionalInformation[i].title%> </span
-                            >:- <%=additionalInformation[i].description%>
+                          <p style="font-size: 16px; ; line-height: 16px">
+                            <span style="font-weight: bold;"
+                              ><%=additionalDetails[i].key%> </span
+                            >:- <%=additionalDetails[i].value%>
                           </p>
                           <% } %>
                         </td>
                       </tr>
-                      <% } %> <% if (refrences && refrences.length>0) { %>
+                      <% } %>
+                      
+                      <% if (refrences && refrences.length>0) { %>
                       <tr>
                         <td>
                           <p
