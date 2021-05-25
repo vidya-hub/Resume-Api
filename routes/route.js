@@ -63,6 +63,8 @@ router.post('/api/verify_otp_changepassword', main.fnVerifyOtpForForgotPassword)
 
 
 router.post('/api/get_users_resumes', resume.fnGetResumeList);
+router.post('/api/get_user_latest_resume', resume.fnGetLatestRes);
+
 router.post('/api/update_resume', resume.fnUpdateResume);
 router.post('/api/update_resume_type', resume.fnUpdateResumeType);
 router.post('/api/delete_resume', resume.fnDeleteResume);

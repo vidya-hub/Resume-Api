@@ -548,7 +548,7 @@ module.exports.fnUpdateResumeType = async (req, res, next) => {
                 resumeDate = (resumeDate && typeof resumeDate === 'string') ? resumeDate.trim() : "";
 
                 if (resumeId && resumeType) {
-                        resumeModel.findByIdAndUpdate(resumeId, { resumeType: resumeType,resumeDate:parseInt(resumeDate) }, { new: true }, function (e1, result) {
+                        resumeModel.findByIdAndUpdate(resumeId, { resumeType: resumeType, resumeDate: parseInt(resumeDate) }, { new: true }, function (e1, result) {
                                 if (!e1) {
                                         console.log("result");
                                         console.log("result");
@@ -778,6 +778,98 @@ module.exports.fnGetResumeList = async (req, res, next) => {
                 res.json(response);
         }
 }
+
+
+module.exports.fnGetLatestRes = async (req, res, next) => {
+        var response = {
+                status: 'error',
+                msg: 'Something happened wrong, please try again after sometime.',
+                data: {
+                },
+                method: req.url.split('/')[req.url.split('/').length - 1]
+        }
+        try {
+                var email = req.body.email;
+                resumeModel.find({ email: email }).lean().exec(async function (e1, result) {
+                        if (!e1) {
+                                var resumes = result;
+                                var dateList = [];
+                                console.log(resumes.length);
+                                if (resumes.length > 0) {
+                                        resumes.forEach((resume) => { dateList.push(resume.resumeDate) });
+
+                                        if (dateList.some(date => date === null)) {
+                                                var id = resumes[0]._id;
+                                                // console.log(id);
+                                        } else {
+                                                var indexOfMaxValue = dateList.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
+                                                var id = resumes[indexOfMaxValue]._id;
+                                        };
+                                        console.log(id);
+                                        try {
+                                                var id = resumes[0]._id;
+                                                // if (id){
+                                                var renderedHtml = await retrieveLogs(ipaddress + '/api/render/?id=' + id);
+
+                                                const filePath = './' + "pdf/" + (Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 10)).toUpperCase() + ".pdf";
+                                                pdf.create(renderedHtml).toFile(filePath, (error, out) => {
+                                                        console.log(out)
+                                                        if (out) {
+                                                                fs.readFile(out.filename, function (err, content) {
+                                                                        if (err) {
+                                                                                res.writeHead(400, { 'Content-type': 'text/html' })
+                                                                                console.log(err);
+                                                                                res.end("No such file");
+                                                                        } else {
+
+                                                                                res.writeHead(200, {
+
+                                                                                        'Content-disposition': 'attachment;filename=' + filePath,
+                                                                                });
+                                                                                res.end(content);
+                                                                        }
+                                                                });
+                                                                fs.unlink(out.filename, function (err) {
+                                                                        if (err) throw err;
+                                                                        console.log('file deleted');
+                                                                });
+                                                        }
+                                                        if (error != null) {
+                                                                console.log("Error");
+
+                                                                throw error;
+                                                        }
+                                                });
+
+
+                                                // } else {
+                                                //         response.msg = "Invalid Parameter";
+                                                //         res.json(response);
+                                                // }
+                                        } catch (e) {
+                                                console.log('Server error --> fnConvertPdfDoc --> e', e);
+                                                res.json(response);
+                                        }
+                                }
+                                else {
+                                        response.msg = "No Resumes";
+                                        res.json(response);
+                                }
+                                // for (var resume in resumes) {
+                                //         console.log(resume.resumeDate);
+                                // }
+                                // console.log(result.length);
+                        } else {
+                                console.log('Server error --> fnGetResumeList --> e1', e1);
+                                res.json(response);
+                        }
+                })
+        } catch (e) {
+                console.log('Server error --> fnGetResumeList --> e', e);
+                res.json(response);
+        }
+}
+
 
 module.exports.fnGetDemoResumes = (req, res, next) => {
         console.log("resume");

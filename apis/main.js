@@ -317,7 +317,7 @@ module.exports.fnAdminRegister = (req, res, next) => {
         var email = req.body.email;
         var phone = req.body.phone;
         var password = req.body.password;
-        var usertype=req.body.usertype;
+        var usertype = req.body.usertype;
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
         firstName = (firstName && typeof firstName === 'string') ? firstName.trim() : null;
@@ -347,7 +347,7 @@ module.exports.fnAdminRegister = (req, res, next) => {
                             password: password,
                             phone: phone,
                             status: 1,
-                            usertype:usertype,
+                            usertype: usertype,
 
                         };
                         userModel(userData).save(function (e2, savedUserData) {
@@ -441,8 +441,8 @@ module.exports.fnUpdateProfile = (req, res, next) => {
                     } else {
                         console.log(userUpdatedData);
                         userModel.findByIdAndUpdate(userId, userUpdatedData, { new: true }, function (e1, result) {
-                            if (!e1 ) {
-                                
+                            if (!e1) {
+
                                 response.status = 'success';
                                 response.msg = 'User Details Updated is updated.';
                                 response.data = result;
@@ -484,9 +484,9 @@ module.exports.fnUpdateAdminProfile = (req, res, next) => {
         var lastName = req.body.lastName;
         var updatedPhoneNo = req.body.updatedPhoneNo;
         var email = req.body.email;
-        var updatedEmail=req.body.updatedEmail;
-        var usertype=req.body.usertype;
-
+        var updatedEmail = req.body.updatedEmail;
+        var usertype = req.body.usertype;
+        console.log("here");
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         firstName = (firstName && typeof firstName === 'string') ? firstName.trim() : null;
         lastName = (lastName && typeof lastName === 'string') ? lastName.trim() : null;
@@ -497,6 +497,7 @@ module.exports.fnUpdateAdminProfile = (req, res, next) => {
         updatedEmail = (updatedEmail && typeof updatedEmail === 'string' && re.test(String(updatedEmail).toLowerCase())) ? updatedEmail.trim() : null;
 
         if (firstName && lastName && updatedPhoneNo && email && usertype && updatedEmail) {
+            
             var userUpdatedData = {
                 // userId: userId,
                 firstName: firstName,
@@ -504,38 +505,38 @@ module.exports.fnUpdateAdminProfile = (req, res, next) => {
                 phone: updatedPhoneNo,
                 email: updatedEmail,
                 name: firstName + ' ' + lastName,
-                usertype:usertype
-                
+                usertype: usertype
+
             };
             console.log(userUpdatedData);
 
-                    userModel.findOneAndUpdate({ email: email }, userUpdatedData, { new: true }, function (e1, result) {
-                        if (!e1 ) {
-                            console.log(e1);
-                            var data_old = {
-                                email: email,
-                                subject: "Alert! User Details Updated",
-                                heading:"Updating The Details By The Admin",
-                                test: `Your Details Updated \n email -- ${email} to ${updatedEmail} \n name -- ${firstName + ' ' + lastName}\n phone-no ${updatedPhoneNo}`,
-                            }
-                            var data_update = {
-                                email: updatedEmail,
-                                subject: "Alert! User Details Updated",
-                                heading:"Updating The Details By The Admin",
-                                test: `Your Details Updated \n email -- ${email} to ${updatedEmail} \n name -- ${firstName + ' ' + lastName}\n phone-no ${updatedPhoneNo}`,
-                            }
-                            emailHelper.sendMail(data_old);
-                            emailHelper.sendMail(data_update);
+            userModel.findOneAndUpdate({ email: email }, userUpdatedData, { new: true }, function (e1, result) {
+                if (!e1) {
+                    console.log(e1);
+                    var data_old = {
+                        email: email,
+                        subject: "Alert! User Details Updated",
+                        heading: "Updating The Details By The Admin",
+                        test: `Your Details Updated \n email -- ${email} to ${updatedEmail} \n name -- ${firstName + ' ' + lastName}\n phone-no ${updatedPhoneNo}`,
+                    }
+                    var data_update = {
+                        email: updatedEmail,
+                        subject: "Alert! User Details Updated",
+                        heading: "Updating The Details By The Admin",
+                        test: `Your Details Updated \n email -- ${email} to ${updatedEmail} \n name -- ${firstName + ' ' + lastName}\n phone-no ${updatedPhoneNo}`,
+                    }
+                    emailHelper.sendMail(data_old);
+                    emailHelper.sendMail(data_update);
 
-                            response.status = 'success';
-                            response.msg = 'User Details Updated By Admin.';
-                            response.data = result;
-                            res.json(response);
-                        } else {
-                            console.log('Server error --> FnUpdate User Details --> e1', e1);
-                            res.json(response);
-                        }
-                    })
+                    response.status = 'success';
+                    response.msg = 'User Details Updated By Admin.';
+                    response.data = result;
+                    res.json(response);
+                } else {
+                    console.log('Server error --> FnUpdate User Details --> e1', e1);
+                    res.json(response);
+                }
+            })
 
         } else {
             response.msg = "Invalid Parameters.";
@@ -566,50 +567,50 @@ module.exports.fnDeleteAdminProfile = (req, res, next) => {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         email = (email && typeof email === 'string' && re.test(String(email).toLowerCase())) ? email.trim() : null;
 
-        if (email ) {
+        if (email) {
             userModel.findOne({ $or: [{ email: email }] }).exec(function (e1, result) {
                 // console.log(reslut);
-                try{
-                    if (!e1){
-                    var usertype =result.usertype;
-                    if (usertype==="ADMIN"){
-                        userModel.remove({ email: email }, function (e1, result) {
-                        if (!e1 ) {
-                            console.log(e1);
-                            var data = {
-                                email: email,
-                                subject: "Alert! User Deleted",
-                                heading:"Deleting Account By The Admin",
-                                test: `Your Account Has been Deleted by the ADMIN`,
-                            }
+                try {
+                    if (!e1) {
+                        var usertype = result.usertype;
+                        if (usertype === "ADMIN") {
+                            userModel.remove({ email: email }, function (e1, result) {
+                                if (!e1) {
+                                    console.log(e1);
+                                    var data = {
+                                        email: email,
+                                        subject: "Alert! User Deleted",
+                                        heading: "Deleting Account By The Admin",
+                                        test: `Your Account Has been Deleted by the ADMIN`,
+                                    }
 
-                            emailHelper.sendMail(data);
-                            response.status = 'success';
-                            response.msg = 'User Deleted By Admin.';
-                            response.data = result;
-                            res.json(response);
+                                    emailHelper.sendMail(data);
+                                    response.status = 'success';
+                                    response.msg = 'User Deleted By Admin.';
+                                    response.data = result;
+                                    res.json(response);
+                                } else {
+                                    console.log('Server error --> Delete User Details --> e1', e1);
+                                    res.json(response);
+                                }
+                            })
                         } else {
-                            console.log('Server error --> Delete User Details --> e1', e1);
+                            response.msg = "User is not An Admin.";
                             res.json(response);
                         }
-                    })
-                    }else{
-                        response.msg = "User is not An Admin.";
-                        res.json(response);
                     }
                 }
-                }
-                catch(error){
+                catch (error) {
                     response.msg = "User Not Found";
                     res.json(response);
                 }
-                
-                
+
+
             }
-            
+
             )
-            
-                    
+
+
 
         } else {
             response.msg = "Invalid Parameters.";
@@ -681,7 +682,7 @@ module.exports.fnForgotPasswordEmailSend = async (req, res, next) => {
                 var data = {
                     email: userData.email,
                     subject: "Otp for reset password",
-                    heading:"Password Change Request",
+                    heading: "Password Change Request",
                     test: `your otp for reset password on resume app is  ${otp.toString()}`,
                 }
                 emailHelper.sendMail(data);
