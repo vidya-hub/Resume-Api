@@ -23,7 +23,8 @@ module.exports.sendMail = async (data) => {
         subject: data.subject,
         generateTextFromHTML: true,
         // text: data.text,
-        html: `<h1>Password Change Request</h1><p>${data.test}</p>`
+        // html: `<h1>Password Change Request</h1><p>${data.test}</p>`
+        html: `<h1>${data.heading}</h1><p>${data.test}</p>`
 
     }
 

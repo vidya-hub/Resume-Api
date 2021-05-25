@@ -7,6 +7,9 @@ var TOKEN_VALIDITY = 24 * 60 * 60 * 1000;
 var AES_KEY = '6fnhkgo71s0caeqma6ojjftu4n1m1d85';
 var BASE_URL = '';
 var async = require('async');
+
+
+
 module.exports.fnLogin = (req, res, next) => {
     var response = {
         status: 'error',
@@ -298,6 +301,95 @@ module.exports.fnRegister = (req, res, next) => {
     }
 }
 
+
+module.exports.fnAdminRegister = (req, res, next) => {
+
+
+    var response = {
+        status: "error",
+        msg: 'Something happened wrong, please try again after sometime.',
+        data: {},
+        method: req.url.split('/')[req.url.split('/').length - 1]
+    }
+    try {
+        var firstName = req.body.firstName;
+        var lastName = req.body.lastName;
+        var email = req.body.email;
+        var phone = req.body.phone;
+        var password = req.body.password;
+        var usertype=req.body.usertype;
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        firstName = (firstName && typeof firstName === 'string') ? firstName.trim() : null;
+        lastName = (lastName && typeof lastName === 'string') ? lastName.trim() : null;
+        email = (email && typeof email === 'string' && re.test(String(email).toLowerCase())) ? email.trim() : null;
+        phone = (phone && typeof phone === 'string') ? phone.trim() : null;
+        // userName = (userName && typeof userName === 'string') ? userName.trim() : null;
+        password = (password && typeof password === 'string') ? password.trim() : null;
+        console.log(firstName);
+
+        // console.log(firstName + lastName + email + phone + password);
+        if (firstName && lastName && email && phone && password && usertype === "ADMIN") {
+
+            userModel.findOne({ $or: [{ email: email }, { phone: phone }] }).exec(function (e1, result) {
+                if (!e1) {
+                    if (result && result._id) {
+                        response.msg = 'Already registered';
+                        res.json(response);
+                    } else {
+                        console.log("Success Admin");
+                        password = crypto.SHA256(password).toString();
+                        var userData = {
+                            email: email,
+                            firstName: firstName,
+                            lastName: lastName,
+                            name: firstName + ' ' + lastName,
+                            password: password,
+                            phone: phone,
+                            status: 1,
+                            usertype:usertype,
+
+                        };
+                        userModel(userData).save(function (e2, savedUserData) {
+                            if (!e2) {
+                                if (savedUserData && savedUserData._id) {
+                                    savedUserData = savedUserData.toObject();
+                                    var token = savedUserData._id.toString()
+                                    token = crypto.AES.encrypt(token, AES_KEY).toString();
+
+                                    savedUserData.token = token;
+                                    savedUserData['token'] = token;
+
+                                    response.status = 'success';
+                                    response.data = savedUserData;
+                                    response.msg = '';
+                                    res.json(response);
+                                } else {
+                                    console.log('Server error --> fnRegister --> e2', 'error while save data');
+                                    res.json(response);
+                                }
+                            } else {
+                                console.log('Server error --> fnRegister --> e1', e1);
+                                res.json(response);
+                            }
+                        })
+                    }
+
+                } else {
+                    console.log('Server error --> fnRegister --> e1', e1);
+                    res.json(response);
+                }
+            })
+        } else {
+            response.msg = "Invalid Parameters.";
+            res.json(response);
+        }
+    } catch (e) {
+        console.log('Server error --> fnRegister --> e', e);
+        res.json(response);
+    }
+}
+
 // FORGOT PASSWORD
 
 
@@ -375,6 +467,161 @@ module.exports.fnUpdateProfile = (req, res, next) => {
 
 }
 
+
+
+module.exports.fnUpdateAdminProfile = (req, res, next) => {
+    var response = {
+        status: 'error',
+        msg: 'Something happened wrong, please try again after sometime.',
+        data: {
+        },
+        method: req.url.split('/')[req.url.split('/').length - 1]
+    }
+
+    try {
+        // var userId = req.body.userId;
+        var firstName = req.body.firstName;
+        var lastName = req.body.lastName;
+        var updatedPhoneNo = req.body.updatedPhoneNo;
+        var email = req.body.email;
+        var updatedEmail=req.body.updatedEmail;
+        var usertype=req.body.usertype;
+
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        firstName = (firstName && typeof firstName === 'string') ? firstName.trim() : null;
+        lastName = (lastName && typeof lastName === 'string') ? lastName.trim() : null;
+        // phoneNo = (phoneNo && typeof phoneNo === 'string') ? phoneNo.trim() : null;
+        updatedPhoneNo = (updatedPhoneNo && typeof updatedPhoneNo === 'string') ? updatedPhoneNo.trim() : null;
+
+        email = (email && typeof email === 'string' && re.test(String(email).toLowerCase())) ? email.trim() : null;
+        updatedEmail = (updatedEmail && typeof updatedEmail === 'string' && re.test(String(updatedEmail).toLowerCase())) ? updatedEmail.trim() : null;
+
+        if (firstName && lastName && updatedPhoneNo && email && usertype && updatedEmail) {
+            var userUpdatedData = {
+                // userId: userId,
+                firstName: firstName,
+                lastName: lastName,
+                phone: updatedPhoneNo,
+                email: updatedEmail,
+                name: firstName + ' ' + lastName,
+                usertype:usertype
+                
+            };
+            console.log(userUpdatedData);
+
+                    userModel.findOneAndUpdate({ email: email }, userUpdatedData, { new: true }, function (e1, result) {
+                        if (!e1 ) {
+                            console.log(e1);
+                            var data_old = {
+                                email: email,
+                                subject: "Alert! User Details Updated",
+                                heading:"Updating The Details By The Admin",
+                                test: `Your Details Updated \n email -- ${email} to ${updatedEmail} \n name -- ${firstName + ' ' + lastName}\n phone-no ${updatedPhoneNo}`,
+                            }
+                            var data_update = {
+                                email: updatedEmail,
+                                subject: "Alert! User Details Updated",
+                                heading:"Updating The Details By The Admin",
+                                test: `Your Details Updated \n email -- ${email} to ${updatedEmail} \n name -- ${firstName + ' ' + lastName}\n phone-no ${updatedPhoneNo}`,
+                            }
+                            emailHelper.sendMail(data_old);
+                            emailHelper.sendMail(data_update);
+
+                            response.status = 'success';
+                            response.msg = 'User Details Updated By Admin.';
+                            response.data = result;
+                            res.json(response);
+                        } else {
+                            console.log('Server error --> FnUpdate User Details --> e1', e1);
+                            res.json(response);
+                        }
+                    })
+
+        } else {
+            response.msg = "Invalid Parameters.";
+            res.json(response);
+        }
+    } catch (e) {
+        console.log('Server error --> fnUpdateResume --> e', e);
+        res.json(response);
+    }
+
+}
+
+
+
+
+module.exports.fnDeleteAdminProfile = (req, res, next) => {
+    var response = {
+        status: 'error',
+        msg: 'Something happened wrong, please try again after sometime.',
+        data: {
+        },
+        method: req.url.split('/')[req.url.split('/').length - 1]
+    }
+
+    try {
+        var email = req.body.email;
+
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        email = (email && typeof email === 'string' && re.test(String(email).toLowerCase())) ? email.trim() : null;
+
+        if (email ) {
+            userModel.findOne({ $or: [{ email: email }] }).exec(function (e1, result) {
+                // console.log(reslut);
+                try{
+                    if (!e1){
+                    var usertype =result.usertype;
+                    if (usertype==="ADMIN"){
+                        userModel.remove({ email: email }, function (e1, result) {
+                        if (!e1 ) {
+                            console.log(e1);
+                            var data = {
+                                email: email,
+                                subject: "Alert! User Deleted",
+                                heading:"Deleting Account By The Admin",
+                                test: `Your Account Has been Deleted by the ADMIN`,
+                            }
+
+                            emailHelper.sendMail(data);
+                            response.status = 'success';
+                            response.msg = 'User Deleted By Admin.';
+                            response.data = result;
+                            res.json(response);
+                        } else {
+                            console.log('Server error --> Delete User Details --> e1', e1);
+                            res.json(response);
+                        }
+                    })
+                    }else{
+                        response.msg = "User is not An Admin.";
+                        res.json(response);
+                    }
+                }
+                }
+                catch(error){
+                    response.msg = "User Not Found";
+                    res.json(response);
+                }
+                
+                
+            }
+            
+            )
+            
+                    
+
+        } else {
+            response.msg = "Invalid Parameters.";
+            res.json(response);
+        }
+    } catch (e) {
+        console.log('Server error --> fnUpdateResume --> e', e);
+        res.json(response);
+    }
+
+}
+
 module.exports.fnChangePassword = async (req, res, next) => {
     var response = {
         status: "error",
@@ -434,6 +681,7 @@ module.exports.fnForgotPasswordEmailSend = async (req, res, next) => {
                 var data = {
                     email: userData.email,
                     subject: "Otp for reset password",
+                    heading:"Password Change Request",
                     test: `your otp for reset password on resume app is  ${otp.toString()}`,
                 }
                 emailHelper.sendMail(data);
