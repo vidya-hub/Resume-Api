@@ -13,21 +13,21 @@ var userSchema = mongoose.Schema({
         type: String,
         default: ''
     },
-    linkedinId:{
-        type:String,
-        default:''
+    linkedinId: {
+        type: String,
+        default: ''
     },
-    googleId:{
-        type:String,
-        default:''
+    googleId: {
+        type: String,
+        default: ''
     },
     email: {
         type: String,
         default: '',
     },
-    otp:{
-        type:String,
-        default:'' 
+    otp: {
+        type: String,
+        default: ''
     },
     password: {
         type: String,
