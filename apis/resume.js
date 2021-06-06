@@ -14,7 +14,7 @@ var http = require('http'),
 const { ipvalreturn } = require("../helper/ipaddress.js");
 var ipaddress = ipval.ipvalreturn();
 console.log(ipaddress);
-module.exports.fnAddResume = async(req, res, next) => {
+module.exports.fnAddResume = async (req, res, next) => {
     var response = {
         status: 'error',
         msg: 'Something happened wrong, please try again after sometime.',
@@ -151,13 +151,13 @@ module.exports.fnAddResume = async(req, res, next) => {
                 for (let index = 0; index < educationForVerify.length; index++) {
                     const element = educationForVerify[index];
                     if (!(element.schoolName &&
-                            element.schoolLocation &&
-                            element.degree &&
-                            // element.state &&
-                            element.fieldOfStudy &&
-                            element.graduationMonth &&
-                            element.graduationYear
-                        )) {
+                        element.schoolLocation &&
+                        element.degree &&
+                        // element.state &&
+                        element.fieldOfStudy &&
+                        element.graduationMonth &&
+                        element.graduationYear
+                    )) {
                         education.splice(index, 1)
                     }
                 }
@@ -257,7 +257,7 @@ module.exports.fnAddResume = async(req, res, next) => {
                 summary: summary
             }
 
-            resumeModel(resumeData).save({ lean: true }, function(e1, result) {
+            resumeModel(resumeData).save({ lean: true }, function (e1, result) {
                 if (!e1) {
                     response.status = 'success';
                     response.msg = 'Resume is created.';
@@ -279,7 +279,7 @@ module.exports.fnAddResume = async(req, res, next) => {
     }
 }
 
-module.exports.fnUpdateResume = async(req, res, next) => {
+module.exports.fnUpdateResume = async (req, res, next) => {
     var response = {
         status: 'error',
         msg: 'Something happened wrong, please try again after sometime.',
@@ -407,13 +407,13 @@ module.exports.fnUpdateResume = async(req, res, next) => {
                 for (let index = 0; index < educationForVerify.length; index++) {
                     const element = educationForVerify[index];
                     if (!(element.schoolName &&
-                            element.schoolLocation &&
-                            element.degree &&
-                            // element.state &&
-                            element.fieldOfStudy &&
-                            element.graduationMonth &&
-                            element.graduationYear
-                        )) {
+                        element.schoolLocation &&
+                        element.degree &&
+                        // element.state &&
+                        element.fieldOfStudy &&
+                        element.graduationMonth &&
+                        element.graduationYear
+                    )) {
                         education.splice(index, 1)
                     }
                 }
@@ -507,7 +507,7 @@ module.exports.fnUpdateResume = async(req, res, next) => {
                 summary: summary
             };
 
-            resumeModel.findByIdAndUpdate(resumeId, resumeData, { new: true }, function(e1, result) {
+            resumeModel.findByIdAndUpdate(resumeId, resumeData, { new: true }, function (e1, result) {
 
                 if (!e1) {
                     response.status = 'success';
@@ -530,7 +530,7 @@ module.exports.fnUpdateResume = async(req, res, next) => {
     }
 }
 
-module.exports.fnUpdateResumeType = async(req, res, next) => {
+module.exports.fnUpdateResumeType = async (req, res, next) => {
     var response = {
         status: 'error',
         msg: 'Something happened wrong, please try again after sometime.',
@@ -545,7 +545,7 @@ module.exports.fnUpdateResumeType = async(req, res, next) => {
         resumeDate = (resumeDate && typeof resumeDate === 'string') ? resumeDate.trim() : "";
 
         if (resumeId && resumeType) {
-            resumeModel.findByIdAndUpdate(resumeId, { resumeType: resumeType, resumeDate: parseInt(resumeDate) }, { new: true }, function(e1, result) {
+            resumeModel.findByIdAndUpdate(resumeId, { resumeType: resumeType, resumeDate: parseInt(resumeDate) }, { new: true }, function (e1, result) {
                 if (!e1) {
                     console.log("result");
                     console.log("result");
@@ -609,7 +609,7 @@ module.exports.fnUpdateResumeType = async(req, res, next) => {
     }
 }
 
-module.exports.fnDeleteResume = async(req, res, next) => {
+module.exports.fnDeleteResume = async (req, res, next) => {
     var response = {
         status: 'error',
         msg: 'Something happened wrong, please try again after sometime.',
@@ -624,7 +624,7 @@ module.exports.fnDeleteResume = async(req, res, next) => {
         console.log(req.body.userId);
 
         if (resumeId) {
-            resumeModel.remove({ _id: resumeId, userId: req.body.userId }, function(e1, result) {
+            resumeModel.remove({ _id: resumeId, userId: req.body.userId }, function (e1, result) {
                 if (!e1) {
                     response.status = 'success';
                     response.msg = 'Resume is deleted.';
@@ -645,7 +645,7 @@ module.exports.fnDeleteResume = async(req, res, next) => {
     }
 }
 
-module.exports.fnDownloadResume = async(req, res, next) => {
+module.exports.fnDownloadResume = async (req, res, next) => {
     var response = {
         status: 'error',
         msg: 'Something happened wrong, please try again after sometime.',
@@ -656,9 +656,9 @@ module.exports.fnDownloadResume = async(req, res, next) => {
         var resumeId = req.body.resumeId
         resumeId = (resumeId && typeof resumeId === 'string') ? resumeId.trim() : null;
         if (resumeId) {
-            phantom.create().then(function(ph) {
-                ph.createPage().then(function(page) {
-                    page.open(ipaddress + "api/render/?id=" + resumeId).then(function(status) {
+            phantom.create().then(function (ph) {
+                ph.createPage().then(function (page) {
+                    page.open(ipaddress + "api/render/?id=" + resumeId).then(function (status) {
                         var path = 'public/id_' + new Date().getTime() + '.pdf'
                         page.property('paperSize', {
                             format: 'A4',
@@ -666,7 +666,7 @@ module.exports.fnDownloadResume = async(req, res, next) => {
                             border: '1cm',
                         }).then((result) => {
                             page.property('viewportSize', { width: 595 }).then(() => {
-                                page.render(path).then(function() {
+                                page.render(path).then(function () {
                                     console.log('Page Rendered');
                                     response.status = "success";
                                     response.msg = "";
@@ -690,7 +690,7 @@ module.exports.fnDownloadResume = async(req, res, next) => {
     }
 }
 
-module.exports.fnGetSingleResume = async(req, res, next) => {
+module.exports.fnGetSingleResume = async (req, res, next) => {
     var response = {
         status: 'error',
         msg: 'Something happened wrong try again after sometimes.',
@@ -701,7 +701,7 @@ module.exports.fnGetSingleResume = async(req, res, next) => {
         var id = req.body.resumeId;
         id = (id && typeof id === 'string') ? id.trim() : null;
         if (id) {
-            resumeModel.findOne({ _id: id, isDeleted: false }).populate('userId', '*').lean().exec(function(e1, result) {
+            resumeModel.findOne({ _id: id, isDeleted: false }).populate('userId', '*').lean().exec(function (e1, result) {
                 if (!e1) {
                     if (result && result._id) {
                         response.msg = "";
@@ -729,7 +729,7 @@ module.exports.fnGetSingleResume = async(req, res, next) => {
     }
 }
 
-module.exports.fnGetResumeList = async(req, res, next) => {
+module.exports.fnGetResumeList = async (req, res, next) => {
     var response = {
         status: 'error',
         msg: 'Something happened wrong, please try again after sometime.',
@@ -738,7 +738,7 @@ module.exports.fnGetResumeList = async(req, res, next) => {
     }
     try {
         var userId = req.body.userId;
-        resumeModel.find({ userId: userId }).lean().exec(function(e1, result) {
+        resumeModel.find({ userId: userId }).lean().exec(function (e1, result) {
             if (!e1) {
                 console.log(result);
                 console.log(userId);
@@ -773,7 +773,7 @@ module.exports.fnGetResumeList = async(req, res, next) => {
 }
 
 
-module.exports.fnGetLatestRes = async(req, res, next) => {
+module.exports.fnGetLatestRes = async (req, res, next) => {
     var response = {
         status: 'error',
         msg: 'Something happened wrong, please try again after sometime.',
@@ -782,7 +782,7 @@ module.exports.fnGetLatestRes = async(req, res, next) => {
     }
     try {
         var email = req.body.email;
-        resumeModel.find({ email: email }).lean().exec(async function(e1, result) {
+        resumeModel.find({ email: email }).lean().exec(async function (e1, result) {
             if (!e1) {
                 var resumes = result;
                 var dateList = [];
@@ -807,7 +807,7 @@ module.exports.fnGetLatestRes = async(req, res, next) => {
                         pdf.create(renderedHtml).toFile(filePath, (error, out) => {
                             console.log(out)
                             if (out) {
-                                fs.readFile(out.filename, function(err, content) {
+                                fs.readFile(out.filename, function (err, content) {
                                     if (err) {
                                         res.writeHead(400, { 'Content-type': 'text/html' })
                                         console.log(err);
@@ -821,7 +821,7 @@ module.exports.fnGetLatestRes = async(req, res, next) => {
                                         res.end(content);
                                     }
                                 });
-                                fs.unlink(out.filename, function(err) {
+                                fs.unlink(out.filename, function (err) {
                                     if (err) throw err;
                                     console.log('file deleted');
                                 });
@@ -900,7 +900,7 @@ module.exports.fnGetDemoResumes = (req, res, next) => {
     }
 }
 
-module.exports.fnGetDemoResumeFromFile = async(req, res, next) => {
+module.exports.fnGetDemoResumeFromFile = async (req, res, next) => {
     console.log(req.url);
 
     try {
@@ -908,7 +908,7 @@ module.exports.fnGetDemoResumeFromFile = async(req, res, next) => {
         var query = url.parse(req.url, true).query;
         pic = query.image;
 
-        fs.readFile('./' + pic, function(err, content) {
+        fs.readFile('./' + pic, function (err, content) {
             if (err) {
                 res.writeHead(400, { 'Content-type': 'text/html' })
                 console.log(err);
@@ -932,7 +932,7 @@ module.exports.fnGetDemoResumeFromFile = async(req, res, next) => {
     }
 }
 
-module.exports.fnSendFiles = async(req, res, next) => {
+module.exports.fnSendFiles = async (req, res, next) => {
     console.log(req.url);
 
     try {
@@ -940,7 +940,7 @@ module.exports.fnSendFiles = async(req, res, next) => {
         var query = url.parse(req.url, true).query;
         doc = query.docfilename;
 
-        fs.readFile('./' + doc, function(err, content) {
+        fs.readFile('./' + doc, function (err, content) {
             if (err) {
                 res.writeHead(400, { 'Content-type': 'text/html' })
                 console.log(err);
@@ -973,7 +973,7 @@ module.exports.fnSendFiles = async(req, res, next) => {
 
 
 
-module.exports.renderFile = async(req, res, next) => {
+module.exports.renderFile = async (req, res, next) => {
     console.log(req.query.id)
     var id = req.query.id;
     var ejs = require('ejs')
@@ -988,43 +988,43 @@ module.exports.renderFile = async(req, res, next) => {
     }
     console.log(data);
     if (data.resumeType == 1) {
-        ejs.renderFile('resume1.ejs', data, {}, function(err, str) {
+        ejs.renderFile('resume1.ejs', data, {}, function (err, str) {
             res.end(ejs.render(str, {}, {}));
         });
     }
 
     if (data.resumeType == 2) {
-        ejs.renderFile('resume3.ejs', data, {}, function(err, str) {
+        ejs.renderFile('resume3.ejs', data, {}, function (err, str) {
             res.end(ejs.render(str, {}, {}));
         });
 
     }
     if (data.resumeType == 3) {
-        ejs.renderFile('resume4.ejs', data, {}, function(err, str) {
+        ejs.renderFile('resume4.ejs', data, {}, function (err, str) {
             res.end(ejs.render(str, {}, {}));
         });
 
     }
     if (data.resumeType == 4) {
-        ejs.renderFile('resume5.ejs', data, {}, function(err, str) {
+        ejs.renderFile('resume5.ejs', data, {}, function (err, str) {
             res.end(ejs.render(str, {}, {}));
         });
 
     }
     if (data.resumeType == 5) {
-        ejs.renderFile('resume6.ejs', data, {}, function(err, str) {
+        ejs.renderFile('resume6.ejs', data, {}, function (err, str) {
             res.end(ejs.render(str, {}, {}));
         });
 
     }
     if (data.resumeType == 6) {
-        ejs.renderFile('resume7.ejs', data, {}, function(err, str) {
+        ejs.renderFile('resume7.ejs', data, {}, function (err, str) {
             res.end(ejs.render(str, {}, {}));
         });
 
     }
     if (data.resumeType == 7) {
-        ejs.renderFile('resume8.ejs', data, {}, function(err, str) {
+        ejs.renderFile('resume8.ejs', data, {}, function (err, str) {
             res.end(ejs.render(str, {}, {}));
         });
 
@@ -1032,16 +1032,70 @@ module.exports.renderFile = async(req, res, next) => {
 
 }
 
+// Dynamic Template Future
+
+module.exports.dynamicTemp = async (req, res, next) => {
+    var pathejs = path.join(__dirname, '.././resumeTempTest/', "resume.ejs")
+    console.log(req.query.id)
+    var id = req.query.id;
+    var ejs = require('ejs')
+    // console.log();
+    var listOfContent = req.body.listOfContent;
+    if (!id) {
+        id = req.body.id;
+    }
+    try {
+        var data = await resumeModel.findById(id);
+
+    } catch (error) {
+        console.log(error);
+    }
+    data.listOfContent = listOfContent;
+    ejs.renderFile(pathejs, data, {}, function (err, renderedHtml) {
+        const filePath = './' + "pdf/" + (Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 10)).toUpperCase() + ".pdf";
+        pdf.create(renderedHtml).toFile(filePath, (error, out) => {
+            console.log(out)
+            if (out) {
+                fs.readFile(out.filename, function (err, content) {
+                    if (err) {
+                        res.writeHead(400, { 'Content-type': 'text/html' })
+                        console.log(err);
+                        res.end("No such file");
+                    } else {
+
+                        res.writeHead(200, {
+
+                            'Content-disposition': 'attachment;filename=' + filePath,
+                        });
+                        res.end(content);
+                    }
+                });
+                fs.unlink(out.filename, function (err) {
+                    if (err) throw err;
+                    console.log('file deleted');
+                });
+            }
+            if (error != null) {
+                console.log("Error");
+
+                throw error;
+            }
+        });
+        // res.end(ejs.render(str, {}, {}));
+    });
+
+}
 
 
-module.exports.renderHtmlStep = async(req, res, next) => {
+
+module.exports.renderHtmlStep = async (req, res, next) => {
     console.log("here");
     var query = url.parse(req.url, true).query;
     var id = query.id;
     var datavalues = req.body;
     if (id == "1") {
         var pathejs = path.join(__dirname, 'views/', 'resume1.ejs');
-        ejs.renderFile(pathejs, datavalues, function(err, data) {
+        ejs.renderFile(pathejs, datavalues, function (err, data) {
             if (err) {
                 res.send(err);
             } else {
@@ -1053,7 +1107,7 @@ module.exports.renderHtmlStep = async(req, res, next) => {
 
     if (id == "2") {
         var pathejs = path.join(__dirname, 'views/', 'resume3.ejs');
-        ejs.renderFile(pathejs, datavalues, function(err, data) {
+        ejs.renderFile(pathejs, datavalues, function (err, data) {
             if (err) {
                 res.send(err);
             } else {
@@ -1066,7 +1120,7 @@ module.exports.renderHtmlStep = async(req, res, next) => {
     }
     if (id == "3") {
         var pathejs = path.join(__dirname, 'views/', 'resume4.ejs');
-        ejs.renderFile(pathejs, datavalues, function(err, data) {
+        ejs.renderFile(pathejs, datavalues, function (err, data) {
             if (err) {
                 res.send(err);
             } else {
@@ -1078,7 +1132,7 @@ module.exports.renderHtmlStep = async(req, res, next) => {
     }
     if (id == "4") {
         var pathejs = path.join(__dirname, 'views/', 'resume5.ejs');
-        ejs.renderFile(pathejs, datavalues, function(err, data) {
+        ejs.renderFile(pathejs, datavalues, function (err, data) {
             if (err) {
                 res.send(err);
             } else {
@@ -1090,7 +1144,7 @@ module.exports.renderHtmlStep = async(req, res, next) => {
     }
     if (id == "5") {
         var pathejs = path.join(__dirname, 'views/', 'resume6.ejs');
-        ejs.renderFile(pathejs, datavalues, function(err, data) {
+        ejs.renderFile(pathejs, datavalues, function (err, data) {
             if (err) {
                 res.send(err);
             } else {
@@ -1101,7 +1155,7 @@ module.exports.renderHtmlStep = async(req, res, next) => {
     }
     if (id == "6") {
         var pathejs = path.join(__dirname, 'views/', 'resume7.ejs');
-        ejs.renderFile(pathejs, datavalues, function(err, data) {
+        ejs.renderFile(pathejs, datavalues, function (err, data) {
             if (err) {
                 res.send(err);
             } else {
@@ -1112,7 +1166,7 @@ module.exports.renderHtmlStep = async(req, res, next) => {
     }
     if (id == "7") {
         var pathejs = path.join(__dirname, 'views/', 'resume8.ejs');
-        ejs.renderFile(pathejs, datavalues, function(err, data) {
+        ejs.renderFile(pathejs, datavalues, function (err, data) {
             if (err) {
                 res.send(err);
             } else {
@@ -1127,7 +1181,7 @@ module.exports.renderHtmlStep = async(req, res, next) => {
 
 
 
-module.exports.fnConvertRenderHtmlToJson = async(req, res, next) => {
+module.exports.fnConvertRenderHtmlToJson = async (req, res, next) => {
     var response = {
         status: 'error',
         msg: "Something happened wrong try again after sometime.",
@@ -1154,7 +1208,7 @@ module.exports.fnConvertRenderHtmlToJson = async(req, res, next) => {
     }
 }
 
-module.exports.senpdf = async(req, res, next) => {
+module.exports.senpdf = async (req, res, next) => {
     var response = {
         status: 'error',
         msg: "Something happened wrong try again after sometime.",
@@ -1181,7 +1235,15 @@ module.exports.senpdf = async(req, res, next) => {
     }
 }
 
-module.exports.sendWordDocument = async(req, res, next) => {
+
+
+
+
+
+
+
+
+module.exports.sendWordDocument = async (req, res, next) => {
     // var docfullname = "resume.docx";
     const docfullname = (Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 10)).toUpperCase() + ".docx";
 
@@ -1206,9 +1268,9 @@ module.exports.sendWordDocument = async(req, res, next) => {
             try {
 
 
-                client.save_to(docfullname, function(error, id) {
+                client.save_to(docfullname, function (error, id) {
                     if (id == null) {
-                        fs.readFile(docfullname, function(err, content) {
+                        fs.readFile(docfullname, function (err, content) {
                             if (err) {
                                 res.writeHead(400, { 'Content-type': 'text/html' })
                                 console.log(err);
@@ -1224,7 +1286,7 @@ module.exports.sendWordDocument = async(req, res, next) => {
                                 res.end(content);
                             }
                         });
-                        fs.unlink(docfullname, function(err) {
+                        fs.unlink(docfullname, function (err) {
                             if (err) throw err;
                             console.log('file deleted');
                         });
@@ -1251,9 +1313,9 @@ module.exports.sendWordDocument = async(req, res, next) => {
         res.json(response);
     }
 }
-module.exports.sendPdf = async(req, res, next) => {
+module.exports.sendPdf = async (req, res, next) => {
     console.log("here")
-        // var docfullname = "resume.docx";
+    // var docfullname = "resume.docx";
     const docfullname = (Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 10)).toUpperCase() + ".pdf";
 
     console.log(docfullname);
@@ -1273,7 +1335,7 @@ module.exports.sendPdf = async(req, res, next) => {
             pdf.create(renderedHtml).toFile(filePath, (error, out) => {
                 console.log(out)
                 if (out) {
-                    fs.readFile(out.filename, function(err, content) {
+                    fs.readFile(out.filename, function (err, content) {
                         if (err) {
                             res.writeHead(400, { 'Content-type': 'text/html' })
                             console.log(err);
@@ -1287,7 +1349,7 @@ module.exports.sendPdf = async(req, res, next) => {
                             res.end(content);
                         }
                     });
-                    fs.unlink(out.filename, function(err) {
+                    fs.unlink(out.filename, function (err) {
                         if (err) throw err;
                         console.log('file deleted');
                     });
@@ -1310,7 +1372,7 @@ module.exports.sendPdf = async(req, res, next) => {
     }
 }
 
-module.exports.fnGetAllUserResume = async(req, res, next) => {
+module.exports.fnGetAllUserResume = async (req, res, next) => {
     let response = {
         status: 'error',
         msg: "Something happened wrong try again after sometime.",
@@ -1344,7 +1406,7 @@ module.exports.fnGetAllUserResume = async(req, res, next) => {
         //     }
 
         // })
-        resumeModel.find().lean().exec(function(e1, result) {
+        resumeModel.find().lean().exec(function (e1, result) {
             console.log(result)
             if (!e1) {
                 res.json({

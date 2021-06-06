@@ -1,7 +1,11 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-
+// var bodyParser = require('body-parser');
+const multer = require("multer");
+const bodyParser = require("body-parser");
+const GridFsStorage = require("multer-gridfs-storage");
+const Grid = require("gridfs-stream");
+const methodOverRide = require("method-override");
 var http = require('http');
 var path = require('path');
 var cors = require('cors');
@@ -36,7 +40,7 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 app.use(session);
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "YOUR-DOMAIN.TLD"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
@@ -49,7 +53,7 @@ app.use(expressLayouts)
 
 server.listen(port);
 server.setTimeout(1500000);
-server.on('error', function(error) {
+server.on('error', function (error) {
     if (error.syscall != 'listen') {
         throw error;
     }
@@ -68,7 +72,7 @@ server.on('error', function(error) {
             throw error;
     }
 });
-server.on('listening', function() {
+server.on('listening', function () {
     var addr = server.address();
     var bind = typeof addr === 'string' ? 'Pipe ' + addr : 'Port ' + addr.port;
     console.log('Listening on port ' + bind);
@@ -80,7 +84,7 @@ server.on('listening', function() {
 });
 
 
-mongoose.connection.once('open', function() {
+mongoose.connection.once('open', function () {
 
     console.log('Database connection made successfully.');
     app.use('/uploads/', express.static(path.join(__dirname, 'uploads')));
@@ -104,16 +108,16 @@ mongoose.connection.once('open', function() {
     app.post('*', (req, res) => {
         res.send(path.join(__dirname, 'ui'));
     });
-    app.use(function(req, res, next) {});
+    app.use(function (req, res, next) { });
 
     if (app.get('env') == 'development') {
-        app.use(function(res, req, next) {
+        app.use(function (res, req, next) {
             res.status(err.status || 500);
             res.rander('page_404.html');
         });
     }
 
-    app.use(function(res, req, next) {
+    app.use(function (res, req, next) {
         console.log(err);
         res.status(err.status || 500);
         // res.json({asd:'asd1'})
@@ -121,14 +125,14 @@ mongoose.connection.once('open', function() {
         next(err);
     });
 
-    app.use(function(error, res, req, next) {
+    app.use(function (error, res, req, next) {
         // req.json({error:error})
         // req.status(500).json({ error: error.message })
         // next(err);
     });
 
 });
-mongoose.connection.on('error', function(err) {
+mongoose.connection.on('error', function (err) {
     console.log('Database connection dropped, due to ' + err);
     // proecss.exit();
 });

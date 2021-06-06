@@ -4,7 +4,8 @@ var multer = require('multer');
 var crypto = require("crypto-js");
 var AES_KEY = '6fnhkgo71s0caeqma6ojjftu4n1m1d85';
 var pdf = require('html-pdf');
-
+var profileimgModel = require("../models/profilemodel");
+var bodyParser = require('body-parser')
 var userModel = require("../models/user");
 
 
@@ -23,9 +24,14 @@ var template = require('../apis/template');
 
 /*************************************************************************/
 module.exports = router;
+// router.use()
+router.use(bodyParser.urlencoded({ extended: false }))
+router.use(bodyParser.json())
 //basic
 router.post('/api/login', main.fnLogin);
 router.post('/api/test', main.fnTest);
+router.post('/api/profileImageUpload', main.fnprofileImageUpload);
+
 router.post('/api/register', main.fnRegister);
 router.post('/api/registerAdmin', main.fnAdminRegister);
 router.post("/api/updateUserProfile", main.fnUpdateProfile);
@@ -45,6 +51,10 @@ router.post('/api/get_single_resume_data', resume.fnGetSingleResume);
 router.post('/api/get_download_link', resume.fnDownloadResume);
 router.get('/api/render', resume.renderFile);
 router.post('/api/render', resume.renderFile);
+router.post('/api/dyanamicTemp', resume.dynamicTemp);
+router.get('/api/dyanamicTemp', resume.dynamicTemp);
+
+
 router.post('/api/renderhtml', resume.renderHtmlStep);
 
 router.post('/api/render_json_data', resume.fnConvertRenderHtmlToJson);
@@ -55,7 +65,7 @@ router.post('/api/get_word_document', resume.sendWordDocument);
 router.post('/api/search_objective', jobDescription.fnGetObjective);
 router.get('/resume_template', template.fnOutputResume)
 router.post('/api/add_multipal', jobTitle.fnAddMultipal)
-    //open for all (sencetive data)
+//open for all (sencetive data)
 
 // open for users
 // router.post('/api/*', fnAuthoriseToken(), main.fnAuthoriseToken);
@@ -175,7 +185,7 @@ function fnAuthoriseToken() {
         status: 'error',
         msg: "Unauthorised request."
     };
-    return function(req, res, next) {
+    return function (req, res, next) {
         var url = req.originalUrl;
         if (req.headers && req.headers.authorization) {
             var parts = req.headers.authorization.split(' ');
@@ -184,7 +194,7 @@ function fnAuthoriseToken() {
                     var str = parts[1];
                     var data = crypto.AES.decrypt(str, AES_KEY).toString(crypto.enc.Utf8);
                     if (data) {
-                        userModel.findById(data).exec(function(e1, userData) {
+                        userModel.findById(data).exec(function (e1, userData) {
                             if (!e1) {
                                 if (userData && userData._id) {
                                     req.session.userId = userData._id;
