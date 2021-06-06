@@ -51,7 +51,7 @@ router.post('/api/get_single_resume_data', resume.fnGetSingleResume);
 router.post('/api/get_download_link', resume.fnDownloadResume);
 router.get('/api/render', resume.renderFile);
 router.post('/api/render', resume.renderFile);
-router.post('/api/dyanamicTemp', resume.dynamicTemp);
+router.post('/api/dynamicTemp', resume.dynamicTemp);
 router.get('/api/dynamicTemp', resume.dynamicTemp);
 
 
