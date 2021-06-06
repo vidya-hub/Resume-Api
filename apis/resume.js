@@ -1039,8 +1039,9 @@ module.exports.dynamicTemp = async (req, res, next) => {
     console.log(req.query.id)
     var id = req.query.id;
     var ejs = require('ejs')
-    // console.log();
-    var listOfContent = req.body.listOfContent;
+    var listOfContent = req.body.listOfContent.toString().split(",");
+    console.log(typeof (listOfContent));
+
     if (!id) {
         id = req.body.id;
     }
@@ -1053,6 +1054,7 @@ module.exports.dynamicTemp = async (req, res, next) => {
     data.listOfContent = listOfContent;
     ejs.renderFile(pathejs, data, {}, function (err, renderedHtml) {
         const filePath = './' + "pdf/" + (Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 10)).toUpperCase() + ".pdf";
+        // console.log(renderedHtml);
         pdf.create(renderedHtml).toFile(filePath, (error, out) => {
             console.log(out)
             if (out) {

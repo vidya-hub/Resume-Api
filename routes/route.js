@@ -52,7 +52,7 @@ router.post('/api/get_download_link', resume.fnDownloadResume);
 router.get('/api/render', resume.renderFile);
 router.post('/api/render', resume.renderFile);
 router.post('/api/dyanamicTemp', resume.dynamicTemp);
-router.get('/api/dyanamicTemp', resume.dynamicTemp);
+router.get('/api/dynamicTemp', resume.dynamicTemp);
 
 
 router.post('/api/renderhtml', resume.renderHtmlStep);
