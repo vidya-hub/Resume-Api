@@ -39,7 +39,14 @@ router.post("/api/updateUserAdminProfile", main.fnUpdateAdminProfile);
 router.post("/api/change_admin_password", main.fnChangeAdminPassword);
 router.post("/api/get_admin_data", main.fnGetAdminProfile);
 router.post("/api/get_all_users", main.fnGetAllUsersData);
+router.post("/api/get_all_users_latest_data", main.fnGetAllUsersLatestData);
+
+
+// DELETE PROFILE
+
 router.post("/api/deleteAdminProfile", main.fnDeleteAdminProfile);
+
+//
 router.post('/api/login_with_linkedin', main.fnLoginWithLinkedin);
 router.post('/api/login_with_google', main.fnLoginWithGoogle);
 router.post('/api/add_resume', resume.fnAddResume);

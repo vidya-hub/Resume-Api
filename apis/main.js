@@ -1,4 +1,6 @@
 var userModel = require("../models/user");
+var resumeModel = require("../models/resume");
+
 // var ProfileImages = require("../models/profilemodel");
 var crypto = require("crypto-js");
 var nodemailer = require('nodemailer');
@@ -315,6 +317,95 @@ module.exports.fnRegister = (req, res, next) => {
     }
 }
 
+//  CITY,COUNTRY,STATE,JOB TITLE ---> LATEST
+
+
+// async function getLatestResdetails(userData) {
+//     updatedUserdata = [];
+
+//     return updatedUserdata;
+// }
+
+
+async function getLatestResdetails(userinfo) {
+    var resumes = await resumeModel.find({ userId: userinfo._id }).lean();
+    // console.log(userResume);
+    if (resumes.length == 0) {
+        userinfo.city = "Not Defined";
+        userinfo.state = "Not Defined";
+        userinfo.jobTitle = "Not Defined";
+        var updateUser = userinfo;
+        // console.log(updateUser);
+        return updateUser;
+
+        // userinfo.push(userSampleData);
+
+    } else {
+        var dateList = [];
+
+        if (dateList.some(date => date === null)) {
+            var id = resumes[0]._id;
+            var resResult = await resumeModel.findOne({ _id: id }).lean();
+            // resumeModel.findOne({ _id: id }).lean().exec(function (e1, resResult) {
+            !(resResult.city == "" || resResult.city == undefined) ? userinfo.city = resResult.city.toString() : userinfo.city = "Not Defined";
+            !(resResult.state == "" || resResult.state == undefined) ? userinfo.state = resResult.state.toString() : userinfo.state = "Not Defined";
+            !(resResult.jobTitle == "" || resResult.jobTitle == undefined) ? userinfo.jobTitle = resResult.jobTitle.toString() : userinfo.jobTitle = "Not Defined";
+            // updatedUserdata.push(userSampleData);
+            var updateUser = userinfo;
+            return updateUser;
+        } else {
+            var indexOfMaxValue = dateList.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
+            var id = resumes[indexOfMaxValue]._id;
+            var resResult = await resumeModel.findOne({ _id: id }).lean();
+            !(resResult.city == "" || resResult.city == undefined) ? userinfo.city = resResult.city.toString() : userinfo.city = "Not Defined";
+            !(resResult.state == "" || resResult.state == undefined) ? userinfo.state = resResult.state.toString() : userinfo.state = "Not Defined";
+            !(resResult.jobTitle == "" || resResult.jobTitle == undefined) ? userinfo.jobTitle = resResult.jobTitle.toString() : userinfo.jobTitle = "Not Defined";
+
+            var updateUser = userinfo;
+            return updateUser;
+        };
+    }
+
+
+}
+
+module.exports.fnGetAllUsersLatestData = async (req, res, next) => {
+    var updatedUserdata = [];
+
+    var response = {
+        status: 'error',
+        msg: 'Something happened wrong, please try again after sometime.',
+        data: {},
+        method: req.url.split('/')[req.url.split('/').length - 1]
+    }
+
+    try {
+        var userData = await userModel.find({ usertype: "USER" }).lean();
+        try {
+            for (let index = 0; index < userData.length; index++) {
+                const userinfo = userData[index];
+                var updateddata = await getLatestResdetails(userinfo);
+                updatedUserdata.push(updateddata);
+            }
+
+        } catch (e) {
+            console.log('Server error --> fnGetResumeList --> e', e);
+            res.json(response);
+        }
+        res.json({
+            status: "success",
+            data: updatedUserdata,
+        })
+
+    } catch (e) {
+
+        console.log('Server error --> fnUpdateResume --> e', e);
+        res.json(response);
+    }
+    // console.log(updatedUserdata);
+
+}
+
 
 module.exports.fnAdminRegister = (req, res, next) => {
 
@@ -402,6 +493,9 @@ module.exports.fnAdminRegister = (req, res, next) => {
         res.json(response);
     }
 }
+
+
+
 
 module.exports.fnGetAllUsersData = async (req, res, next) => {
     var response = {
@@ -515,7 +609,7 @@ module.exports.fnprofileImageUpload = async (req, res, next) => {
                 return res.send(response);
             }
             response.msg = `File has been uploaded.`;
-            response.status="Success";
+            response.status = "Success";
             return res.send(response);
         } catch (error) {
             console.log(error);
@@ -677,6 +771,8 @@ module.exports.fnChangeAdminPassword = async (req, res, next) => {
         res.json(response);
     }
 }
+
+
 
 
 module.exports.fnDeleteAdminProfile = (req, res, next) => {
@@ -967,6 +1063,7 @@ module.exports.fnAuthoriseToken = async (req, res, next) => {
     }
 }
 const axios = require('axios');
+const resume = require("../models/resume");
 module.exports.fnTest = async (req, res, next) => {
     let objectid = "";
     var summaryData = [];
