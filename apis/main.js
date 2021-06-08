@@ -317,15 +317,6 @@ module.exports.fnRegister = (req, res, next) => {
     }
 }
 
-//  CITY,COUNTRY,STATE,JOB TITLE ---> LATEST
-
-
-// async function getLatestResdetails(userData) {
-//     updatedUserdata = [];
-
-//     return updatedUserdata;
-// }
-
 
 async function getLatestResdetails(userinfo) {
     var resumes = await resumeModel.find({ userId: userinfo._id }).lean();
