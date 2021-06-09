@@ -320,12 +320,25 @@ module.exports.fnRegister = (req, res, next) => {
 
 async function getLatestResdetails(userinfo) {
     var resumes = await resumeModel.find({ userId: userinfo._id }).lean();
+    console.log(userinfo.usertype);
+    var userSampleData = {};
+    userSampleData.id = userinfo._id;
+    userSampleData.Name = userinfo.name;
+    userSampleData.phone = userinfo.phone;
+    userSampleData.usertype = userinfo.usertype;
+    userSampleData.email = userinfo.email;
+
+
+
+
     // console.log(userResume);
     if (resumes.length == 0) {
-        userinfo.city = "Not Defined";
-        userinfo.state = "Not Defined";
-        userinfo.jobTitle = "Not Defined";
-        var updateUser = userinfo;
+        userSampleData.city = "Not Defined";
+        userSampleData.state = "Not Defined";
+        userSampleData.jobTitle = "Not Defined";
+        userSampleData.country = "Not Defined";
+
+        var updateUser = userSampleData;
         // console.log(updateUser);
         return updateUser;
 
@@ -338,21 +351,25 @@ async function getLatestResdetails(userinfo) {
             var id = resumes[0]._id;
             var resResult = await resumeModel.findOne({ _id: id }).lean();
             // resumeModel.findOne({ _id: id }).lean().exec(function (e1, resResult) {
-            !(resResult.city == "" || resResult.city == undefined) ? userinfo.city = resResult.city.toString() : userinfo.city = "Not Defined";
-            !(resResult.state == "" || resResult.state == undefined) ? userinfo.state = resResult.state.toString() : userinfo.state = "Not Defined";
-            !(resResult.jobTitle == "" || resResult.jobTitle == undefined) ? userinfo.jobTitle = resResult.jobTitle.toString() : userinfo.jobTitle = "Not Defined";
+            !(resResult.city == "" || resResult.city == undefined) ? userSampleData.city = resResult.city.toString() : userSampleData.city = "Not Defined";
+            !(resResult.state == "" || resResult.state == undefined) ? userSampleData.state = resResult.state.toString() : userSampleData.state = "Not Defined";
+            !(resResult.jobTitle == "" || resResult.jobTitle == undefined) ? userSampleData.jobTitle = resResult.jobTitle.toString() : userSampleData.jobTitle = "Not Defined";
+            !(resResult.country == "" || resResult.country == undefined) ? userSampleData.country = resResult.country.toString() : userSampleData.country = "Not Defined";
+            !(resResult.country == "" || resResult.country == undefined) ? userSampleData.country = resResult.country.toString() : userSampleData.country = "Not Defined";
+
             // updatedUserdata.push(userSampleData);
-            var updateUser = userinfo;
+            var updateUser = userSampleData;
             return updateUser;
         } else {
             var indexOfMaxValue = dateList.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
             var id = resumes[indexOfMaxValue]._id;
             var resResult = await resumeModel.findOne({ _id: id }).lean();
-            !(resResult.city == "" || resResult.city == undefined) ? userinfo.city = resResult.city.toString() : userinfo.city = "Not Defined";
-            !(resResult.state == "" || resResult.state == undefined) ? userinfo.state = resResult.state.toString() : userinfo.state = "Not Defined";
-            !(resResult.jobTitle == "" || resResult.jobTitle == undefined) ? userinfo.jobTitle = resResult.jobTitle.toString() : userinfo.jobTitle = "Not Defined";
+            !(resResult.city == "" || resResult.city == undefined) ? userSampleData.city = resResult.city.toString() : userSampleData.city = "Not Defined";
+            !(resResult.state == "" || resResult.state == undefined) ? userSampleData.state = resResult.state.toString() : userSampleData.state = "Not Defined";
+            !(resResult.jobTitle == "" || resResult.jobTitle == undefined) ? userSampleData.jobTitle = resResult.jobTitle.toString() : userSampleData.jobTitle = "Not Defined";
+            !(resResult.country == "" || resResult.country == undefined) ? userSampleData.country = resResult.country.toString() : userSampleData.country = "Not Defined";
 
-            var updateUser = userinfo;
+            var updateUser = userSampleData;
             return updateUser;
         };
     }
@@ -371,12 +388,16 @@ module.exports.fnGetAllUsersLatestData = async (req, res, next) => {
     }
 
     try {
-        var userData = await userModel.find({ usertype: "USER" }).lean();
+        var userData = await userModel.find().lean();
         try {
-            for (let index = 0; index < userData.length; index++) {
-                const userinfo = userData[index];
-                var updateddata = await getLatestResdetails(userinfo);
-                updatedUserdata.push(updateddata);
+            var userNewData = userData.filter((user) => user.usertype != "MAINADMIN");
+            for (let index = 0; index < userNewData.length; index++) {
+                if (userNewData[index] != "MAINADMIN") {
+                    const userinfo = userNewData[index];
+                    var updateddata = await getLatestResdetails(userinfo);
+                    updatedUserdata.push(updateddata);
+                }
+
             }
 
         } catch (e) {
