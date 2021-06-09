@@ -13,13 +13,13 @@ var resumeSchema = mongoose.Schema({
         type: String,
         default: ''
     },
-    jobTitle:{ 
-        type:String,
+    jobTitle: {
+        type: String,
         default: ''
     },
-    jobTitleId:{ 
-        type:String,
-        default: '' 
+    jobTitleId: {
+        type: String,
+        default: ''
     },
     address: {
         type: String,
@@ -32,6 +32,10 @@ var resumeSchema = mongoose.Schema({
     state: {
         type: String,
         default: ''
+    },
+    country: {
+        type: String,
+        default: 'India'
     },
     zipCode: {
         type: String,
@@ -60,7 +64,7 @@ var resumeSchema = mongoose.Schema({
             }
         }
     ],
-    
+
     professionalSummary: { type: String, },
     summary: [{ type: String, }],
     skills: [
@@ -75,13 +79,13 @@ var resumeSchema = mongoose.Schema({
             employer: { type: String, default: '' },
             city: { type: String, default: '' },
             country: { type: String, default: '' },
-            
+
             state: { type: String, default: '' },
             startDate: { type: Number },
             endDate: { type: Number },
             currentlyWorkHere: { type: Boolean, default: false },
-            responsibility:[{type:String}],
-            environment:[{type:String}]
+            responsibility: [{ type: String }],
+            environment: [{ type: String }]
         }
     ],
     education: [
@@ -93,15 +97,15 @@ var resumeSchema = mongoose.Schema({
             fieldOfStudy: { type: String },
             graduationMonth: { type: String },
             graduationYear: { type: Number },
-           
+
         }
     ],
-    refrences:[
+    refrences: [
         {
-            name:{type:String},
-            position:{type:String},
-            phone:{type:String},
-            email:{type:String}
+            name: { type: String },
+            position: { type: String },
+            phone: { type: String },
+            email: { type: String }
         }
     ],
     certifications: [
@@ -134,9 +138,9 @@ var resumeSchema = mongoose.Schema({
             }
         }
     ],
-    objectives:[{type:String}],
-    environment:[{type:String}],
-    additionalDetails:[
+    objectives: [{ type: String }],
+    environment: [{ type: String }],
+    additionalDetails: [
         {
             key: {
                 type: String,

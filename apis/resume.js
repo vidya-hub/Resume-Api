@@ -31,6 +31,8 @@ module.exports.fnAddResume = async (req, res, next) => {
         var address = req.body.address;
         var city = req.body.city;
         var state = req.body.state;
+        var country = req.body.country;
+
         var zipCode = req.body.zipCode;
         var phoneNo = req.body.phoneNo;
         var email = req.body.email;
@@ -233,6 +235,7 @@ module.exports.fnAddResume = async (req, res, next) => {
                 address: address,
                 city: city,
                 state: state,
+                country: country,
                 zipCode: zipCode,
                 phoneNo: phoneNo,
                 email: email,
@@ -298,6 +301,7 @@ module.exports.fnUpdateResume = async (req, res, next) => {
         var address = req.body.address;
         var city = req.body.city;
         var state = req.body.state;
+        var country = req.body.country;
         var zipCode = req.body.zipCode;
         var phoneNo = req.body.phoneNo;
         var email = req.body.email;
@@ -483,6 +487,8 @@ module.exports.fnUpdateResume = async (req, res, next) => {
                 address: address,
                 city: city,
                 state: state,
+                country: country,
+
                 zipCode: zipCode,
                 phoneNo: phoneNo,
                 email: email,

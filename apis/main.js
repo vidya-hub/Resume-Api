@@ -260,7 +260,7 @@ module.exports.fnRegister = (req, res, next) => {
         // userName = (userName && typeof userName === 'string') ? userName.trim() : null;
         password = (password && typeof password === 'string') ? password.trim() : null;
         if (firstName && lastName && email && phone && password) {
-            userModel.findOne({ $or: [{ email: email }, { phone: phone }] }).exec(function (e1, result) {
+            userModel.findOne({ $or: [{ email: email }] }).exec(function (e1, result) {
                 if (!e1) {
                     if (result && result._id) {
                         response.msg = 'Already registered';
@@ -537,7 +537,7 @@ module.exports.fnUpdateProfile = (req, res, next) => {
                 email: email,
                 name: firstName + ' ' + lastName,
             };
-            userModel.findOne({ $or: [{ email: email }, { phone: phoneNo }] }).exec(function (e1, result) {
+            userModel.findOne({ $or: [{ email: email }] }).exec(function (e1, result) {
                 console.log(result);
 
                 if (!e1) {
@@ -766,7 +766,7 @@ module.exports.fnChangeAdminPassword = async (req, res, next) => {
 
 
 
-module.exports.fnDeleteAdminProfile = (req, res, next) => {
+module.exports.fnDeleteUser = (req, res, next) => {
     var response = {
         status: 'error',
         msg: 'Something happened wrong, please try again after sometime.',
@@ -786,7 +786,9 @@ module.exports.fnDeleteAdminProfile = (req, res, next) => {
                 try {
                     if (!e1) {
                         var usertype = result.usertype;
-                        if (usertype === "ADMIN") {
+
+                        // MAINADMIN,
+                        if (usertype !== "MAINADMIN") {
                             userModel.remove({ email: email }, function (e1, result) {
                                 if (!e1) {
                                     console.log(e1);
@@ -808,7 +810,7 @@ module.exports.fnDeleteAdminProfile = (req, res, next) => {
                                 }
                             })
                         } else {
-                            response.msg = "User is not An Admin.";
+                            response.msg = "User is Main Admin.";
                             res.json(response);
                         }
                     }

@@ -7,8 +7,6 @@ var pdf = require('html-pdf');
 var profileimgModel = require("../models/profilemodel");
 var bodyParser = require('body-parser')
 var userModel = require("../models/user");
-
-
 var main = require('../apis/main');
 var jobTitle = require('../apis/jobtitle');
 var accomplishments = require('../apis/accomplishments');
@@ -44,7 +42,7 @@ router.post("/api/get_all_users_latest_data", main.fnGetAllUsersLatestData);
 
 // DELETE PROFILE
 
-router.post("/api/deleteAdminProfile", main.fnDeleteAdminProfile);
+router.post("/api/deleteUser", main.fnDeleteUser);
 
 //
 router.post('/api/login_with_linkedin', main.fnLoginWithLinkedin);
