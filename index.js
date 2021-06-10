@@ -103,6 +103,7 @@ mongoose.connection.once('open', function () {
     app.post('/*', route);
     app.get('/*', route);
     app.get('*', (req, res) => {
+        console.log("Admin Panel");
         res.send(path.join(__dirname, 'ui/admin_panel/dist/www/index.html'));
     });
     app.post('*', (req, res) => {
