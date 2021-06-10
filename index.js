@@ -99,14 +99,14 @@ mongoose.connection.once('open', function () {
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.static(path.join(__dirname, 'data')));
     app.use("/public", express.static(__dirname + "/public/"));
-    app.use(express.static('ui'));
+    app.use(express.static('ui/admin_panel/dist/www/'));
     app.post('/*', route);
     app.get('/*', route);
     app.get('*', (req, res) => {
-        res.send(path.join(__dirname, 'ui'));
+        res.send(path.join(__dirname, 'ui/admin_panel/dist/www/index.html'));
     });
     app.post('*', (req, res) => {
-        res.send(path.join(__dirname, 'ui'));
+        res.send(path.join(__dirname, 'ui/admin_panel/dist/www/index.html'));
     });
     app.use(function (req, res, next) { });
 
