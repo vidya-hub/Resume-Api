@@ -445,7 +445,7 @@ module.exports.fnAdminRegister = (req, res, next) => {
         console.log(firstName);
 
         // console.log(firstName + lastName + email + phone + password);
-        if (firstName && lastName && email && phone && password && usertype === "ADMIN") {
+        if (firstName && lastName && email && phone && password) {
 
             userModel.findOne({ $or: [{ email: email }, { phone: phone }] }).exec(function (e1, result) {
                 if (!e1) {
