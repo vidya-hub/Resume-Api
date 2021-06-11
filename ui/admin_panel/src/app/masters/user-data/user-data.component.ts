@@ -43,7 +43,9 @@ export class UserDataComponent implements OnInit {
   }
 
   getUserData(){
+    this.userdata = []
     this.pleasewaitforloadmore = true;
+    this.loadding = true;
     let form = new HttpParams()
     this.service.post('get_all_users_latest_data', form).then((result: any) => {
         for (let index = 0; index < result.data.length; index++) {
@@ -87,14 +89,17 @@ export class UserDataComponent implements OnInit {
 
   fnDeleteUser(user, i){
     if(this.userType == "MAINADMIN"){
-      let form = new HttpParams().set('email', user.email);
-      this.service.post('deleteUser', form).then((result: any) => {
-          if (result && result.msg && result.msg != '') {
-            this.toast.success(result.msg)
-          }
-        }, (error: any) => {
-          this.toast.error(error)
-      })
+      if(confirm("Are you sure you want to delete this user?")){
+        let form = new HttpParams().set('email', user.email);
+        this.service.post('deleteUser', form).then((result: any) => {
+            if (result && result.msg && result.msg != '') {
+              this.toast.success(result.msg)
+              this.getUserData();
+            }
+          }, (error: any) => {
+            this.toast.error(error)
+        })
+      }
     }
     else{
       this.toast.error("You dont have access to delete users")

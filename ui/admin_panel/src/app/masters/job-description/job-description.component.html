@@ -7,7 +7,7 @@
                         <!-- <button class="btn btn-sm btn-info m-1" (click)="fnOpenFilterModal(filterModel)">
                                 <i class="fa fa-filter"></i>&nbsp;Filter
                         </button> -->
-                        <button class="btn btn-success btn-sm" (click)="fnOpenAddCategoryModal(addCategoryModal)">
+                        <button class="btn btn-success btn-sm addbtn" (click)="fnOpenAddCategoryModal(addCategoryModal)">
                                 <i class="fa fa-plus"></i>&nbsp;
                                 <span>
                                         ADD
@@ -22,12 +22,12 @@
                                         No.
                                 </th>
                                 <!-- <th class="text-left" (click)="fnOrderBy('name')"> -->
-                                <th class="text-left">
+                                <th class="text-left" [class.description]="true">
                                         Description
                                 </th>
-                                <th class="text-left">
+                                <!-- <th class="text-left">
                                         Status
-                                </th>
+                                </th> -->
                                 <th class="text-right"></th>
                         </tr>
                 </thead>
@@ -35,14 +35,14 @@
                         <ng-template ngFor let-category [ngForOf]="categories" let-i="index">
                                 <tr>
                                         <td class="align-middle p-2 pl-3 text-left" style="width: 40px;">{{ i+1 }}</td>
-                                        <td class="align-middle p-2 text-left">{{ category.description }}</td>
-                                        <td class="align-middle p-2 text-left">
+                                        <td class="align-middle p-2 text-left" [class.description]="true">{{ category.description }}</td>
+                                        <!-- <td class="align-middle p-2 text-left">
                                                 <span class="badge badge-success" style="cursor: pointer;" *ngIf="category.status == '1'"
                                                         (click)="fnOpenDisableCategoryModal(disableCategoryModal,category,i)">Active</span>
                                                 <span class="badge badge-danger" style="cursor: pointer;" *ngIf="category.status == '0'"
                                                         (click)="fnOpenEnableCategoryModal(enableCategoryModal,category,i)">Disable</span>
-                                        </td>
-                                        <td class="align-middle p-2 text-right">
+                                        </td> -->
+                                        <td class="align-middle p-2 text-left">
                                                 <a class="fa fa-edit fa-lg pr-1 text-info" (click)="fnOpenEditCategoryModal(viewCategoryModal,category,i)"
                                                         style="cursor: pointer;"></a>
                                                 <a class="fa fa-trash fa-lg pl-1 text-danger" (click)="fnOpenDeleteCategoryModal(deleteCategoryModal,category,i)"

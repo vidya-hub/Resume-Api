@@ -1,8 +1,17 @@
+// .logoutBtn {
+//     position: absolute;
+//     right: 0;
+//     background-color: #0573E4;
+//     border-color: #0573E4;
+// }
+
 .logoutBtn {
-    position: absolute;
-    right: 0;
     background-color: #0573E4;
     border-color: #0573E4;
+}
+.nav-right{
+    position: absolute;
+    right: 0;
 }
 
 .dashboardBtn {
@@ -41,4 +50,8 @@
 .user-title{
     margin-bottom: 15px !important;
     font-weight: bold;
+}
+
+.container{
+    min-width: 100%
 }

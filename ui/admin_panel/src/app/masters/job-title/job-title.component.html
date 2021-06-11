@@ -43,9 +43,9 @@
                 <th class="text-left">Objective</th>
                 <th class="text-left">Skill</th>
                 <th class="text-left">Responsibility</th>
-                <th class="text-left">
+                <!-- <th class="text-left">
                     Status
-                </th>
+                </th> -->
                 <th class="text-right"></th>
             </tr>
         </thead>
@@ -63,10 +63,10 @@
                     <td class="align-middle p-0 text-center">
                         <span class="badge badge-secondary badge-btn" style="cursor: pointer;" routerLink="/job-description/{{category._id}}/{{category.title}}">{{ category.jobDescription }}</span>
                     </td>
-                    <td class="align-middle p-2 text-left">
+                    <!-- <td class="align-middle p-2 text-left">
                         <span class="badge badge-success" style="cursor: pointer;" *ngIf="category.status == '1'" (click)="fnOpenDisableCategoryModal(disableCategoryModal,category,i)">Active</span>
                         <span class="badge badge-danger" style="cursor: pointer;" *ngIf="category.status == '0'" (click)="fnOpenEnableCategoryModal(enableCategoryModal,category,i)">Disable</span>
-                    </td>
+                    </td> -->
                     <td class="align-middle p-2 text-right">
                         <a class="fa fa-edit fa-lg pr-1 text-info" (click)="fnOpenEditCategoryModal(viewCategoryModal,category,i)" style="cursor: pointer;"></a>
                         <a class="fa fa-trash fa-lg pl-1 text-danger" (click)="fnOpenDeleteCategoryModal(deleteCategoryModal,category,i)" style="cursor: pointer;"></a>

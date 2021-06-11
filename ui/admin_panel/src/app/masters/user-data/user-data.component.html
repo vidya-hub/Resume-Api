@@ -3,12 +3,14 @@
         <div class="example-container">
             <mat-toolbar color="primary" class="example-toolbar">
                 <a class="example-app-name fill-space" routerLink="/home"><span>Resume App</span></a>
-                <button class="btn btn-sm btn-info mr-3 dashboardBtn" routerLink="/dashboard">
+                <div class="nav-right">
+                    <button class="btn btn-sm btn-info mr-3 dashboardBtn" routerLink="/dashboard">
                         Go to Dashboard
                     </button>
                 <button class="btn btn-sm btn-info mr-3 logoutBtn" (click)="fnLogout()">
                                 Logout <i class="fa fa-sign-out" aria-hidden="true"></i>
                         </button>
+                </div>
             </mat-toolbar>
         </div>
         <div class="container">
@@ -56,6 +58,8 @@
                         <th class="text-left">City</th>
                         <th class="text-left">State</th>
                         <th class="text-left">Country</th>
+                        <th class="text-left">User Type</th>
+                        <th class="text-right"></th>
                         <th class="text-right"></th>
                     </tr>
                 </thead>
@@ -63,15 +67,18 @@
                     <ng-template ngFor let-user [ngForOf]="userdata" let-i="index">
                         <tr *ngIf="(user.jobTitle.toLocaleLowerCase().indexOf(jobTitleSearchString.toLocaleLowerCase()) != -1 && user.state.toLocaleLowerCase().indexOf(stateSearchString.toLocaleLowerCase()) != -1 && user.country.toLocaleLowerCase().indexOf(countrySearchString.toLocaleLowerCase()) != -1 && user.city.toLocaleLowerCase().indexOf(citySearchString.toLocaleLowerCase()) != -1) || (jobTitleSearchString == '' && citySearchString == '' && stateSearchString == '' && countrySearchString == '')">
                             <td class="align-middle p-2 pl-3 text-left">{{ i+1 }}</td>
-                            <td class="align-middle p-2 text-left">{{ user.name }}</td>
+                            <td class="align-middle p-2 text-left">{{ user.Name }}</td>
                             <td class="align-middle p-2 text-left">{{ user.email }}</td>
                             <td class="align-middle p-2 text-left">{{ user.phone }}</td>
                             <td class="align-middle p-2 text-left">{{ user.jobTitle }}</td>
                             <td class="align-middle p-2 text-left">{{ user.city }}</td>
                             <td class="align-middle p-2 text-left">{{ user.state }}</td>
                             <td class="align-middle p-2 text-left">{{ user.country }}</td>
+                            <td class="align-middle p-2 text-left">{{ user.usertype }}</td>
                             <td class="align-middle p-2 text-right">
                                 <a class="fa fa-download fa-lg pr-1 text-info" (click)="fnDownloadResume(user,i)" style="cursor: pointer;"></a>
+                            </td>
+                            <td class="align-middle p-2 text-right">
                                 <a class="fa fa-trash fa-lg pr-1 text-info" (click)="fnDeleteUser(user,i)" *ngIf="userType == 'MAINADMIN'" style="cursor: pointer;"></a>
                             </td>
                         </tr>
@@ -84,14 +91,14 @@
                 </tbody>
                 <tbody *ngIf="loadding">
                     <tr>
-                        <td class="text-center" colspan="5">
+                        <td class="text-center" colspan="10">
                             <i style="font-size: xx-large" class="fa fa-spinner fa-spin"></i>
                         </td>
                     </tr>
                 </tbody>
                 <tbody *ngIf="!loadding && userdata.length == 0">
                     <tr>
-                        <td class="text-center" colspan="5">
+                        <td class="text-center" colspan="10">
                             No record found.
                         </td>
                     </tr>
