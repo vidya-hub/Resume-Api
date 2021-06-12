@@ -597,52 +597,6 @@ module.exports.fnUpdateProfile = (req, res, next) => {
 
 
 
-// Upload the Pro picture
-
-// mongo Url
-
-// fnprofileImageUpload.use
-
-module.exports.fnprofileImageUpload = async (req, res, next) => {
-    let response = {
-        status: 'error',
-        msg: 'Something happened wrong, please try again after sometime.',
-        data: {},
-        method: req.url.split('/')[req.url.split('/').length - 1]
-    }
-    const userId = req.body.userId;
-    console.log(req);
-    if (userId != "" && req.file != undefined) {
-        try {
-            await upload(req, res);
-            console.log(req.file);
-            if (req.file == undefined) {
-                response.msg = `You must select a file.`;
-                return res.send(response);
-            }
-            response.msg = `File has been uploaded.`;
-            response.status = "Success";
-            return res.send(response);
-        } catch (error) {
-            console.log(error);
-            return res.send(response);
-        }
-
-    } else {
-        res.send(response);
-    }
-
-};
-
-
-// app.post(‘/api/photo’,function(req,res){
-//     var newItem = new Item();
-//     newItem.img.data = fs.readFileSync(req.files.userPhoto.path)
-//     newItem.img.contentType = ‘image/png’;
-//     newItem.save();
-//    });
-
-
 
 
 module.exports.fnGetAdminProfile = async (req, res, next) => {

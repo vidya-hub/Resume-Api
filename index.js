@@ -9,6 +9,7 @@ const methodOverRide = require("method-override");
 var http = require('http');
 var path = require('path');
 var cors = require('cors');
+var upload = require("./helper/profileImageController");
 var http = require('http'),
     fs = require('fs'),
     url = require('url');
@@ -93,6 +94,7 @@ mongoose.connection.once('open', function () {
     app.use(bodyParser.urlencoded({
         extended: true
     }));
+    app.use(methodOverRide("_method"));
 
     //app.use(cookieParser());
 
@@ -112,6 +114,8 @@ mongoose.connection.once('open', function () {
     });
     app.use(function (req, res, next) { });
 
+
+
     if (app.get('env') == 'development') {
         app.use(function (res, req, next) {
             res.status(err.status || 500);
@@ -123,7 +127,8 @@ mongoose.connection.once('open', function () {
         console.log(err);
         res.status(err.status || 500);
         // res.json({asd:'asd1'})
-        res.rander('page_404.html');
+
+        res.render('page_404.html');
         next(err);
     });
 
@@ -133,7 +138,13 @@ mongoose.connection.once('open', function () {
         // next(err);
     });
 
+
+
 });
+
+
+
+
 mongoose.connection.on('error', function (err) {
     console.log('Database connection dropped, due to ' + err);
     // proecss.exit();

@@ -4,7 +4,11 @@ var multer = require('multer');
 var crypto = require("crypto-js");
 var AES_KEY = '6fnhkgo71s0caeqma6ojjftu4n1m1d85';
 var pdf = require('html-pdf');
-var profileimgModel = require("../models/profilemodel");
+var profileImg = require("../models/profilemodel");
+const mongoose = require("mongoose");
+const GridFsStorage = require("multer-gridfs-storage");
+const Grid = require("gridfs-stream");
+
 var bodyParser = require('body-parser')
 var userModel = require("../models/user");
 var main = require('../apis/main');
@@ -19,6 +23,7 @@ var skills = require('../apis/skills');
 var summary = require('../apis/summary');
 var resume = require('../apis/resume');
 var template = require('../apis/template');
+// var upload = require("../helper/profileImageController");
 
 /*************************************************************************/
 module.exports = router;
@@ -28,7 +33,7 @@ router.use(bodyParser.json())
 //basic
 router.post('/api/login', main.fnLogin);
 router.post('/api/test', main.fnTest);
-router.post('/api/profileImageUpload', main.fnprofileImageUpload);
+// router.post('/api/profileImageUpload', main.fnprofileImageUpload);
 
 router.post('/api/register', main.fnRegister);
 router.post('/api/registerAdmin', main.fnAdminRegister);
@@ -245,3 +250,199 @@ function fnAuthoriseToken() {
         }
     }
 }
+
+
+/*
+ 
+  ________  ________  ________  ________ ___  ___       _______      
+ |\   __  \|\   __  \|\   __  \|\  _____\\  \|\  \     |\  ___ \     
+ \ \  \|\  \ \  \|\  \ \  \|\  \ \  \__/\ \  \ \  \    \ \   __/|    
+  \ \   ____\ \   _  _\ \  \\\  \ \   __\\ \  \ \  \    \ \  \_|/__  
+   \ \  \___|\ \  \\  \\ \  \\\  \ \  \_| \ \  \ \  \____\ \  \_|\ \ 
+    \ \__\    \ \__\\ _\\ \_______\ \__\   \ \__\ \_______\ \_______\
+     \|__|     \|__|\|__|\|_______|\|__|    \|__|\|_______|\|_______|
+                                                                     
+                                                                     
+                                                                     
+ 
+*/
+
+
+const mongoURI = "mongodb+srv://resumeApp:B5emcpwPuWwiwZB3@resumeapp.xd4fr.mongodb.net/resume_app_db?retryWrites=true&w=majority"
+let conn = mongoose.connection
+let gfs
+conn.once('open', () => {
+    //initialize our stream
+    gfs = Grid(conn.db, mongoose.mongo)
+    gfs.collection('imageUpload')
+})
+let storage = new GridFsStorage({
+    url: mongoURI,
+    file: (req, file) => {
+        return new Promise(
+            (resolve, reject) => {
+                const fileInfo = {
+                    // userId: req.id,
+                    filename: file.originalname,
+                    bucketName: "imageUpload"
+                }
+                resolve(fileInfo)
+
+            }
+        )
+    }
+})
+var upload = multer({ storage });
+
+
+router.post('/api/profileImageUpload', upload.single("file"), (req, res) => {
+    var response = {
+        status: 'error',
+        msg: 'Something happened wrong, please try again after sometime.',
+        data: {},
+        method: req.url.split('/')[req.url.split('/').length - 1]
+    }
+    var fileId = req.file.id;
+    var userId = req.body.userId;
+    // var fileType = req.file.contentType.toString();
+    // var imgFormats = ["image/png", "image/jpg", "image/jpeg"]
+    // ();
+    // if (userId != "" && userId != undefined) {
+
+    //     if (imgFormats.includes(fileType)) {
+    console.log("Okkkkk");
+    var profileData = {
+        userId: userId,
+        fileid: fileId,
+    };
+    profileImg(profileData).save(function (e2, savedData) {
+        if (!e2) {
+            response.data = savedData;
+            response.msg = "Profile Picture Saved";
+            response.status = "success";
+            res.send(response);
+        }
+
+    })
+    // } else {
+    //     res.send("File Format Not Supported");
+    // }
+    // } else {
+    //     res.send("Server Failed");
+
+    // }
+});
+
+
+router.get('/api/getProfileImage/:userId', (req, res) => {
+    var response = {
+        status: 'error',
+        msg: 'Something happened wrong, please try again after sometime.',
+        data: {},
+        method: req.url.split('/')[req.url.split('/').length - 1]
+    }
+    // console.log(req.params);
+    var userId = req.params.userId;
+    console.log(userId);
+
+    if (userId != "" && userId != undefined) {
+        profileImg.findOne({ userId: userId }).exec(function (e1, result) {
+            if (result && !e1) {
+                // console.log(result.fileid);
+                gfs.files.findOne({ _id: result.fileid }, (err, file) => {
+                    console.log(file);
+                    if (file) {
+                        console.log(file);
+                        if (file.contentType === "image/jpeg" || file.contentType === "image/png") {
+                            const readstream = gfs.createReadStream(file.filename);
+                            readstream.pipe(res);
+                        } else {
+                            res.status(404).json({
+                                err: "Not an Image",
+                            });
+                        }
+                    } else {
+                        console.log(err);
+                        res.send("No Data");
+
+                    }
+                })
+            } else {
+                console.log(e1);
+
+                response.msg = "No profile Data";
+                response.status = "No Data";
+                res.send(response);
+            }
+        })
+    } else {
+        res.send("Enter User ID");
+    }
+
+});
+
+
+router.get('/api/deleteProfilePicture/:userId', (req, res) => {
+    var response = {
+        status: 'error',
+        msg: 'Something happened wrong, please try again after sometime.',
+        data: {},
+        method: req.url.split('/')[req.url.split('/').length - 1]
+    }
+    var userId = req.params.userId;
+    console.log(userId);
+    if (userId != "" && userId != undefined) {
+        console.log("Here");
+        profileImg.findOne({ userId: userId }).exec(function (e1, result) {
+            // console.log(e1);
+            if (result) {
+                console.log(result);
+                gfs.files.findOne({ _id: result.fileid }, (err, file) => {
+                    if (err) {
+                        console.log(err);
+                        res.send("Error")
+                    }
+                    if (file) {
+                        console.log("Okkkkk");
+                        gfs.remove({ _id: file._id, root: 'imageUpload' }, (err1, gridStore) => {
+                            console.log(gridStore);
+                            if (gridStore) {
+                                profileImg.remove({ userId: userId }, function (e1, result) {
+
+                                    console.log(result);
+                                    if (!e1) {
+                                        response.data = result;
+                                        response.msg = "Profile Picture Deleted";
+                                        response.status = "success";
+                                        res.send(response);
+                                        // res.send(result)
+                                    };
+                                });
+                            } else {
+                                // if (err1) {
+                                console.log(err1);
+                                response.msg = "No profile Data";
+                                response.status = "No Data";
+                                res.send(response);
+                                //  res.status(404).json({ err: err1 });
+                                // }
+                            }
+
+
+                            // res.redirect('/');
+                        });
+                        // res.send(file);
+                    }
+                })
+            } else {
+                // response.data = result;
+                response.msg = "No profile Data";
+                response.status = "No Data";
+                res.send(response);
+                // res.send("No Data");
+            }
+
+        })
+    }
+
+});
