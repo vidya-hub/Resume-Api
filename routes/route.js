@@ -446,3 +446,38 @@ router.get('/api/deleteProfilePicture/:userId', (req, res) => {
     }
 
 });
+
+router.get('/api/checkProfile/:userId', (req, res) => {
+    var response = {
+        status: 'error',
+        msg: 'Something happened wrong, please try again after sometime.',
+        data: {},
+        method: req.url.split('/')[req.url.split('/').length - 1]
+    };
+    var userId = req.params.userId;
+    console.log("Here");
+
+    profileImg.findOne({ userId: userId }).exec(function (e1, result) {
+        // console.log(e1);
+        // console.log(result);
+
+
+        if (result != null) {
+            response.status = "Available";
+            response.msg = "Profile img Data Available";
+            response.data = result;
+            res.send(
+                response
+            );
+            // res.send(result);
+        }
+        else {
+            response.status = "Not Available";
+            response.msg = "Profile img Data Not Available";
+            res.send(
+                response
+            );
+        }
+    })
+
+})
