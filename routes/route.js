@@ -353,14 +353,15 @@ router.get('/api/getProfileImage/:userId', (req, res) => {
                     console.log(file);
                     if (file) {
                         console.log(file);
-                        if (file.contentType === "image/jpeg" || file.contentType === "image/jpg" || file.contentType === "image/png") {
-                            const readstream = gfs.createReadStream(file.filename);
-                            readstream.pipe(res);
-                        } else {
-                            res.status(404).json({
-                                err: "Not an Image",
-                            });
-                        }
+                        // if (file.contentType === "image/jpeg" || file.contentType === "image/jpg" || file.contentType === "image/png") {
+                        const readstream = gfs.createReadStream(file.filename);
+                        console.log(readstream);
+                        readstream.pipe(res);
+                        // } else {
+                        //     res.status(404).json({
+                        //         err: "Not an Image",
+                        //     });
+                        // }
                     } else {
                         console.log(err);
                         res.send("No Data");
