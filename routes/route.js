@@ -353,7 +353,7 @@ router.get('/api/getProfileImage/:userId', (req, res) => {
                     console.log(file);
                     if (file) {
                         console.log(file);
-                        if (file.contentType === "image/jpeg" || file.contentType === "image/png") {
+                        if (file.contentType === "image/jpeg" || file.contentType === "image/jpg" || file.contentType === "image/png") {
                             const readstream = gfs.createReadStream(file.filename);
                             readstream.pipe(res);
                         } else {
