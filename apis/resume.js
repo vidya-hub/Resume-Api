@@ -1085,9 +1085,9 @@ module.exports.renderFile = async (req, res, next) => {
 // Dynamic Template Future
 
 module.exports.dynamicTemp = async (req, res, next) => {
-    var type = req.query.type;
+    var typeVal = req.query.type;
 
-    var pathejs = path.join(__dirname, '.././resumeTempTest/', type.toString(), "resume.ejs")
+    var pathejs = path.join(__dirname, '.././resumeTempTest/', typeVal, "resume.ejs")
     console.log(req.query.id)
     var id = req.query.id;
     var ejs = require('ejs')
