@@ -1362,7 +1362,7 @@ module.exports.sendPdf = async (req, res, next) => {
         id = (id && typeof id === 'string') ? id.trim() : null;
         if (id) {
             var renderedHtml = await retrieveLogs(ipaddress + '/api/render/?id=' + id.trim());
-
+            console.log(renderedHtml);
             const filePath = './' + "pdf/" + (Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 10)).toUpperCase() + ".pdf";
             pdf.create(renderedHtml).toFile(filePath, (error, out) => {
                 console.log(out)
