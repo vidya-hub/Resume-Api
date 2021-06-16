@@ -1086,6 +1086,7 @@ module.exports.renderFile = async (req, res, next) => {
 
 module.exports.dynamicTemp = async (req, res, next) => {
     var typeVal = req.query.type;
+
     var id = req.query.id;
     var listOfContent = req.body.listOfContent.toString().split(",");
     console.log(listOfContent);
@@ -1098,7 +1099,7 @@ module.exports.dynamicTemp = async (req, res, next) => {
 
     try {
         var data = await resumeModel.findById(id);
-
+        console.log(data);
     } catch (error) {
         console.log(error);
     }
