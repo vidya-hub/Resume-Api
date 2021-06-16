@@ -100,7 +100,7 @@ mongoose.connection.once('open', function () {
 
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.static(path.join(__dirname, 'data')));
-    app.use("/data", express.static(__dirname + "/data/"));
+    app.use("/data", express.static(__dirname + "/data"));
 
     app.use("/public", express.static(__dirname + "/public/"));
     app.use(express.static('ui'));
