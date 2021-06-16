@@ -4,9 +4,36 @@
   style="background-color: #fff; padding: 0 1em"
 >
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <title>Resume | First Last</title>
-    <meta name="robots" content="noindex, nofollow" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0"
+    />
+    <title>PDF 1</title>
+    <style type="text/css" media="print">
+      @page {
+        size: auto;
+        margin: 5mm;
+      }
+      html {
+        zoom: 0.6;
+      }
+      /* uncomment for check A4 size */
+      @page {
+        size: 7in 9.25in;
+        margin: 27mm 16mm 27mm 16mm;
+      }
+
+      @media print {
+        .footer,
+        #non-printable {
+          display: none !important;
+        }
+        #printable {
+          display: block;
+        }
+      }
+    </style>
   </head>
   <body
     style="
