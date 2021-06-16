@@ -1087,7 +1087,6 @@ module.exports.renderFile = async (req, res, next) => {
 module.exports.dynamicTemp = async (req, res, next) => {
     var typeVal = req.query.type;
 
-    var pathejs = path.join(__dirname, '.././resumeTempTest/', typeVal, "resume.ejs")
     console.log(req.query.id)
     var id = req.query.id;
     var ejs = require('ejs')
@@ -1098,6 +1097,8 @@ module.exports.dynamicTemp = async (req, res, next) => {
         type = req.body.type.toString();
 
     }
+    var pathejs = path.join(__dirname, '.././resumeTempTest/', typeVal, "resume.ejs");
+
     try {
         var data = await resumeModel.findById(id);
 
