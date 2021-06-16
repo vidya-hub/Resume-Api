@@ -1095,7 +1095,7 @@ module.exports.dynamicTemp = async (req, res, next) => {
     console.log(listOfContent);
     if (!id && !type) {
         id = req.body.id;
-        type = req.body.type;
+        type = req.body.type.toString();
 
     }
     try {
