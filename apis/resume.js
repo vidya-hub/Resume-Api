@@ -1092,7 +1092,7 @@ module.exports.dynamicTemp = async (req, res, next) => {
     var ejs = require('ejs')
     var listOfContent = req.body.listOfContent.toString().split(",");
     console.log(listOfContent);
-    if (!id && !type) {
+    if (!id && type === undefined) {
         id = req.body.id;
         type = req.body.type.toString();
 
