@@ -1098,6 +1098,7 @@ module.exports.dynamicTemp = async (req, res, next) => {
 
     }
     var pathejs = path.join(__dirname, '.././resumeTempTest/', typeVal, "resume.ejs");
+    console.log(pathejs);
 
     try {
         var data = await resumeModel.findById(id);
