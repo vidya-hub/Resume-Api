@@ -563,6 +563,7 @@ module.exports.fnUpdateResumeType = async (req, res, next) => {
                         "resume6.PNG",
                         "resume7.PNG",
                         "resume8.PNG",
+                        "resume9.PNG",
 
                     ]
                     result["thumbnil"] = demoResumeArray[result.resumeType];
@@ -593,6 +594,9 @@ module.exports.fnUpdateResumeType = async (req, res, next) => {
                     }
                     if (result.resumeType == 7) {
                         result.thumbnil = "resume8.PNG";
+                    }
+                    if (result.resumeType == 8) {
+                        result.thumbnil = "resume9.PNG";
                     }
 
                     response.status = 'success';
@@ -756,6 +760,7 @@ module.exports.fnGetResumeList = async (req, res, next) => {
                     "resume6.PNG",
                     "resume7.PNG",
                     "resume8.PNG",
+                    "resume9.PNG",
                 ]
                 if (result.length > 0) {
                     for (let index = 0; index < result.length; index++) {
@@ -893,6 +898,7 @@ module.exports.fnGetDemoResumes = (req, res, next) => {
             { resumeType: 5, thumbnil: "resume6.PNG" },
             { resumeType: 6, thumbnil: "resume7.PNG" },
             { resumeType: 7, thumbnil: "resume8.PNG" },
+            { resumeType: 8, thumbnil: "resume9.PNG" },
 
         ];
         console.log(resume)
@@ -1035,21 +1041,29 @@ module.exports.renderFile = async (req, res, next) => {
         });
 
     }
+    if (data.resumeType == 8) {
+        ejs.renderFile('resume9.ejs', data, {}, function (err, str) {
+            res.end(ejs.render(str, {}, {}));
+        });
 
+    }
 }
 
 // Dynamic Template Future
 
 module.exports.dynamicTemp = async (req, res, next) => {
-    var pathejs = path.join(__dirname, '.././resumeTempTest/', "resume.ejs")
+    var type = req.query.type;
+
+    var pathejs = path.join(__dirname, '.././resumeTempTest/', type.toString(), "resume.ejs")
     console.log(req.query.id)
     var id = req.query.id;
     var ejs = require('ejs')
     var listOfContent = req.body.listOfContent.toString().split(",");
     console.log(listOfContent);
-
-    if (!id) {
+    if (!id && !type) {
         id = req.body.id;
+        type = req.body.type;
+
     }
     try {
         var data = await resumeModel.findById(id);
@@ -1183,7 +1197,17 @@ module.exports.renderHtmlStep = async (req, res, next) => {
             };
         });
     }
-
+    if (id == "8") {
+        var pathejs = path.join(__dirname, 'views/', 'resume9.ejs');
+        ejs.renderFile(pathejs, datavalues, function (err, data) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.set('Content-Type', 'text/html');
+                res.send(Buffer.from(data.toString()));
+            };
+        });
+    }
 }
 
 
