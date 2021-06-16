@@ -2,21 +2,9 @@
 <html>
   <head>
     <title>1st</title>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="http://165.227.248.244:3001/poppins.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="http://165.227.248.244:3001/1.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="http://165.227.248.244:3001/all.css"
-    />
+    <link rel="stylesheet" type="text/css" href="./data/poppins.css" />
+    <link rel="stylesheet" type="text/css" href="./data/1.css"" />
+    <link rel="stylesheet" type="text/css" href="./data/all.css" />
     <style type="text/css" media="print">
       html {
         zoom: 0.62;
@@ -179,8 +167,7 @@
                 </div>
               </div>
             </div>
-            <% } %>
-            <% if (summary && summary.length>0) { %>
+            <% } %> <% if (summary && summary.length>0) { %>
             <div class="r_1">
               <div class="hdng_1">PROFESSIONAL SUMMARY</div>
               <div class="dsgn"></div>
@@ -233,9 +220,7 @@
                 </div>
               </div>
             </div>
-            <%}%> 
-            
-            <% if (workHistory[i] && workHistory[i].environment.length>0
+            <%}%> <% if (workHistory[i] && workHistory[i].environment.length>0
             && workHistory[i].environment[0] &&
             workHistory[i].environment[0].trim()) { %>
             <div class="r_1 last">
@@ -251,10 +236,8 @@
                 </div>
               </div>
             </div>
-            <%}%>
-             <%}%> <%}%>
-
-             <% if (additionalDetails && additionalDetails.length>0) { %>
+            <%}%> <%}%> <%}%> <% if (additionalDetails &&
+            additionalDetails.length>0) { %>
             <div class="r_1">
               <div class="hdng_1">Additional Details</div>
               <div class="dsgn"></div>
@@ -262,7 +245,9 @@
                 <div class="details">
                   <ul class="summry">
                     <% for(var i=0; i < additionalDetails.length; i++) { %>
-                    <li class="hdng2" style="padding-bottom: 10;"><%=additionalDetails[i].key%>  </li>
+                    <li class="hdng2" style="padding-bottom: 10">
+                      <%=additionalDetails[i].key%>
+                    </li>
                     <h8><%=additionalDetails[i].value%></h8>
                     <%}%>
                   </ul>
@@ -270,8 +255,6 @@
               </div>
             </div>
             <%}%>
-
-
           </th>
         </tr>
       </table>

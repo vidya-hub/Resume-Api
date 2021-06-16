@@ -7,22 +7,9 @@
       }
     </style>
     <title>2nd</title>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="http://165.227.248.244:3001/poppins.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="http://165.227.248.244:3001/2.css"
-    />
-
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="http://165.227.248.244:3001/all.css"
-    />
+    <link rel="stylesheet" type="text/css" href="./data/poppins.css" />
+    <link rel="stylesheet" type="text/css" href="./data/2.css" />
+    <link rel="stylesheet" type="text/css" href="./data/all.cssy" />
   </head>
 
   <body>
@@ -260,14 +247,14 @@
             <div class="r_1">
               <div class="hdng_1">Additional Details:</div>
               <div class="details_main"></div>
-                <div class="details">
-                  <% for(var i=0; i < additionalDetails.length; i++) { %>
-                  <li><%=additionalDetails[i].key%></li>
-                  <h5><%=additionalDetails[i].value%></h5>
-                  <%}%>
-                </div>
+              <div class="details">
+                <% for(var i=0; i < additionalDetails.length; i++) { %>
+                <li><%=additionalDetails[i].key%></li>
+                <h5><%=additionalDetails[i].value%></h5>
+                <%}%>
               </div>
             </div>
+
             <%}%>
           </th>
         </tr>
