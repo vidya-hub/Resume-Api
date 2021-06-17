@@ -1,0 +1,20 @@
+<% if (education && education.length>0) { %>
+
+<div class="yui-gf">
+  <div class="yui-u first">
+    <h2>Education</h2>
+  </div>
+  <div class="yui-u">
+    <% for( let i = 0; i < education.length; i++ ) { %>
+
+    <div class="job">
+      <h2><%= education[i].fieldOfStudy %> <%=education[i].degree%></h2>
+      <h3>
+        <%=education[i].schoolName%>,<%=education[i].schoolLocation%>,<%=education[i].state%>
+      </h3>
+      <h4><%= education[i].graduationYear %></h4>
+    </div>
+    <% } %>
+  </div>
+</div>
+<% } %>

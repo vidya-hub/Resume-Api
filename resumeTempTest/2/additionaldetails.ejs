@@ -1,0 +1,72 @@
+<% if (affiliations && affiliations.length>0) { %>
+
+<div class="yui-gf">
+  <div class="yui-u first">
+    <h2>Affiliations</h2>
+  </div>
+  <div class="yui-u">
+    <% for(var i=0; i < affiliations.length; i++) { %>
+
+    <div class="job">
+      <h2><%=affiliations[i]%></h2>
+    </div>
+    <% } %>
+  </div>
+</div>
+<% } %>
+<!--// .yui-gf -->
+<% if (certifications && certifications.length>0) { %>
+
+<div class="yui-gf">
+  <div class="yui-u first">
+    <h2>Certifications</h2>
+  </div>
+  <div class="yui-u">
+    <% for(var i=0; i < certifications.length; i++) { %>
+
+    <div class="job">
+      <h2><%=certifications[i]%></h2>
+    </div>
+    <% } %>
+  </div>
+</div>
+<% } %>
+<!--// .yui-gf -->
+<% if (additionalDetails && additionalDetails.length>0) { %>
+
+<div class="yui-gf">
+  <div class="yui-u first">
+    <h2>Additional Details</h2>
+  </div>
+  <div class="yui-u">
+    <% for( let i = 0; i < additionalDetails.length; i++ ) { %>
+
+    <div class="job">
+      <h2><%= additionalDetails[i].key%></h2>
+      <h3><%=additionalDetails[i].value%></h3>
+    </div>
+    <% } %>
+  </div>
+</div>
+<% } %>
+
+<!--// .yui-gf -->
+<% if (refrences && refrences.length>0) { %>
+
+<div class="yui-gf">
+  <div class="yui-u first">
+    <h2>References</h2>
+  </div>
+  <div class="yui-u">
+    <% for( var i=0; i < refrences.length; i++) { %>
+
+    <div class="job">
+      <h2><%=refrences[i].name%></h2>
+      <h3><%=refrences[i].position%></h3>
+      <h4><%=refrences[i].phone%></h4>
+      <h4 style="padding-top: 20px"><%=refrences[i].email%></h4>
+    </div>
+    <% } %>
+  </div>
+</div>
+<% } %>

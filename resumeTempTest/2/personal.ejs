@@ -1,0 +1,20 @@
+<div id="hd">
+  <div class="yui-gc">
+    <div class="yui-u first">
+      <h1 style="text-align: center; color: crimson">
+        <%= firstName %> <%= lastName %>
+      </h1>
+    </div>
+    <div class="yui-u">
+      <div class="contact-info">
+        <h3><a><%= address %></a></h3>
+        <h3><a><%=email %></a><br /></h3>
+        <h3><a><%=phoneNo %></a></h3>
+        <% if (links && links.length>0) { %> <% for(var i=0; i < links.length;
+        i++) { %>
+        <a><%= links[i] %></a>
+        <% } %> <% } %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="yui-gf">
+  <div class="yui-u first">
+    <h2>Skills</h2>
+  </div>
+  <% if (skills && skills.length>0) { %>
+
+  <div class="yui-u">
+    <div class="talent">
+      <ul class="talent">
+        <% for( let i = 0; i < skills.length; i++ ) { %>
+        <li class="skill"><%=skills[i]%></li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</div>
+<% } %>

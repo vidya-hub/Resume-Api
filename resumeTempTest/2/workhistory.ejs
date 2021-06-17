@@ -1,0 +1,28 @@
+<% if (workHistory && workHistory.length>0) { %>
+<div class="yui-gf">
+  <div class="yui-u first">
+    <h2>Experience</h2>
+  </div>
+  <div class="yui-u">
+    <% for( let i = 0; i < workHistory.length; i++ ) { %>
+
+    <div class="job">
+      <h2>
+        <%=workHistory[i].employer%>,<%=workHistory[i].city%>,<%=workHistory[i].state%>
+      </h2>
+      <h4>
+        <%= workHistory[i].startDate %> &raquo; <%= workHistory[i].endDate %>
+      </h4>
+      <% if (workHistory[i].environment && workHistory[i].environment.length>0)
+      { %>
+      <ul>
+        <% for( let j = 0; j < workHistory[i].environment.length; j++ ) { %>
+        <li><%= workHistory[i].environment[j] %></li>
+        <% } %>
+      </ul>
+      <% } %>
+    </div>
+    <% } %>
+  </div>
+</div>
+<% } %>
