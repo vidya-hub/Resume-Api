@@ -1,18 +1,36 @@
 <% if (skills && skills.length>0) { %>
-<div class="yui-gf">
+
+<div
+  class="yui-gf"
+  style="
+    width: 80.2%;
+    margin-bottom: 2em;
+    padding-bottom: 2em;
+    border-bottom: 1px solid #ccc;
+  "
+>
   <div class="yui-u first">
-    <h2>Skills</h2>
+    <h2 style="font-size: 152%; color: #333">Skills</h2>
   </div>
 
   <div class="yui-u">
-    <div class="talent">
-      <ul class="talent">
+    <div class="talent" style="width: 32%; float: left">
+      <ul class="talent" style="width: 32%; float: left">
         <% for( let i = 0; i < skills.length; i++ ) { %>
-        <li class="skill"><%=skills[i]%></li>
+        <li
+          class="skill"
+          style="
+            line-height: 24px;
+            width: 100px;
+            padding-left: 40px;
+            color: black;
+          "
+        >
+          <%=skills[i]%>
+        </li>
         <% } %>
       </ul>
     </div>
   </div>
-
   <% } %>
 </div>
