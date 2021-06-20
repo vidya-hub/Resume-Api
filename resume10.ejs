@@ -11,27 +11,7 @@
     />
     <link rel="stylesheet" type="text/css" href="resume.css" media="all" />
     <style>
-      @page {
-        size: auto;
-        margin: 5mm;
-      }
-      html {
-        zoom: 0.6;
-      }
-      @page {
-        size: 7in 9.25in;
-        margin: 27mm 16mm 27mm 16mm;
-      }
-
-      @media print {
-        .footer,
-        #non-printable {
-          display: none !important;
-        }
-        #printable {
-          display: block;
-        }
-      }
+      /* //-- yui-grids style overrides -- */
     </style>
   </head>
   <body style="font-family: Georgia; color: rgb(255, 253, 253)">
@@ -46,7 +26,15 @@
           border-width: 8px 0 2px 0;
         "
       >
-        <div id="hd" style="margin: 2.5em 0 3em 0; padding-bottom: 1.5em">
+        <!--// .yui-gf -->
+        <div
+          id="hd"
+          style="
+            margin: 2.5em 0 3em 0;
+            padding-bottom: 1.5em;
+            border-bottom: 1px solid #ccc;
+          "
+        >
           <div class="yui-gc">
             <div class="yui-u first">
               <h1
@@ -78,24 +66,45 @@
             </div>
           </div>
         </div>
-        <% if (objectives && objectives.length>0) { %>
-        <div class="yui-gf">
+        <!--// .yui-gf -->
+        <% if (skills && skills.length>0) { %>
+
+        <div
+          class="yui-gf"
+          style="
+            width: 80.2%;
+            margin-bottom: 2em;
+            padding-bottom: 2em;
+            border-bottom: 1px solid #ccc;
+          "
+        >
           <div class="yui-u first">
-            <h2>Objectives</h2>
+            <h2 style="font-size: 152%; color: #333">Skills</h2>
           </div>
 
           <div class="yui-u">
-            <div class="talent">
-              <ul class="talent">
-                <% for(var i=0; i < objectives.length; i++) { %>
-                <li class="skill"><%=objectives[i]%></li>
+            <div class="talent" style="width: 32%; float: left">
+              <ul class="talent" style="width: 32%; float: left">
+                <% for( let i = 0; i < skills.length; i++ ) { %>
+                <li
+                  class="skill"
+                  style="
+                    line-height: 24px;
+                    width: 100px;
+                    padding-left: 40px;
+                    color: black;
+                  "
+                >
+                  <%=skills[i]%>
+                </li>
                 <% } %>
               </ul>
             </div>
           </div>
-
           <% } %>
         </div>
+
+        <!--// .yui-gf -->
         <% if (professionalSummary) { %>
         <div
           class="yui-gf"
@@ -122,7 +131,9 @@
             </p>
           </div>
         </div>
-        <% } %> <% if (workHistory && workHistory.length>0) { %>
+        <% } %>
+        <!--// .yui-gf-->
+        <% if (workHistory && workHistory.length>0) { %>
         <div
           class="yui-gf"
           style="
@@ -143,6 +154,7 @@
                 position: relative;
                 margin-bottom: 1em;
                 padding-bottom: 1em;
+                border-bottom: 1px solid #ccc;
               "
             >
               <h2 style="font-size: 152%; color: #333">
@@ -175,37 +187,10 @@
             <% } %>
           </div>
         </div>
-        <% } %> <% if (skills && skills.length>0) { %>
+        <% } %>
 
-        <div
-          class="yui-gf"
-          style="width: 80.2%; margin-bottom: 2em; padding-bottom: 2em"
-        >
-          <div class="yui-u first">
-            <h2 style="font-size: 152%; color: #333">Skills</h2>
-          </div>
+        <!--// .yui-gf -->
 
-          <div class="yui-u">
-            <div class="talent" style="width: 32%; float: left">
-              <ul class="talent" style="width: 32%; float: left">
-                <% for( let i = 0; i < skills.length; i++ ) { %>
-                <li
-                  class="skill"
-                  style="
-                    line-height: 24px;
-                    width: 100px;
-                    padding-left: 40px;
-                    color: black;
-                  "
-                >
-                  <%=skills[i]%>
-                </li>
-                <% } %>
-              </ul>
-            </div>
-          </div>
-          <% } %>
-        </div>
         <% if (education && education.length>0) { %>
 
         <div
@@ -228,6 +213,7 @@
                 position: relative;
                 margin-bottom: 1em;
                 padding-bottom: 1em;
+                border-bottom: 1px solid #ccc;
               "
             >
               <h2 style="font-size: 152%; color: #333">
@@ -243,7 +229,10 @@
             <% } %>
           </div>
         </div>
-        <% } %> <% if (affiliations && affiliations.length>0) { %>
+        <% } %>
+
+        <!--// .yui-gf -->
+        <% if (affiliations && affiliations.length>0) { %>
 
         <div
           class="yui-gf"
@@ -265,6 +254,7 @@
                 position: relative;
                 margin-bottom: 1em;
                 padding-bottom: 1em;
+                border-bottom: 1px solid #ccc;
               "
             >
               <h2 style="font-size: 152%; color: #333"><%=affiliations[i]%></h2>
@@ -296,6 +286,7 @@
                 position: relative;
                 margin-bottom: 1em;
                 padding-bottom: 1em;
+                border-bottom: 1px solid #ccc;
               "
             >
               <h2 style="font-size: 152%; color: #333">
@@ -329,6 +320,7 @@
                 position: relative;
                 margin-bottom: 1em;
                 padding-bottom: 1em;
+                border-bottom: 1px solid #ccc;
               "
             >
               <h2 style="font-size: 152%; color: #333">
@@ -366,6 +358,7 @@
                 position: relative;
                 margin-bottom: 1em;
                 padding-bottom: 1em;
+                border-bottom: 1px solid #ccc;
               "
             >
               <h2 style="font-size: 152%; color: #333">
