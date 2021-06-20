@@ -55,6 +55,8 @@ router.post('/api/login_with_google', main.fnLoginWithGoogle);
 router.post('/api/add_resume', resume.fnAddResume);
 router.post('/api/login_with_google', resume.fnAddResume);
 router.get('/api/get_resumes', resume.fnGetDemoResumes);
+router.get('/api/get_reorder_resumes', resume.fnGetDemoReorderableResumes);
+
 router.get('/api/get_resume_with_filename', resume.fnGetDemoResumeFromFile);
 
 router.post('/api/get_single_resume_data', resume.fnGetSingleResume);
