@@ -11,7 +11,27 @@
     />
     <link rel="stylesheet" type="text/css" href="resume.css" media="all" />
     <style>
-      /* //-- yui-grids style overrides -- */
+      @page {
+        size: auto;
+        margin: 5mm;
+      }
+      html {
+        zoom: 0.6;
+      }
+      @page {
+        size: 7in 9.25in;
+        margin: 27mm 16mm 27mm 16mm;
+      }
+
+      @media print {
+        .footer,
+        #non-printable {
+          display: none !important;
+        }
+        #printable {
+          display: block;
+        }
+      }
     </style>
   </head>
   <body style="font-family: Georgia; color: rgb(255, 253, 253)">
