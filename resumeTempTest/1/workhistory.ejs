@@ -19,29 +19,6 @@
   <div class="content" style="width: 32em; margin: 0 0 0 16em">
     <% for( let i = 0; i < workHistory.length; i++ ) { %>
 
-    <span
-      class="date"
-      style="
-        float: right;
-        font-size: 0.8em;
-        margin-top: 0.4em;
-        padding-left: 5px;
-      "
-      >Current</span
-    >
-    <% } %> <% if (!workHistory[i].currentlyWorkHere) { %>
-    <span
-      class="date"
-      style="
-        float: right;
-        font-size: 0.8em;
-        margin-top: 0.4em;
-        padding-left: 5px;
-      "
-      ><%= new Date(workHistory[i].endDate).getMonth() + 1 +'/'+new
-      Date(workHistory[i].endDate).getFullYear() %></span
-    >
-    <% } %>
     <span class="date" style="float: right; font-size: 0.8em; margin-top: 0.4em"
       ><%= new Date(workHistory[i].startDate).getMonth() + 1 +'/'+new
       Date(workHistory[i].startDate).getFullYear() %> &raquo;</span
