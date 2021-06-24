@@ -175,18 +175,46 @@
       </h2>
 
       <div class="content" style="width: 32em; margin: 0 0 0 16em">
-        <% for( let i = 0; i < workHistory.length; i++ ) { %>
-
+        <% for( let i = 0; i < workHistory.length; i++ ) { %> <% if
+        (workHistory[i].currentlyWorkHere) { %>
         <span
           class="date"
           style="
             float: right;
             font-size: 0.8em;
             margin-top: 0.4em;
-            text-align: right;
+            padding-left: 5px;
           "
-          ><%= workHistory[i].startDate %> &raquo; <%= workHistory[i].endDate
-          %></span
+          >Current</span
+        >
+        <% } %> <% if (!workHistory[i].currentlyWorkHere) { %>
+        <span
+          class="date"
+          style="
+            float: right;
+            font-size: 0.8em;
+            margin-top: 0.4em;
+            padding-left: 5px;
+          "
+          ><%= new Date(workHistory[i].endDate).getMonth() + 1 +'/'+new
+          Date(workHistory[i].endDate).getFullYear() %></span
+        >
+        <% } %>
+        <span
+          class="date"
+          style="
+            float: right;
+            font-size: 0.8em;
+            margin-top: 0.4em;
+            padding-left: 5px;
+          "
+          ><%= workHistory[i].endDate %></span
+        >
+        <span
+          class="date"
+          style="float: right; font-size: 0.8em; margin-top: 0.4em"
+          ><%= new Date(workHistory[i].startDate).getMonth() + 1 +'/'+new
+          Date(workHistory[i].startDate).getFullYear() %> &raquo;></span
         >
         <h3 style="margin-bottom: 0">Job Title <%= i %></h3>
         <address style="font-style: italic; color: #333; font-size: 0.9em">
