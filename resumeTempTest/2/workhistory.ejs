@@ -26,8 +26,20 @@
         "
       >
         <%= new Date(workHistory[i].startDate).getMonth() + 1 +'/'+new
-        Date(workHistory[i].startDate).getFullYear() %> &raquo; <%=
-        workHistory[i].endDate %>
+        Date(workHistory[i].startDate).getFullYear() %>
+      </h4>
+      &raquo;
+      <h4
+        style="
+          font-size: 122%;
+          position: absolute;
+          top: 0.35em;
+          right: 0;
+          color: #333;
+        "
+      >
+        <%= new Date(workHistory[i].endDate).getMonth() + 1 +'/'+new
+        Date(workHistory[i].endDate).getFullYear() %>
       </h4>
       <% if (workHistory[i].environment && workHistory[i].environment.length>0)
       { %>
