@@ -15,9 +15,9 @@
   >
     Work Experience
   </h2>
-
   <div class="content" style="width: 32em; margin: 0 0 0 16em">
-    <% for( let i = 0; i < workHistory.length; i++ ) { %>
+    <% for( let i = 0; i < workHistory.length; i++ ) { %> <% if
+    (workHistory[i].currentlyWorkHere) { %>
     <span
       class="date"
       style="
@@ -59,4 +59,6 @@
     </ul>
     <% } %> <% } %>
   </div>
+
+  <% } %>
 </div>
