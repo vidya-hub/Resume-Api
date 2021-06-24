@@ -189,7 +189,8 @@
                   color: #333;
                 "
               >
-                <%= workHistory[i].startDate %> &raquo; <%=
+                <%= new Date(workHistory[i].startDate).getMonth() + 1 +'/'+new
+                Date(workHistory[i].startDate).getFullYear() %> &raquo; <%=
                 workHistory[i].endDate %>
               </h4>
               <% if (workHistory[i].environment &&
