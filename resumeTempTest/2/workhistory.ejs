@@ -23,14 +23,44 @@
           top: 0.35em;
           right: 0;
           color: #333;
+          left: 420px;
         "
       >
         <%= new Date(workHistory[i].startDate).getMonth() + 1 +'/'+new
-        Date(workHistory[i].startDate).getFullYear() %> &raquo; <%=
-        workHistory[i].endDate %>
+        Date(workHistory[i].startDate).getFullYear() %> &raquo;
       </h4>
-      <% if (workHistory[i].environment && workHistory[i].environment.length>0)
-      { %>
+
+      <% if (workHistory[i].currentlyWorkHere) { %>
+      <h4
+        style="
+          font-size: 122%;
+          position: absolute;
+          right: 0;
+          color: #333;
+          padding-left: 0px;
+          top: 5.55px;
+          left: 498.85px;
+        "
+      >
+        Current
+      </h4>
+      <% } %> <% if (!workHistory[i].currentlyWorkHere) { %>
+      <h4
+        style="
+          font-size: 122%;
+          position: absolute;
+          right: 0;
+          color: #333;
+          padding-left: 0px;
+          top: 5.55px;
+          left: 498.85px;
+        "
+      >
+        <%= new Date(workHistory[i].endDate).getMonth() + 1 +'/'+new
+        Date(workHistory[i].endDate).getFullYear() %>
+      </h4>
+      <% } %> <% if (workHistory[i].environment &&
+      workHistory[i].environment.length>0) { %>
       <ul>
         <% for( let j = 0; j < workHistory[i].environment.length; j++ ) { %>
         <li style="line-height: 24px; color: #333">
