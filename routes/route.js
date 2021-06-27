@@ -30,6 +30,8 @@ module.exports = router;
 // router.use()
 router.use(bodyParser.urlencoded({ extended: false }))
 router.use(bodyParser.json())
+var worldMapData = require('city-state-country');
+
 //basic
 router.post('/api/login', main.fnLogin);
 router.post('/api/test', main.fnTest);
@@ -483,4 +485,19 @@ router.get('/api/checkProfile/:userId', (req, res) => {
         }
     })
 
+})
+
+router.get("/api/getcountries", (req, res) => {
+    res.json(worldMapData.getAllCountries());
+})
+router.post("/api/getstates", (req, res) => {
+    var country = req.body.country;
+    const statesList = worldMapData.getAllStatesFromCountry(country);
+    res.json(statesList);
+})
+router.post("/api/getcities", (req, res) => {
+    var bodyVal = req.body;
+    state = bodyVal.state;
+    const citiesList = worldMapData.getAllCitiesFromState(state);
+    res.json(citiesList);
 })
