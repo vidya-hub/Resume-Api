@@ -8,7 +8,7 @@ var profileImg = require("../models/profilemodel");
 const mongoose = require("mongoose");
 const GridFsStorage = require("multer-gridfs-storage");
 const Grid = require("gridfs-stream");
-
+const fs = require("fs");
 var bodyParser = require('body-parser')
 var userModel = require("../models/user");
 var main = require('../apis/main');
@@ -24,7 +24,8 @@ var summary = require('../apis/summary');
 var resume = require('../apis/resume');
 var template = require('../apis/template');
 // var upload = require("../helper/profileImageController");
-
+let Country = require('country-state-city').Country;
+let State = require('country-state-city').State;
 /*************************************************************************/
 module.exports = router;
 // router.use()
@@ -500,4 +501,20 @@ router.post("/api/getcities", (req, res) => {
     state = bodyVal.state;
     const citiesList = worldMapData.getAllCitiesFromState(state);
     res.json(citiesList);
+})
+
+router.post("/api/getCity", (req, res) => {
+    var bodyVal = req.body;
+    fs.readFile("helper/cities.json", function (err, data) {
+
+        // Check for errors
+        if (err) throw err;
+
+        // Converting to JSON
+        var city = JSON.parse(data);
+
+        res.json(city["citiesy"]);
+    });
+    // state = bodyVal.state;
+    const citiesList = worldMapData.getAllCitiesFromState(state);
 })
