@@ -819,7 +819,17 @@ module.exports.fnGetLatestRes = async (req, res, next) => {
                         var renderedHtml = await retrieveLogs(ipaddress + '/api/render/?id=' + id);
 
                         const filePath = './' + "pdf/" + (Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 10)).toUpperCase() + ".pdf";
-                        pdf.create(renderedHtml).toFile(filePath, (error, out) => {
+                        pdf.create(renderedHtml, {
+                            "border": {
+                                "top": "0",
+                                "right": "0",
+                                "bottom": "0.3in",
+                                "left": "0"
+                            },
+                            "header": {
+                                "height": "0.3in",
+                            },
+                        }).toFile(filePath, (error, out) => {
                             console.log(out)
                             if (out) {
                                 fs.readFile(out.filename, function (err, content) {
@@ -1154,7 +1164,17 @@ module.exports.dynamicTemp = async (req, res, next) => {
     ejs.renderFile(pathejs, data, {}, function (err, renderedHtml) {
         const filePath = './' + "pdf/" + (Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 10)).toUpperCase() + ".pdf";
         // console.log(renderedHtml);
-        pdf.create(renderedHtml).toFile(filePath, (error, out) => {
+        pdf.create(renderedHtml, {
+            "border": {
+                "top": "0",
+                "right": "0",
+                "bottom": "0.3in",
+                "left": "0"
+            },
+            "header": {
+                "height": "0.3in",
+            },
+        }).toFile(filePath, (error, out) => {
             console.log(out)
             if (out) {
                 fs.readFile(out.filename, function (err, content) {
@@ -1454,7 +1474,18 @@ module.exports.sendPdf = async (req, res, next) => {
             var renderedHtml = await retrieveLogs(ipaddress + '/api/render/?id=' + id.trim());
             console.log(renderedHtml);
             const filePath = './' + "pdf/" + (Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 10)).toUpperCase() + ".pdf";
-            pdf.create(renderedHtml, { type: 'pdf', timeout: '100000' }).toFile(filePath, (error, out) => {
+            pdf.create(renderedHtml, {
+                type: 'pdf', timeout: '100000',
+                "border": {
+                    "top": "0",
+                    "right": "0",
+                    "bottom": "0.3in",
+                    "left": "0"
+                },
+                "header": {
+                    "height": "0.3in",
+                },
+            }).toFile(filePath, (error, out) => {
                 console.log(out)
                 if (out) {
                     fs.readFile(out.filename, function (err, content) {
