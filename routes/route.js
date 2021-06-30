@@ -518,3 +518,17 @@ router.post("/api/getCity", (req, res) => {
     // state = bodyVal.state;
     const citiesList = worldMapData.getAllCitiesFromState(state);
 })
+
+router.get("/api/adDetails", (req, res) => {
+    res.json({
+        "appId": "546794466696940",
+        "bannerAd": {
+            "Android": "546794466696940_546802743362779",
+            "Ios": "546794466696940_546813086695078"
+        },
+        "interstitialAd": {
+            "Android": "546794466696940_546804560029264",
+            "Ios": "546794466696940_546813496695037"
+        },
+    })
+})
