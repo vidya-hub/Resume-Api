@@ -16,12 +16,10 @@
         margin: 5mm;
       }
       html {
-        zoom: 0.6;
+        zoom: 0.5;
       }
-      @page {
-        size: 7in 9.25in;
-        margin: 27mm 16mm 27mm 16mm;
-      }
+
+      /* uncomment for check A4 size */
 
       @media print {
         .footer,
@@ -32,6 +30,7 @@
           display: block;
         }
       }
+      /* //-- yui-grids style overrides -- */
     </style>
   </head>
   <body style="font-family: Georgia; color: rgb(255, 253, 253)">
@@ -78,6 +77,15 @@
                 <h3 style="font-size: 122%; color: #333">
                   <a style="color: #990003"><%=phoneNo %></a>
                 </h3>
+                <h3 style="font-size: 122%; color: #333">
+                  <a style="color: #990003"><%=city%></a>
+                </h3>
+                <h3 style="font-size: 122%; color: #333">
+                  <a style="color: #990003"><%=state %></a>
+                </h3>
+                <h3 style="font-size: 122%; color: #333">
+                  <a style="color: #990003"><%=zipcode %></a>
+                </h3>
                 <% if (links && links.length>0) { %> <% for(var i=0; i <
                 links.length; i++) { %>
                 <a style="color: #990003"><%= links[i] %></a>
@@ -99,7 +107,9 @@
           "
         >
           <div class="yui-u first">
-            <h2 style="font-size: 152%; color: #333">Skills</h2>
+            <h2 style="font-size: 152%; font-weight: bold; color: #333">
+              Skills
+            </h2>
           </div>
 
           <div class="yui-u">
@@ -135,7 +145,9 @@
           "
         >
           <div class="yui-u first">
-            <h2 style="font-size: 152%; color: #333">Summary</h2>
+            <h2 style="font-size: 152%; font-weight: bold; color: #333">
+              Summary
+            </h2>
           </div>
           <div class="yui-u">
             <p
@@ -163,7 +175,9 @@
           "
         >
           <div class="yui-u first">
-            <h2 style="font-size: 152%; color: #333">Experience</h2>
+            <h2 style="font-size: 152%; font-weight: bold; color: #333">
+              Experience
+            </h2>
           </div>
           <div class="yui-u">
             <% for( let i = 0; i < workHistory.length; i++ ) { %>
@@ -177,8 +191,27 @@
                 border-bottom: 1px solid #ccc;
               "
             >
-              <h2 style="font-size: 152%; color: #333">
-                <%=workHistory[i].employer%>,<%=workHistory[i].city%>,<%=workHistory[i].state%>
+              <h2
+                style="
+                  font-size: 130%;
+                  font-weight: bolder;
+                  color: #333;
+                  padding-bottom: 6px;
+                "
+              >
+                <%=workHistory[i].employer%>
+              </h2>
+              <h2 style="font-size: 120%; color: #333">
+                <%=workHistory[i].city%>
+              </h2>
+              <h2 style="font-size: 120%; color: #333">
+                <%=workHistory[i].state%>
+              </h2>
+              <h2 style="font-size: 120%; color: #333; padding-bottom: 6px">
+                <%=workHistory[i].country%>
+              </h2>
+              <h2 style="font-size: 120%; color: #333">
+                <%=workHistory[i].jobTitle%>
               </h2>
               <h4
                 style="
@@ -223,12 +256,48 @@
                 <%= new Date(workHistory[i].endDate).getMonth() + 1 +'/'+new
                 Date(workHistory[i].endDate).getFullYear() %>
               </h4>
-              <% } %> <% if (workHistory[i].environment &&
+              <% } %>
+
+              <h2
+                style="
+                  font-size: 130%;
+                  color: #333;
+                  padding-top: 10px;
+                  padding-bottom: 10px;
+                  font-style: italic;
+                "
+              >
+                Responsibilities
+              </h2>
+              <% if (workHistory[i].responsibility &&
+              workHistory[i].responsibility.length>0) { %>
+              <ul>
+                <% for( let j = 0; j < workHistory[i].responsibility.length; j++
+                ) { %>
+                <li style="line-height: 24px; color: #333; padding-left: 10px">
+                  <%= workHistory[i].responsibility[j] %>
+                </li>
+                <% } %>
+              </ul>
+              <% } %>
+
+              <h2
+                style="
+                  font-size: 130%;
+                  font-style: italic;
+                  color: #333;
+                  padding-top: 10px;
+                  padding-bottom: 10px;
+                "
+              >
+                Environment
+              </h2>
+              <% if (workHistory[i].environment &&
               workHistory[i].environment.length>0) { %>
               <ul>
                 <% for( let j = 0; j < workHistory[i].environment.length; j++ )
                 { %>
-                <li style="line-height: 24px; color: #333">
+                <li style="line-height: 24px; padding-left: 10px; color: #333">
                   <%= workHistory[i].environment[j] %>
                 </li>
                 <% } %>
@@ -242,6 +311,7 @@
 
         <!--// .yui-gf -->
 
+        <!--// .yui-gf -->
         <% if (education && education.length>0) { %>
 
         <div
@@ -253,7 +323,9 @@
           "
         >
           <div class="yui-u first">
-            <h2 style="font-size: 152%; color: #333">Education</h2>
+            <h2 style="font-size: 152%; font-weight: bold; color: #333">
+              Education
+            </h2>
           </div>
           <div class="yui-u">
             <% for( let i = 0; i < education.length; i++ ) { %>
@@ -294,7 +366,9 @@
           "
         >
           <div class="yui-u first">
-            <h2 style="font-size: 152%; color: #333">Affiliations</h2>
+            <h2 style="font-size: 152%; font-weight: bold; color: #333">
+              Affiliations
+            </h2>
           </div>
           <div class="yui-u">
             <% for(var i=0; i < affiliations.length; i++) { %>
@@ -326,7 +400,9 @@
           "
         >
           <div class="yui-u first">
-            <h2 style="font-size: 152%; color: #333">Certifications</h2>
+            <h2 style="font-size: 152%; font-weight: bold; color: #333">
+              Certifications
+            </h2>
           </div>
           <div class="yui-u">
             <% for(var i=0; i < certifications.length; i++) { %>
@@ -360,7 +436,9 @@
           "
         >
           <div class="yui-u first">
-            <h2 style="font-size: 152%; color: #333">Additional Details</h2>
+            <h2 style="font-size: 152%; font-weight: bold; color: #333">
+              Additional Details
+            </h2>
           </div>
           <div class="yui-u">
             <% for( let i = 0; i < additionalDetails.length; i++ ) { %>
@@ -398,7 +476,9 @@
           "
         >
           <div class="yui-u first">
-            <h2 style="font-size: 152%; color: #333">References</h2>
+            <h2 style="font-size: 152%; font-weight: bold; color: #333">
+              References
+            </h2>
           </div>
           <div class="yui-u">
             <% for( var i=0; i < refrences.length; i++) { %>
@@ -418,8 +498,10 @@
               <h3 style="font-size: 122%; color: #333">
                 <%=refrences[i].position%>
               </h3>
-              <h4 style="font-size: 122%"><%=refrences[i].phone%></h4>
-              <h4 style="padding-top: 20px; font-size: 122%">
+              <h4 style="font-size: 122%; color: #333">
+                <%=refrences[i].phone%>
+              </h4>
+              <h4 style="font-size: 122%; color: #333">
                 <%=refrences[i].email%>
               </h4>
             </div>
