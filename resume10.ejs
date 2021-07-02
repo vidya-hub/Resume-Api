@@ -80,10 +80,10 @@
                 <h3 style="font-size: 122%; color: #333">
                   <a style="color: #990003"><%=city%></a>
                 </h3>
-
                 <h3 style="font-size: 122%; color: #333">
-                  <a style="color: #990003"><%=country %></a>
+                  <a style="color: #990003"><%=state %></a>
                 </h3>
+
                 <h3 style="font-size: 122%; color: #333">
                   <a style="color: #990003"><%=zipCode %></a>
                 </h3>
@@ -116,22 +116,22 @@
 
           <div class="yui-u">
             <div class="talent" style="float: left">
-              <ul class="talent" style="float: left">
+              <ol style="float: left">
                 <% for( let i = 0; i < objectives.length; i++ ) { %>
 
                 <li
-                  class="skill"
                   style="
-                    line-height: 24px;
-                    width: 100px;
                     padding-left: 40px;
+                    width: 550px;
+                    text-align: justify;
                     color: black;
+                    padding-bottom: 10px;
                   "
                 >
                   <%=objectives[i]%>
                 </li>
                 <% } %>
-              </ul>
+              </ol>
             </div>
           </div>
           <% } %>
