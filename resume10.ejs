@@ -175,9 +175,7 @@
           "
         >
           <div class="yui-u first">
-            <h2 style="font-size: 152%; font-weight: bold; color: #333">
-              Experience
-            </h2>
+            <h2 style="font-size: 152%; color: #333">Experience</h2>
           </div>
           <div class="yui-u">
             <% for( let i = 0; i < workHistory.length; i++ ) { %>
@@ -191,27 +189,8 @@
                 border-bottom: 1px solid #ccc;
               "
             >
-              <h2
-                style="
-                  font-size: 130%;
-                  font-weight: bolder;
-                  color: #333;
-                  padding-bottom: 6px;
-                "
-              >
-                <%=workHistory[i].employer%>
-              </h2>
-              <h2 style="font-size: 120%; color: #333">
-                <%=workHistory[i].city%>
-              </h2>
-              <h2 style="font-size: 120%; color: #333">
-                <%=workHistory[i].state%>
-              </h2>
-              <h2 style="font-size: 120%; color: #333; padding-bottom: 6px">
-                <%=workHistory[i].country%>
-              </h2>
-              <h2 style="font-size: 120%; color: #333">
-                <%=workHistory[i].jobTitle%>
+              <h2 style="font-size: 152%; color: #333">
+                <%=workHistory[i].employer%>,<%=workHistory[i].city%>,<%=workHistory[i].state%>
               </h2>
               <h4
                 style="
@@ -256,48 +235,12 @@
                 <%= new Date(workHistory[i].endDate).getMonth() + 1 +'/'+new
                 Date(workHistory[i].endDate).getFullYear() %>
               </h4>
-              <% } %>
-
-              <h2
-                style="
-                  font-size: 130%;
-                  color: #333;
-                  padding-top: 10px;
-                  padding-bottom: 10px;
-                  font-style: italic;
-                "
-              >
-                Responsibilities
-              </h2>
-              <% if (workHistory[i].responsibility &&
-              workHistory[i].responsibility.length>0) { %>
-              <ul>
-                <% for( let j = 0; j < workHistory[i].responsibility.length; j++
-                ) { %>
-                <li style="line-height: 24px; color: #333; padding-left: 10px">
-                  <%= workHistory[i].responsibility[j] %>
-                </li>
-                <% } %>
-              </ul>
-              <% } %>
-
-              <h2
-                style="
-                  font-size: 130%;
-                  font-style: italic;
-                  color: #333;
-                  padding-top: 10px;
-                  padding-bottom: 10px;
-                "
-              >
-                Environment
-              </h2>
-              <% if (workHistory[i].environment &&
+              <% } %> <% if (workHistory[i].environment &&
               workHistory[i].environment.length>0) { %>
               <ul>
                 <% for( let j = 0; j < workHistory[i].environment.length; j++ )
                 { %>
-                <li style="line-height: 24px; padding-left: 10px; color: #333">
+                <li style="line-height: 24px; color: #333">
                   <%= workHistory[i].environment[j] %>
                 </li>
                 <% } %>
