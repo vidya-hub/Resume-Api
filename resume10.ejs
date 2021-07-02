@@ -118,17 +118,21 @@
             <div class="talent" style="width: 32%; float: left">
               <ul class="talent" style="width: 32%; float: left">
                 <% for( let i = 0; i < objectives.length; i++ ) { %>
-                <li
-                  class="skill"
-                  style="
-                    line-height: 24px;
-                    width: 100px;
-                    padding-left: 40px;
-                    color: black;
-                  "
-                >
-                  <%=objectives[i]%>
-                </li>
+
+                <div class="yui-u">
+                  <p
+                    class="enlarge"
+                    style="
+                      color: black;
+                      font-size: 100%;
+                      line-height: 18px;
+                      padding-right: 3em;
+                    "
+                  >
+                    <%=objectives[i]%>
+                  </p>
+                </div>
+
                 <% } %>
               </ul>
             </div>
