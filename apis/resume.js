@@ -820,6 +820,8 @@ module.exports.fnGetLatestRes = async (req, res, next) => {
 
                         const filePath = './' + "pdf/" + (Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 10)).toUpperCase() + ".pdf";
                         pdf.create(renderedHtml, {
+                            "format": "Tabloid",
+
                             "border": {
                                 "top": "0",
                                 "right": "0",
