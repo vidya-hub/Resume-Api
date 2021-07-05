@@ -41,12 +41,16 @@
       font-family: 'Trebuchet MS';
       padding: 1em;
       margin: 1em auto;
-      max-width: 50em;
+      max-width: 90em;
+      width: 1300px;
     "
   >
     <h1 style="text-align: center"><%= firstName %> <%= lastName %></h1>
 
-    <div id="first" style="width: 16em; float: left; padding-top: 10px">
+    <div
+      id="first"
+      style="width: 16em; padding-left: 20px; float: left; padding-top: 10px"
+    >
       <h3
         style="
           border-bottom: none;
@@ -68,7 +72,7 @@
       id="address"
       style="padding-top: 10px; text-align: justify; height: 7em; width: 53em"
     >
-      <div style="width: 150px; float: right">
+      <div style="width: 500px; padding-left: 65em">
         <h3
           style="
             border-bottom: none;
@@ -98,6 +102,7 @@
         padding-bottom: 1em;
         padding-bottom: 0px;
         width: 850px;
+        padding-right: 23em;
       "
     >
       <h2
@@ -113,7 +118,7 @@
       </h2>
       <div
         class="content"
-        style="width: 37em; margin: 0 0 0 16em; margin-left: 230px"
+        style="width: 55em; margin: 0 0 0 16em; padding-left: 60px"
       >
         <ul style="text-align: justify">
           <% for( let i = 0; i < objectives.length; i++ ) { %>
@@ -129,11 +134,11 @@
       style="
         border-top: 1px solid #ccc;
         width: 850px;
-
         margin: 1em 0;
         padding: 1em;
         padding-bottom: 1em;
         padding-bottom: 0px;
+        padding-right: 23em;
       "
     >
       <h2
@@ -149,7 +154,7 @@
       </h2>
       <div
         class="content"
-        style="width: 37em; margin: 0 0 0 16em; margin-left: 230px"
+        style="width: 37em; margin: 0 0 0 16em; padding-left: 60px"
       >
         <ul>
           <% for( let i = 0; i < skills.length; i++ ) { %>
@@ -167,6 +172,7 @@
         padding: 1em;
         padding-bottom: 0px;
         width: 850px;
+        padding-right: 23em;
       "
     >
       <h2
@@ -182,10 +188,10 @@
       </h2>
       <p
         style="
-          width: 36em;
+          width: 54em;
           margin: 0 0 0 16em;
           text-align: justify;
-          margin-left: 250px;
+          padding-left: 84px;
           line-height: 24px;
         "
       >
@@ -220,7 +226,7 @@
 
       <div
         class="content"
-        style="width: 32em; margin-top: 0px; margin: 0 0 0 16em"
+        style="width: 53em; margin-top: 0px; margin: 0 0 0 16em"
       >
         <% for( let i = 0; i < workHistory.length; i++ ) { %> <% if
         (workHistory[i].currentlyWorkHere) { %>
@@ -260,19 +266,28 @@
             font-size: 0.8em;
             margin-top: 0.4em;
             width: 60px;
-            padding-left: 100px;
+            padding-left: 150px;
           "
           ><%= new Date(workHistory[i].startDate).getMonth() + 1 +'/'+new
           Date(workHistory[i].startDate).getFullYear() %> &raquo;</span
         >
 
-        <h3 style="margin-bottom: 0; font-size: 15px; margin-top: 0px">
+        <h3
+          style="
+            margin-bottom: 0;
+            padding-left: 80px;
+            font-size: 15px;
+            margin-top: 0px;
+          "
+        >
           <%=workHistory[i].employer%>
         </h3>
         <address
           style="
             font-style: italic;
             color: #333;
+            padding-left: 80px;
+
             padding-top: 10px;
             font-size: 0.9em;
           "
@@ -285,17 +300,22 @@
             color: #333;
             padding-top: 8px;
             font-size: 0.9em;
+            padding-left: 80px;
+
             line-height: 24px;
           "
         >
           <%=workHistory[i].city%> - <%=workHistory[i].state%> -
           <%=workHistory[i].country%>
         </address>
-        <h3 style="margin-bottom: 0; font-size: 15px">Responsibilities</h3>
+
+        <h3 style="margin-bottom: 0; padding-left: 80px; font-size: 15px">
+          Responsibilities
+        </h3>
         <% if (workHistory[i].responsibility &&
         workHistory[i].responsibility.length>0) { %>
 
-        <ul style="padding-left: 20px; margin-left: 0.5em; width: 550px">
+        <ul style="padding-left: 100px; margin-left: 0.5em; width: 52em">
           <% for( let j = 0; j < workHistory[i].responsibility.length; j++ ) {
           %>
           <li style="text-align: justify; line-height: 24px">
@@ -306,12 +326,14 @@
 
         <% } %>
 
-        <h3 style="margin-bottom: 0; font-size: 15px">Environment</h3>
+        <h3 style="margin-bottom: 0; padding-left: 80px; font-size: 15px">
+          Environment
+        </h3>
 
         <% if (workHistory[i].environment &&
         workHistory[i].environment.length>0) { %>
 
-        <ul style="padding-left: 20px; margin-left: 0.5em; width: 550px">
+        <ul style="padding-left: 100px; margin-left: 0.5em; width: 550px">
           <% for( let j = 0; j < workHistory[i].environment.length; j++ ) { %>
           <li style="line-height: 24px">
             <%= workHistory[i].environment[j] %>
@@ -331,6 +353,7 @@
         padding-bottom: 1em;
         padding-bottom: 0px;
         width: 850px;
+        padding-right: 23em;
       "
     >
       <h2
@@ -345,7 +368,7 @@
         Education Details
       </h2>
 
-      <div class="content" style="width: 32em; margin: 0 0 0 16em">
+      <div class="content" style="width: 60em; margin: 0 0 0 16em">
         <% for( let i = 0; i < education.length; i++ ) { %>
 
         <span
@@ -355,16 +378,18 @@
             font-size: 0.8em;
             margin-top: 0.4em;
             text-align: right;
+            padding-left: 20px;
           "
           ><%= education[i].graduationYear %>
         </span>
-        <h3 style="margin-bottom: 0; line-height: 24px">
+        <h3 style="margin-bottom: 0; padding-left: 80px; line-height: 24px">
           <%= education[i].fieldOfStudy %> <%=education[i].degree%>
         </h3>
         <address
           style="
             font-style: italic;
             color: #333;
+            padding-left: 80px;
             line-height: 24px;
             font-size: 0.9em;
           "
@@ -382,7 +407,9 @@
         border-top: 1px solid #ccc;
         width: 850px;
         margin: 1em 0;
+
         padding: 1em;
+        padding-right: 23em;
       "
     >
       <h2
@@ -398,7 +425,7 @@
         Accomplishments
       </h2>
       <div class="content" style="width: 32em; margin: 0 0 0 16em">
-        <ul style="padding-left: 0.1em; margin-left: 0.5em">
+        <ul style="padding-left: 80px; margin-left: 0.5em">
           <% for(var i=0; i < accomplishments.length; i++) { %>
           <li style="line-height: 24px"><%=accomplishments[i]%></li>
           <% } %>
@@ -418,6 +445,7 @@
 
         padding-bottom: 0px;
         padding-top: 0px;
+        padding-right: 23em;
       "
     >
       <h2
@@ -431,8 +459,8 @@
       >
         Affiliations
       </h2>
-      <div class="content" style="width: 32em; margin: 0 0 0 16em">
-        <ul style="padding-left: 0.1em; margin-left: 0.5em">
+      <div class="content" style="width: 40em; margin: 0 0 0 16em">
+        <ul style="padding-left: 80px; margin-left: 0.5em">
           <% for(var i=0; i < affiliations.length; i++) { %>
           <li style="line-height: 24px"><%=affiliations[i]%></li>
           <% } %>
@@ -452,6 +480,7 @@
         margin-top: 0px;
         padding-top: 0px;
         padding-bottom: 0px;
+        padding-right: 0em;
       "
     >
       <h2
@@ -466,7 +495,7 @@
         Certifications
       </h2>
       <div class="content" style="width: 32em; margin: 0 0 0 16em">
-        <ul style="padding-left: 0.5em; margin-left: 0.5em">
+        <ul style="padding-left: 80px; margin-left: 0.5em">
           <% for(var i=0; i < certifications.length; i++) { %>
           <li style="line-height: 24px"><%=certifications[i]%></li>
           <% } %>
@@ -485,6 +514,7 @@
 
         padding-bottom: 1em;
         padding-bottom: 0px;
+        padding-right: 23em;
       "
     >
       <h2
@@ -499,22 +529,16 @@
         Additional Details
       </h2>
 
-      <div class="content" style="width: 32em; margin: 0 0 1em 16em">
+      <div
+        class="content"
+        style="width: 40em; padding-left: 80px; margin: 0 0 1em 16em"
+      >
         <% for( let i = 0; i < additionalDetails.length; i++ ) { %>
 
-        <h3 style="margin-bottom: 0; line-height: 24px">
-          <%= additionalDetails[i].key%>
-        </h3>
-        <address
-          style="
-            font-style: italic;
-            color: #333;
-            line-height: 24px;
-            font-size: 0.9em;
-          "
-        >
-          <%= additionalDetails[i].value%>
-        </address>
+        <p style="margin-bottom: 0; line-height: 24px">
+          <%= additionalDetails[i].value%> : <%= additionalDetails[i].key%>
+        </p>
+
         <% } %>
       </div>
       <% } %>
@@ -533,6 +557,7 @@
 
         padding-bottom: 1em;
         padding-bottom: 0px;
+        padding-right: 23em;
       "
     >
       <h2
@@ -547,7 +572,10 @@
         References
       </h2>
 
-      <div class="content" style="width: 32em; margin: 1em 0 0.5em 16em">
+      <div
+        class="content"
+        style="width: 32em; padding-left: 80px; margin: 1em 0 0.5em 16em"
+      >
         <% for( var i=0; i < refrences.length; i++) { %>
         <div
           class="job"
