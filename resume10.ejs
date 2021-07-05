@@ -16,7 +16,7 @@
         margin: 5mm;
       }
       html {
-        zoom: 0.83;
+        zoom: 0.5;
       }
 
       /* uncomment for check A4 size */
@@ -38,8 +38,8 @@
       <div
         id="inner"
         style="
-          padding: 10px 60px;
-          margin: 5px auto;
+          padding: 10px 80px;
+          margin: 80px auto;
           background: #f5f5f5;
           border: solid rgb(241, 90, 90);
           border-width: 8px 0 2px 0;
@@ -70,23 +70,21 @@
             </div>
             <div class="yui-u">
               <div class="contact-info" style="margin-top: 7px">
-                <h3 style="font-size: 122%; line-height: 24px; color: #333">
-                  <%= address %>
-                </h3>
-                <h3 style="font-size: 122%; line-height: 24px; color: #333">
+                <h3 style="font-size: 122%; color: #333"><%= address %></h3>
+                <h3 style="font-size: 122%; color: #333">
                   <a style="color: #990003"><%=city%></a>
                 </h3>
-                <h3 style="font-size: 122%; line-height: 24px; color: #333">
+                <h3 style="font-size: 122%; color: #333">
                   <a style="color: #990003"><%=state %></a>
                 </h3>
 
-                <h3 style="font-size: 122%; line-height: 24px; color: #333">
+                <h3 style="font-size: 122%; color: #333">
                   <a style="color: #990003"><%=zipCode %></a>
                 </h3>
-                <h3 style="font-size: 122%; line-height: 24px; color: #333">
+                <h3 style="font-size: 122%; color: #333">
                   <a style="color: #990003"><%=email %></a><br />
                 </h3>
-                <h3 style="font-size: 122%; line-height: 24px; color: #333">
+                <h3 style="font-size: 122%; color: #333">
                   <a style="color: #990003"><%=phoneNo %></a>
                 </h3>
 
@@ -127,13 +125,11 @@
 
                 <li
                   style="
-                    padding-left: 100px;
+                    padding-left: 30px;
                     width: 550px;
                     text-align: justify;
                     color: black;
-                    font-size: 16px;
                     padding-bottom: 10px;
-                    line-height: 24px;
                   "
                 >
                   <%=objectives[i]%>
@@ -168,7 +164,7 @@
             <div class="talent" style="width: 32%; float: left">
               <ul
                 class="talent"
-                style="width: 32%; padding-left: 108px; float: left"
+                style="width: 32%; padding-left: 40px; float: left"
               >
                 <% for( let i = 0; i < skills.length; i++ ) { %>
                 <li
@@ -205,17 +201,15 @@
               Summary
             </h2>
           </div>
-          <div class="yui-u">
+          <div class="yui-u" style="padding-right: 13px">
             <p
               class="enlarge"
               style="
                 color: black;
                 font-size: 100%;
+                line-height: 18px;
                 font-size: 16px;
-                text-align: justify;
-                padding-right: 1em;
-                line-height: 24px;
-                padding-left: 50px;
+                padding-right: 3em;
               "
             >
               <%=professionalSummary%>
@@ -230,18 +224,11 @@
           style="margin-bottom: 1em; border-bottom: 1px solid #ccc"
         >
           <div class="yui-u first">
-            <h2
-              style="
-                font-size: 152%;
-                font-weight: bold;
-                padding-left: 1px;
-                color: #333;
-              "
-            >
+            <h2 style="font-size: 152%; font-weight: bold; color: #333">
               Experience
             </h2>
           </div>
-          <div class="yui-u" style="width: 587px">
+          <div class="yui-u" style="padding-right: 12px">
             <% for( let i = 0; i < workHistory.length; i++ ) { %>
 
             <div
@@ -258,25 +245,16 @@
                   font-weight: bolder;
                   color: #333;
                   padding-bottom: 6px;
-                  padding-left: 20px;
                 "
               >
                 <%=workHistory[i].employer%>
               </h2>
-
-              <h2
-                style="
-                  font-size: 120%;
-                  padding-left: 20px;
-                  color: #333;
-                  padding-bottom: 1px;
-                "
-              >
+              <h2 style="font-size: 120%; color: #333; padding-bottom: 1px">
                 <%=workHistory[i].city%> - <%=workHistory[i].state%> -
                 <%=workHistory[i].country%>
               </h2>
 
-              <h2 style="font-size: 120%; padding-left: 20px; color: #333">
+              <h2 style="font-size: 120%; color: #333">
                 <%=workHistory[i].jobTitle%>
               </h2>
               <h4
@@ -285,7 +263,6 @@
                   position: absolute;
                   top: 0.35em;
                   right: 0;
-
                   color: #333;
                   left: 450px;
                 "
@@ -328,7 +305,6 @@
                   font-size: 130%;
                   color: #333;
                   padding-top: 10px;
-                  padding-left: 20px;
                   padding-bottom: 10px;
                   font-style: italic;
                 "
@@ -338,14 +314,13 @@
               <% if (workHistory[i].responsibility &&
               workHistory[i].responsibility.length>0) { %> <% for( let j = 0; j
               < workHistory[i].responsibility.length; j++ ) { %>
-              <ul style="padding-left: 40px">
+              <ul style="padding-left: 20px">
                 <li
                   style="
                     line-height: 24px;
                     list-style-type: disc;
-                    font-size: 16px;
-                    color: rgb(15, 15, 15);
-                    text-align: justify;
+                    color: #333;
+                    padding-left: 10px;
                   "
                 >
                   <%= workHistory[i].responsibility[j] %>
@@ -357,8 +332,7 @@
                 style="
                   font-size: 130%;
                   font-style: italic;
-                  color: rgb(0, 0, 0);
-                  padding-left: 20px;
+                  color: #333;
                   padding-top: 10px;
                   padding-bottom: 10px;
                 "
@@ -368,15 +342,15 @@
               <% if (workHistory[i].environment &&
               workHistory[i].environment.length>0) { %>
 
-              <ul style="padding-left: 50px">
+              <ul style="padding-left: 20px">
                 <% for( let j = 0; j < workHistory[i].environment.length; j++ )
                 { %>
                 <li
                   style="
                     line-height: 24px;
+                    padding-left: 15px;
                     list-style-type: disc;
-                    color: rgb(0, 0, 0);
-                    font-size: 16px;
+                    color: #333;
                   "
                 >
                   <%= workHistory[i].environment[j] %>
@@ -407,10 +381,7 @@
           <div class="yui-u" style="padding-right: 12px">
             <% for( let i = 0; i < education.length; i++ ) { %>
 
-            <div
-              class="job"
-              style="position: relative; padding-left: 47px; margin-bottom: 1em"
-            >
+            <div class="job" style="position: relative; margin-bottom: 1em">
               <h2 style="font-size: 142%; color: #333">
                 <%= education[i].fieldOfStudy %> <%=education[i].degree%>
               </h2>
@@ -435,21 +406,14 @@
           "
         >
           <div class="yui-u first">
-            <h2
-              style="
-                font-size: 152%;
-                width: 587px;
-                font-weight: bold;
-                color: #333;
-              "
-            >
+            <h2 style="font-size: 152%; font-weight: bold; color: #333">
               Affiliations
             </h2>
           </div>
 
           <div class="yui-u">
             <div class="talent" style="float: left">
-              <ul class="talent" style="padding-left: 50px; float: left">
+              <ul class="talent" style="padding-left: 1px; float: left">
                 <% for( let i = 0; i < affiliations.length; i++ ) { %>
                 <li
                   class="skill"
@@ -491,7 +455,7 @@
 
           <div class="yui-u">
             <div class="talent" style="float: left">
-              <ul class="talent" style="padding-left: 50px; float: left">
+              <ul class="talent" style="padding-left: 1px; float: left">
                 <% for(var i=0; i < certifications.length; i++) { %>
                 <li
                   class="skill"
@@ -530,13 +494,12 @@
               class="job"
               style="
                 position: relative;
-                padding-left: 50px;
                 margin-bottom: 1em;
                 padding-bottom: 1em;
               "
             >
-              <h2 style="font-size: 152%; line-height: 24px; color: #333">
-                <%= additionalDetails[i].key%> : <%=additionalDetails[i].value%>
+              <h2 style="font-size: 152%; color: #333">
+                <%=additionalDetails[i].value%> : <%= additionalDetails[i].key%>
               </h2>
             </div>
             <% } %>
@@ -549,7 +512,7 @@
 
         <div
           class="yui-gf"
-          style="margin-bottom: 5px; border-bottom: 1px solid #ccc"
+          style="margin-bottom: 1em; border-bottom: 1px solid #ccc"
         >
           <div class="yui-u first">
             <h2 style="font-size: 152%; font-weight: bold; color: #333">
@@ -563,21 +526,20 @@
               class="job"
               style="
                 position: relative;
-                padding-left: 50px;
                 margin-bottom: 1em;
                 padding-bottom: 1em;
               "
             >
-              <h2 style="font-size: 152%; line-height: 24px; color: #333">
+              <h2 style="font-size: 152%; color: #333">
                 <%=refrences[i].name%>
               </h2>
-              <h3 style="font-size: 122%; line-height: 24px; color: #333">
+              <h3 style="font-size: 122%; color: #333">
                 <%=refrences[i].position%>
               </h3>
-              <h4 style="font-size: 122%; line-height: 24px; color: #333">
+              <h4 style="font-size: 122%; color: #333">
                 <%=refrences[i].phone%>
               </h4>
-              <h4 style="font-size: 122%; line-height: 24px; color: #333">
+              <h4 style="font-size: 122%; color: #333">
                 <%=refrences[i].email%>
               </h4>
             </div>
