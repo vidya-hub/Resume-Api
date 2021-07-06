@@ -1174,9 +1174,7 @@ module.exports.dynamicTemp = async (req, res, next) => {
                 "bottom": "0.3in",
                 "left": "0"
             },
-            "header": {
-                "height": "0.3in",
-            },
+
         }).toFile(filePath, (error, out) => {
             console.log(out)
             if (out) {
