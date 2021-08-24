@@ -564,6 +564,11 @@ module.exports.fnUpdateResumeType = async (req, res, next) => {
                         "resume7.PNG",
                         "resume8.PNG",
                         "resume9.PNG",
+                        "resume10.PNG",
+                        "resume11.PNG",
+                        "resume12.PNG",
+                        "resume13.PNG",
+
 
                     ]
                     result["thumbnil"] = demoResumeArray[result.resumeType];
@@ -600,6 +605,15 @@ module.exports.fnUpdateResumeType = async (req, res, next) => {
                     }
                     if (result.resumeType == 9) {
                         result.thumbnil = "resume10.PNG";
+                    }
+                    if (result.resumeType == 10) {
+                        result.thumbnil = "resume11.PNG";
+                    }
+                    if (result.resumeType == 11) {
+                        result.thumbnil = "resume12.PNG";
+                    }
+                    if (result.resumeType == 12) {
+                        result.thumbnil = "resume13.PNG";
                     }
                     response.status = 'success';
                     response.msg = 'Resume is updated.';
@@ -764,7 +778,9 @@ module.exports.fnGetResumeList = async (req, res, next) => {
                     "resume8.PNG",
                     "resume9.PNG",
                     "resume10.PNG",
-
+                    "resume11.PNG",
+                    "resume12.PNG",
+                    "resume13.PNG",
                 ]
                 if (result.length > 0) {
                     for (let index = 0; index < result.length; index++) {
@@ -916,8 +932,9 @@ module.exports.fnGetDemoResumes = (req, res, next) => {
             // { resumeType: 7, thumbnil: "resume8.PNG" },
             { resumeType: 8, thumbnil: "resume9.PNG" },
             { resumeType: 9, thumbnil: "resume10.PNG" },
-
-
+            { resumeType: 10, thumbnil: "resume11.PNG" },
+            { resumeType: 11, thumbnil: "resume12.PNG" },
+            { resumeType: 12, thumbnil: "resume13.PNG" },
         ];
         console.log(resume)
         response.msg = '';
@@ -959,7 +976,7 @@ module.exports.fnGetDemoReorderableResumes = (req, res, next) => {
         response.data = resume;
         res.json(response);
     } catch (e) {
-        console.log('Server error --> fnGetDemoResume --> e', e);
+        console.log('Server error --> fnGetDemoReorderableResumes --> e', e);
         res.json(response);
     }
 }
@@ -1310,6 +1327,39 @@ module.exports.renderHtmlStep = async (req, res, next) => {
     }
     if (id == "9") {
         var pathejs = path.join(__dirname, 'views/', 'resume10.ejs');
+        ejs.renderFile(pathejs, datavalues, function (err, data) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.set('Content-Type', 'text/html');
+                res.send(Buffer.from(data.toString()));
+            };
+        });
+    }
+    if (id == "10") {
+        var pathejs = path.join(__dirname, 'views/', 'resume11.ejs');
+        ejs.renderFile(pathejs, datavalues, function (err, data) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.set('Content-Type', 'text/html');
+                res.send(Buffer.from(data.toString()));
+            };
+        });
+    }
+    if (id == "11") {
+        var pathejs = path.join(__dirname, 'views/', 'resume12.ejs');
+        ejs.renderFile(pathejs, datavalues, function (err, data) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.set('Content-Type', 'text/html');
+                res.send(Buffer.from(data.toString()));
+            };
+        });
+    }
+    if (id == "12") {
+        var pathejs = path.join(__dirname, 'views/', 'resume13.ejs');
         ejs.renderFile(pathejs, datavalues, function (err, data) {
             if (err) {
                 res.send(err);
