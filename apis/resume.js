@@ -1156,6 +1156,24 @@ module.exports.renderFile = async (req, res, next) => {
         });
 
     }
+    if (data.resumeType == 10) {
+        ejs.renderFile('resume11.ejs', data, {}, function (err, str) {
+            res.end(ejs.render(str, {}, {}));
+        });
+
+    }
+    if (data.resumeType == 11) {
+        ejs.renderFile('resume12.ejs', data, {}, function (err, str) {
+            res.end(ejs.render(str, {}, {}));
+        });
+
+    }
+    if (data.resumeType == 12) {
+        ejs.renderFile('resume13.ejs', data, {}, function (err, str) {
+            res.end(ejs.render(str, {}, {}));
+        });
+
+    }
 }
 
 // Dynamic Template Future
