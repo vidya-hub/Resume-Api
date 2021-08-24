@@ -968,6 +968,9 @@ module.exports.fnGetDemoReorderableResumes = (req, res, next) => {
             // { resumeType: 7, thumbnil: ipaddress + "/api/get_resume_with_filename/?image=resume7.PNG" },
             { resumeType: 1, thumbnil: "resume1Reorder.PNG" },
             { resumeType: 2, thumbnil: "resume2Reorder.PNG" },
+            { resumeType: 3, thumbnil: "resume3Reorder.PNG" },
+            { resumeType: 4, thumbnil: "resume4Reorder.PNG" },
+            { resumeType: 5, thumbnil: "resume5Reorder.PNG" },
 
         ];
         console.log(resume)
