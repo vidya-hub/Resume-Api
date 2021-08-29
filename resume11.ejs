@@ -163,7 +163,14 @@
                   <%= workHistory[i].jobTitle %>
                 </span>
               </td>
-              <td style="font-size: 18px; font-weight: bold; text-align: right">
+              <td
+                style="
+                  font-size: 18px;
+                  width: 200;
+                  font-weight: bold;
+                  text-align: right;
+                "
+              >
                 &nbsp;<br />
                 <%= new Date(workHistory[i].startDate).getMonth() + 1 +'/'+new
                 Date(workHistory[i].startDate).getFullYear() %> - <% if
